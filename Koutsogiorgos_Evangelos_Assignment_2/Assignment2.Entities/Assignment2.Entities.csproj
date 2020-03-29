@@ -53,8 +53,11 @@
   <ItemGroup>
     <Compile Include="Assignment.cs" />
     <Compile Include="Course.cs" />
+    <Compile Include="CourseTrainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs" />
+    <Compile Include="StudentAssignment.cs" />
+    <Compile Include="StudentCourse.cs" />
     <Compile Include="Trainer.cs" />
   </ItemGroup>
   <ItemGroup>

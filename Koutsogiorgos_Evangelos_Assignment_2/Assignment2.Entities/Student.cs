@@ -15,5 +15,9 @@ namespace Assignment2.Entities
         public DateTime Date { get; set; }
         public string PhotoUrl { get; set; }
 
+        //======================== Navigation Properties ================================================
+        public virtual ICollection<StudentAssignment> StudentAssignments { get; set; }
+        public virtual ICollection<StudentCourse> StudentCourses { get; set; }
+
     }
 }
