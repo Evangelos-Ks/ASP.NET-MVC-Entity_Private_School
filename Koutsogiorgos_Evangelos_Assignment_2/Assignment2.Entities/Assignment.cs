@@ -13,8 +13,7 @@ namespace Assignment2.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime SubDateTime { get; set; }
-        public int OralMark { get; set; }
-        public int TotalMark { get; set; }
+
 
 
     }
