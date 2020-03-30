@@ -12,12 +12,12 @@ namespace Assignment2.Database
     {
         public MyDatabase() : base("Connection") {}
 
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Course> Courses { get; set; }
-        public DbSet<Trainer> Trainers { get; set; }
-        public DbSet<Assignment> Assignments { get; set; }
-        public DbSet<CourseTrainer> CourseTrainers { get; set; }
-        public DbSet<StudentAssignment> StudentAssignments { get; set; }
-        public DbSet<StudentCourse> studentCourses { get; set; }
+        //public DbSet<Student> Students { get; set; }
+        //public DbSet<Course> Courses { get; set; }
+        //public DbSet<Trainer> Trainers { get; set; }
+        //public DbSet<Assignment> Assignments { get; set; }
+        //public DbSet<CourseTrainer> CourseTrainers { get; set; }
+        //public DbSet<StudentAssignment> StudentAssignments { get; set; }
+        //public DbSet<StudentCourse> studentCourses { get; set; }
     }
 }

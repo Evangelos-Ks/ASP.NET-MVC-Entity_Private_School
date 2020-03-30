@@ -17,8 +17,8 @@ namespace Assignment2.Entities
         [Key]
         [Column(Order = 2)]
         public int AssignmentId { get; set; }
-        public int OralMark { get; set; }
-        public int TotalMark { get; set; }
+        //public int OralMark { get; set; }
+        //public int TotalMark { get; set; }
 
         //======================== Navigation Properties ================================================
         public virtual Student Student { get; set; }

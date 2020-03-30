@@ -18,7 +18,7 @@ namespace Assignment2.Entities
         [Key]
         [Column(Order = 2)]
         public int CourseId { get; set; }
-        public decimal TuitionFees { get; set; }
+        //public decimal TuitionFees { get; set; }
 
         //======================== Navigation Properties ================================================
         public virtual Student Student { get; set; }
