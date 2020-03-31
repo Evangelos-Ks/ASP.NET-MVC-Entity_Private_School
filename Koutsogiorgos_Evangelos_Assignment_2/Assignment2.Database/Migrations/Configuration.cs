@@ -25,8 +25,17 @@
 
 
             //==================== Seeding Trainers ===========================================
-            Trainer t1 = new Trainer() { FirstName = "Albert" };
-            Trainer t2 = new Trainer() { FirstName = "Richard" };
+            Trainer t1 = new Trainer() { FirstName = "Albert", LastName = "Einstain", Subject = "Phisics"};
+            Trainer t2 = new Trainer() { FirstName = "Richard", LastName = "Faynman", Subject = "Phisics" };
+            Trainer t3 = new Trainer() { FirstName = "Marie", LastName = "Curie", Subject = "Chemistry" };
+            Trainer t4 = new Trainer() { FirstName = "Luis", LastName = "Pasteur", Subject = "Chemistry" };
+            Trainer t5 = new Trainer() { FirstName = "Francis", LastName = "Crick", Subject = "Biology" };
+            Trainer t6 = new Trainer() { FirstName = "James", LastName = "Watson", Subject = "Biology" };
+            Trainer t7 = new Trainer() { FirstName = "Leonhard", LastName = "Euler", Subject = "Mathematics" };
+            Trainer t8 = new Trainer() { FirstName = "Carl", LastName = "Gauss", Subject = "Mathematics" };
+            Trainer t9 = new Trainer() { FirstName = "Alan", LastName = "Turing", Subject = "Information Technology" };
+            Trainer t10 = new Trainer() { FirstName = "Dennis", LastName = "Ritchie", Subject = "Information Technology" };
+
 
             //==================== Seeding Assignments ===========================================
             Assignment a1 = new Assignment() { Title = "MecPhys" };
@@ -59,17 +68,31 @@
 
             //=================== Asign Assignments and Trainers to Courses ==========================
             c1.Assignments = new List<Assignment>() { a1, a2, a3 };
+
             c1.Trainers = new List<Trainer>() { t1, t2 };
+            c2.Trainers = new List<Trainer>() { t3, t4 };
+            c3.Trainers = new List<Trainer>() { t5, t6 };
+            c4.Trainers = new List<Trainer>() { t7, t8 };
+            c5.Trainers = new List<Trainer>() { t9, t10 };
+            
 
             //=================== Asign Courses to Trainers =========================================
             t1.Courses = new List<Course>() { c1 };
             t2.Courses = new List<Course>() { c1 };
+            t3.Courses = new List<Course>() { c2 };
+            t4.Courses = new List<Course>() { c2 };
+            t5.Courses = new List<Course>() { c3 };
+            t6.Courses = new List<Course>() { c3 };
+            t7.Courses = new List<Course>() { c4 };
+            t8.Courses = new List<Course>() { c4 };
+            t9.Courses = new List<Course>() { c5 };
+            t10.Courses = new List<Course>() { c5 };
 
             //=================== Insert data to the database ========================================
             context.Assignments.AddOrUpdate(x => x.Title, a1, a2, a3);
             context.Courses.AddOrUpdate(x => x.Title, c1, c2, c3, c4, c5);
             context.Students.AddOrUpdate(x => x.FirstName, s1, s2, s3, s4, s5, s6);
-            context.Trainers.AddOrUpdate(x => x.FirstName, t1, t2);
+            context.Trainers.AddOrUpdate(x => x.FirstName, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
             context.StudentsAssignments.AddOrUpdate(sa1, sa2, sa3, sa4, sa5, sa6);
             context.StudentsCourses.AddOrUpdate(x => new { x.CourseId, x.StudentId }, sc1, sc2, sc3, sc4, sc5, sc6);
 
