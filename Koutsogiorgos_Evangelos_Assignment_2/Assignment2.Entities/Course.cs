@@ -17,8 +17,8 @@ namespace Assignment2.Entities
         //public DateTime EndDate { get; set; }
 
         //======================== Navigation Properties ================================================
-        public virtual IEnumerable<Assignment> Assignments { get; set; }
-        public virtual IEnumerable<CourseTrainer> CourseTrainers { get; set; }
-        public virtual IEnumerable<StudentCourse> StudentCourses { get; set; }
+        public virtual ICollection<Assignment> Assignments { get; set; }
+        public virtual ICollection<Trainer> Trainers { get; set; }
+        public virtual ICollection<StudentCourse> StudentCourses { get; set; }
     }
 }

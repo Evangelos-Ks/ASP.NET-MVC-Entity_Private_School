@@ -15,7 +15,7 @@ namespace Assignment2.Entities
         //public string Subject { get; set; }
 
         //======================== Navigation Properties ================================================
-        public virtual ICollection<CourseTrainer> CourseTrainers { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
 
     }
 }

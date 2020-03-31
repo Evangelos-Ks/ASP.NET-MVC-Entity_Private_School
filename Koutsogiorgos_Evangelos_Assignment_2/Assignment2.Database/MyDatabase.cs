@@ -20,9 +20,6 @@ namespace Assignment2.Database
         public DbSet<StudentAssignment> StudentsAssignments { get; set; }
         public DbSet<StudentCourse> StudentsCourses { get; set; }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        //}
+       
     }
 }

@@ -41,37 +41,41 @@
             Student s6 = new Student() { FirstName = "Eleni" };
 
             //==================== Seeding StudentAssignment ===========================================
-            StudentAssignment sa1 = new StudentAssignment() { AssignmentId = a1.AssignmentId, StudentId = s1.StudentId };
-            StudentAssignment sa2 = new StudentAssignment() { AssignmentId = a1.AssignmentId, StudentId = s2.StudentId };
-            StudentAssignment sa3 = new StudentAssignment() { AssignmentId = a2.AssignmentId, StudentId = s3.StudentId };
-            StudentAssignment sa4 = new StudentAssignment() { AssignmentId = a2.AssignmentId, StudentId = s4.StudentId };
-            StudentAssignment sa5 = new StudentAssignment() { AssignmentId = a3.AssignmentId, StudentId = s5.StudentId };
-            StudentAssignment sa6 = new StudentAssignment() { AssignmentId = a3.AssignmentId, StudentId = s6.StudentId };
+            StudentAssignment sa1 = new StudentAssignment() { Assignment = a1, Student = s1 };
+            StudentAssignment sa2 = new StudentAssignment() { Assignment = a1, Student = s2 };
+            StudentAssignment sa3 = new StudentAssignment() { Assignment = a2, Student = s3 };
+            StudentAssignment sa4 = new StudentAssignment() { Assignment = a2, Student = s4 };
+            StudentAssignment sa5 = new StudentAssignment() { Assignment = a3, Student = s5 };
+            StudentAssignment sa6 = new StudentAssignment() { Assignment = a3, Student = s6 };
 
             //==================== Seeding StudentCourse ===========================================
-            StudentCourse sc1 = new StudentCourse() { CourseId = c1.CourseId, StudentId = s1.StudentId };
-            StudentCourse sc2 = new StudentCourse() { CourseId = c1.CourseId, StudentId = s2.StudentId };
-            StudentCourse sc3 = new StudentCourse() { CourseId = c1.CourseId, StudentId = s3.StudentId };
-            StudentCourse sc4 = new StudentCourse() { CourseId = c1.CourseId, StudentId = s4.StudentId };
-            StudentCourse sc5 = new StudentCourse() { CourseId = c1.CourseId, StudentId = s5.StudentId };
-            StudentCourse sc6 = new StudentCourse() { CourseId = c1.CourseId, StudentId = s6.StudentId };
+            StudentCourse sc1 = new StudentCourse() { Course = c1, Student = s1 };
+            StudentCourse sc2 = new StudentCourse() { Course = c1, Student = s2 };
+            StudentCourse sc3 = new StudentCourse() { Course = c1, Student = s3 };
+            StudentCourse sc4 = new StudentCourse() { Course = c1, Student = s4 };
+            StudentCourse sc5 = new StudentCourse() { Course = c1, Student = s5 };
+            StudentCourse sc6 = new StudentCourse() { Course = c1, Student = s6 };
 
             c1.Assignments = new List<Assignment>() { a1, a2, a3 };
+            c1.Trainers = new List<Trainer>() { t1, t2 };
 
-            
+            t1.Courses = new List<Course>() { c1 };
+            t2.Courses = new List<Course>() { c1 };
+
+
+
             //c1.StudentCourses = new List<StudentCourse>() { sc1, sc2, sc3, sc4, sc5, sc6 };
 
             //t1.CourseTrainers = new List<CourseTrainer>() { ct1, ct2 };
 
-
-            //context.StudentsAssignments.AddOrUpdate(sa1, sa2, sa3, sa4, sa5, sa6);
-            //context.CoursesTrainers.AddOrUpdate(ct1, ct2);
+            context.Assignments.AddOrUpdate(x => x.Title, a1, a2, a3);
+            context.Courses.AddOrUpdate(x => x.Title, c1);
+            context.Students.AddOrUpdate(x => x.FirstName, s1, s2, s3, s4, s5, s6);
+            context.Trainers.AddOrUpdate(x => x.FirstName, t1, t2);
+            context.StudentsAssignments.AddOrUpdate(sa1, sa2, sa3, sa4, sa5, sa6);
             context.StudentsCourses.AddOrUpdate(x => new { x.CourseId, x.StudentId }, sc1, sc2, sc3, sc4, sc5, sc6);
 
-            //context.Assignments.AddOrUpdate(x => x.Title, a1, a2, a3);
-            //context.Courses.AddOrUpdate(x => x.Title, c1);
-            //context.Trainers.AddOrUpdate(x => x.FirstName, t1, t2);
-            //context.Students.AddOrUpdate(x => x.FirstName, s1, s2, s3, s4, s5, s6);
+            
 
             context.SaveChanges();
         }
