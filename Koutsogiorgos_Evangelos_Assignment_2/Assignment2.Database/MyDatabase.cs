@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using Assignment2.Entities;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Assignment2.Database
 {
@@ -12,12 +13,16 @@ namespace Assignment2.Database
     {
         public MyDatabase() : base("Connection") {}
 
-        //public DbSet<Student> Students { get; set; }
-        //public DbSet<Course> Courses { get; set; }
-        //public DbSet<Trainer> Trainers { get; set; }
-        //public DbSet<Assignment> Assignments { get; set; }
-        //public DbSet<CourseTrainer> CourseTrainers { get; set; }
-        //public DbSet<StudentAssignment> StudentAssignments { get; set; }
-        //public DbSet<StudentCourse> studentCourses { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Trainer> Trainers { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<StudentAssignment> StudentsAssignments { get; set; }
+        public DbSet<StudentCourse> StudentsCourses { get; set; }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        //}
     }
 }

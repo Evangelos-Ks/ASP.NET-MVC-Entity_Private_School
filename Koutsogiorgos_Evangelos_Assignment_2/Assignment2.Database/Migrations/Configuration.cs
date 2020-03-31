@@ -40,10 +40,6 @@
             Student s5 = new Student() { FirstName = "Sophia" };
             Student s6 = new Student() { FirstName = "Eleni" };
 
-            //==================== Seeding CourseTrainer ===========================================
-            CourseTrainer ct1 = new CourseTrainer() { CourseId = c1.CourseId, TrainerId = t1.TrainerId };
-            CourseTrainer ct2 = new CourseTrainer() { CourseId = c1.CourseId, TrainerId = t2.TrainerId };
-
             //==================== Seeding StudentAssignment ===========================================
             StudentAssignment sa1 = new StudentAssignment() { AssignmentId = a1.AssignmentId, StudentId = s1.StudentId };
             StudentAssignment sa2 = new StudentAssignment() { AssignmentId = a1.AssignmentId, StudentId = s2.StudentId };
@@ -62,13 +58,20 @@
 
             c1.Assignments = new List<Assignment>() { a1, a2, a3 };
 
-            context.Courses.AddOrUpdate(x => x.Title, c1);
-            context.Trainers.AddOrUpdate(x => x.FirstName, t1, t2);
-            //context.CourseTrainers.AddOrUpdate(ct1, ct2);
-            context.Assignments.AddOrUpdate(x => x.Title, a1, a2, a3);
-            context.Students.AddOrUpdate(x => x.FirstName, s1, s2, s3, s4, s5, s6);
-            //context.studentCourses.AddOrUpdate(sc1, sc2, sc3, sc4, sc5, sc6);
-            //context.StudentAssignments.AddOrUpdate(sa1, sa2, sa3, sa4, sa5, sa6);
+            
+            //c1.StudentCourses = new List<StudentCourse>() { sc1, sc2, sc3, sc4, sc5, sc6 };
+
+            //t1.CourseTrainers = new List<CourseTrainer>() { ct1, ct2 };
+
+
+            //context.StudentsAssignments.AddOrUpdate(sa1, sa2, sa3, sa4, sa5, sa6);
+            //context.CoursesTrainers.AddOrUpdate(ct1, ct2);
+            context.StudentsCourses.AddOrUpdate(x => new { x.CourseId, x.StudentId }, sc1, sc2, sc3, sc4, sc5, sc6);
+
+            //context.Assignments.AddOrUpdate(x => x.Title, a1, a2, a3);
+            //context.Courses.AddOrUpdate(x => x.Title, c1);
+            //context.Trainers.AddOrUpdate(x => x.FirstName, t1, t2);
+            //context.Students.AddOrUpdate(x => x.FirstName, s1, s2, s3, s4, s5, s6);
 
             context.SaveChanges();
         }

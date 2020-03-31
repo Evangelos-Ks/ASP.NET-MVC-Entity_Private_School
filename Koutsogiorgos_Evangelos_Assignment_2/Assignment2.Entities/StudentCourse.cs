@@ -12,11 +12,14 @@ namespace Assignment2.Entities
     public class StudentCourse
     {
         //======================== Properties ================================================
-        [Key]
-        [Column(Order = 1)]
-        public int StudentId { get; set; }
+        //public int StudentCourseId { get; set; }
         [Key]
         [Column(Order = 2)]
+        //[ForeignKey("Student")]
+        public int StudentId { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        //[ForeignKey("Course")]
         public int CourseId { get; set; }
         //public decimal TuitionFees { get; set; }
 

@@ -11,14 +11,17 @@ namespace Assignment2.Entities
     public class StudentAssignment
     {
         //======================== Properties ================================================
-        [Key]
-        [Column(Order = 1)]
-        public int StudentId { get; set; }
+        //public int StudentAssignmentId { get; set; }
         [Key]
         [Column(Order = 2)]
+        //[ForeignKey("Student")]
+        public int StudentId { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        //[ForeignKey("Assignment")]
         public int AssignmentId { get; set; }
-        //public int OralMark { get; set; }
-        //public int TotalMark { get; set; }
+        public int OralMark { get; set; }
+        public int TotalMark { get; set; }
 
         //======================== Navigation Properties ================================================
         public virtual Student Student { get; set; }
