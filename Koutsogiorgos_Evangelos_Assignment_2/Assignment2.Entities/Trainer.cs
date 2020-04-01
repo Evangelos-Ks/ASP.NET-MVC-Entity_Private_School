@@ -14,5 +14,8 @@ namespace Assignment2.Entities
         public string LastName { get; set; }
         public string Subject { get; set; }
 
+        //======================== Navigation Properties ================================================
+        public virtual ICollection<Course> Courses { get; set; }
+
     }
 }

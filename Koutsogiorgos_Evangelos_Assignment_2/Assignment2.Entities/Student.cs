@@ -9,11 +9,15 @@ namespace Assignment2.Entities
     public class Student
     {
         //======================== Properties ================================================
-        public Student StudentId { get; set; }
+        public int StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime Date { get; set; }
-        public decimal TuitionFees { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string PhotoUrl { get; set; }
+
+        //======================== Navigation Properties ================================================
+        public virtual ICollection<StudentAssignment> StudentAssignments { get; set; }
+        public virtual ICollection<StudentCourse> StudentCourses { get; set; }
 
     }
 }

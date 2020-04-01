@@ -1,0 +1,11 @@
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Entities\bin\Debug\Assignment2.Entities.dll.config
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Entities\bin\Debug\Assignment2.Entities.dll
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Entities\bin\Debug\Assignment2.Entities.pdb
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Entities\bin\Debug\EntityFramework.dll
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Entities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Entities\bin\Debug\EntityFramework.xml
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Entities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Entities\obj\Debug\Assignment2.Entities.csprojAssemblyReference.cache
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Entities\obj\Debug\Assignment2.Entities.csproj.CopyComplete
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Entities\obj\Debug\Assignment2.Entities.dll
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Entities\obj\Debug\Assignment2.Entities.pdb

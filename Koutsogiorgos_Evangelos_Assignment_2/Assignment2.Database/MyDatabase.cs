@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using Assignment2.Entities;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Assignment2.Database
 {
@@ -16,5 +17,9 @@ namespace Assignment2.Database
         public DbSet<Course> Courses { get; set; }
         public DbSet<Trainer> Trainers { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<StudentAssignment> StudentsAssignments { get; set; }
+        public DbSet<StudentCourse> StudentsCourses { get; set; }
+
+       
     }
 }

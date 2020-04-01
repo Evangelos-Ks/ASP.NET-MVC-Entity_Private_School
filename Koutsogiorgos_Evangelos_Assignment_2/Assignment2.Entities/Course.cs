@@ -15,5 +15,10 @@ namespace Assignment2.Entities
         public string Type { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+
+        //======================== Navigation Properties ================================================
+        public virtual ICollection<Assignment> Assignments { get; set; }
+        public virtual ICollection<Trainer> Trainers { get; set; }
+        public virtual ICollection<StudentCourse> StudentCourses { get; set; }
     }
 }
