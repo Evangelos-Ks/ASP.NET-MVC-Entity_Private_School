@@ -22,6 +22,7 @@ namespace Assignment2.Entities
         [Display(Name = "Date of birth")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfBirth { get; set; }
+        [Display(Name = "Student photo")]
         public string PhotoUrl { get; set; }
 
         //======================== Navigation Properties ================================================

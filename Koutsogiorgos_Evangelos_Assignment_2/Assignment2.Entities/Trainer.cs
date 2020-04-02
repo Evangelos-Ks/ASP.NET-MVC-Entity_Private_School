@@ -20,6 +20,8 @@ namespace Assignment2.Entities
         [MinLength(3, ErrorMessage = "The minimum length is 3 characters"), MaxLength(30, ErrorMessage = "The maximum length is 30 characters")]
         public string LastName { get; set; }
         public string Subject { get; set; }
+        [Display(Name = "Trainer photo")]
+        public string PhotoUrl { get; set; }
 
         //======================== Navigation Properties ================================================
         public virtual ICollection<Course> Courses { get; set; }
