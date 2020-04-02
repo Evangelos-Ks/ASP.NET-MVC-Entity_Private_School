@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Assignment.cs" />
     <Compile Include="Course.cs" />
+    <Compile Include="Custom Validations\MyValidationMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="StudentAssignment.cs" />

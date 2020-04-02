@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Assignment2.Entities
 {
@@ -11,9 +12,13 @@ namespace Assignment2.Entities
     {
         //======================== Properties ================================================
         public int AssignmentId { get; set; }
+        [Required(ErrorMessage = "Title is required")]
+        [MinLength(3, ErrorMessage ="The title needs at least 3 characters"), MaxLength(30, ErrorMessage = "The maximum length is 30 characters")]
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime SubDateTime { get; set; }
+        [Display(Name = "Submission date")]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? SubDateTime { get; set; }
 
         //======================== Navigation Properties ================================================
         [ForeignKey("Course")]

@@ -16,14 +16,17 @@
 
         protected override void Seed(Assignment2.Database.MyDatabase context)
         {
+            #region Seed Courses
             //==================== Seeding Courses ===========================================
             Course c1 = new Course() { Title = "Phisics", Stream = "Full time", Type = "Science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/6/16") };
             Course c2 = new Course() { Title = "Chemistry", Stream = "Full time", Type = "Science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/6/11") };
             Course c3 = new Course() { Title = "Biology", Stream = "Full time", Type = "Science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/7/1") };
             Course c4 = new Course() { Title = "Mathematics", Stream = "Full time", Type = "Science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/5/30") };
             Course c5 = new Course() { Title = "Information Technology", Stream = "Full time", Type = "Computer science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/6/2") };
+            #endregion
 
 
+            #region Seed Trainers
             //==================== Seeding Trainers ===========================================
             Trainer t1 = new Trainer() { FirstName = "Albert", LastName = "Einstain", Subject = "Phisics" };
             Trainer t2 = new Trainer() { FirstName = "Richard", LastName = "Faynman", Subject = "Phisics" };
@@ -35,8 +38,10 @@
             Trainer t8 = new Trainer() { FirstName = "Carl", LastName = "Gauss", Subject = "Mathematics" };
             Trainer t9 = new Trainer() { FirstName = "Alan", LastName = "Turing", Subject = "Computer science" };
             Trainer t10 = new Trainer() { FirstName = "Dennis", LastName = "Ritchie", Subject = "Computer science" };
+            #endregion
 
 
+            #region Seed Assignmets
             //==================== Seeding Assignments ===========================================
             Assignment a1 = new Assignment() { Title = "PhysMec", Description = "Mechanics", SubDateTime= DateTime.Parse("2020/2/10") };
             Assignment a2 = new Assignment() { Title = "PhysOpt", Description = "Optics", SubDateTime = DateTime.Parse("2020/3/20") };
@@ -57,8 +62,10 @@
             Assignment a13 = new Assignment() { Title = "ITAl", Description = "Algorithms", SubDateTime = DateTime.Parse("2020/2/20"), Course = c5 };
             Assignment a14 = new Assignment() { Title = "ITCD", Description = "Computer design", SubDateTime = DateTime.Parse("2020/3/26"), Course = c5 };
             Assignment a15 = new Assignment() { Title = "ITPM", Description = "Programming methodology", SubDateTime = DateTime.Parse("2020/5/25"), Course = c5 };
+            #endregion
 
 
+            #region Seed Students
             //==================== Seeding Students ===========================================
             Student s1 = new Student() { FirstName= "Maria", LastName = "Fafouti", DateOfBirth = DateTime.Parse("12/2/1993"), PhotoUrl = "#" };
             Student s2 = new Student() { FirstName = "Evangelos", LastName = "Koutsogiorgos", DateOfBirth = DateTime.Parse("10/12/1987"), PhotoUrl = "#" };
@@ -94,9 +101,10 @@
             Student s28 = new Student() { FirstName = "Evangelos", LastName = "Mixail", DateOfBirth = DateTime.Parse("6/6/1985"), PhotoUrl = "#" };
             Student s29 = new Student() { FirstName = "Angeliki", LastName = "Karvouniari", DateOfBirth = DateTime.Parse("22/5/1989"), PhotoUrl = "#" };
             Student s30 = new Student() { FirstName = "Stephanos", LastName = "Adamos", DateOfBirth = DateTime.Parse("20/1/1986"), PhotoUrl = "#" };
+            #endregion
 
 
-
+            #region Seed StudentAssignment
             //==================== Seeding StudentAssignment ===========================================
             //StudentAssignment sa1 = new StudentAssignment() { Assignment = a1, Student = s1, OralMark = 80, TotalMark = 90 };
             //StudentAssignment sa2 = new StudentAssignment() { Assignment = a1, Student = s2, OralMark = 82, TotalMark = 94 };
@@ -167,8 +175,10 @@
             StudentAssignment sa28 = new StudentAssignment() { OralMark = 89, TotalMark = 87 };
             StudentAssignment sa29 = new StudentAssignment() { OralMark = 75, TotalMark = 71 };
             StudentAssignment sa30 = new StudentAssignment() { OralMark = 73, TotalMark = 69 };
+            #endregion
 
 
+            #region Seed StudentCourse
             //==================== Seeding StudentCourse ===========================================
             //StudentCourse sc1 = new StudentCourse() { Course = c1, Student = s1, TuitionFees = 500M };
             //StudentCourse sc2 = new StudentCourse() { Course = c1, Student = s2, TuitionFees = 500M };
@@ -239,9 +249,11 @@
             StudentCourse sc28 = new StudentCourse() { TuitionFees = 500M };
             StudentCourse sc29 = new StudentCourse() { TuitionFees = 450M };
             StudentCourse sc30 = new StudentCourse() { TuitionFees = 500M };
+            #endregion
 
 
-            //=================== Asign Assignments and Trainers to Courses ==========================
+            #region Asign Assignments, Trainers and StudentCourses to Courses
+            //=================== Asign Assignments, Trainers and StudentCourses to Courses ==========================
             c1.Assignments = new List<Assignment>() { a1, a2, a3 };
             c2.Assignments = new List<Assignment>() { a4, a5, a6 };
             c3.Assignments = new List<Assignment>() { a7, a8, a9 };
@@ -259,8 +271,12 @@
             c3.StudentCourses = new List<StudentCourse> { sc13, sc14, sc15, sc16, sc17, sc18 };
             c4.StudentCourses = new List<StudentCourse> { sc19, sc20, sc21, sc22, sc23, sc24 };
             c5.StudentCourses = new List<StudentCourse> { sc25, sc26, sc27, sc28, sc29, sc30 };
+            #endregion
 
-            s1 .StudentCourses = new List<StudentCourse> { sc1 };
+
+            #region Asign StudentCourses and StudentAssignments to Students
+            //=================== Asign StudentCourses and StudentAssignments to Students ==========================
+            s1.StudentCourses = new List<StudentCourse> { sc1 };
             s2 .StudentCourses = new List<StudentCourse> { sc2 };
             s3 .StudentCourses = new List<StudentCourse> { sc3 };
             s4 .StudentCourses = new List<StudentCourse> { sc4 };
@@ -321,7 +337,11 @@
             s28.StudentAssignments = new List<StudentAssignment> { sa28 };
             s29.StudentAssignments = new List<StudentAssignment> { sa29 };
             s30.StudentAssignments = new List<StudentAssignment> { sa30 };
+            #endregion
 
+
+            #region Asign StudentAssignments to Assignments
+            //=================== Asign StudentAssignments to Assignments ==========================
             a1.StudentAssignments = new List<StudentAssignment>() {sa1, sa2 };
             a2.StudentAssignments = new List<StudentAssignment>() {sa3, sa4 };
             a3.StudentAssignments = new List<StudentAssignment>() {sa5, sa6 };
@@ -337,6 +357,7 @@
             a13.StudentAssignments = new List<StudentAssignment>() {sa25, sa26 };
             a14.StudentAssignments = new List<StudentAssignment>() {sa27, sa28 };
             a15.StudentAssignments = new List<StudentAssignment>() {sa29, sa30 };
+            #endregion
 
 
 
