@@ -130,7 +130,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestAssignmentController.cs" />
+    <Compile Include="Controllers\TestCourseController.cs" />
+    <Compile Include="Controllers\TestStudentAssignmentController.cs" />
     <Compile Include="Controllers\TestStudentController.cs" />
+    <Compile Include="Controllers\TestStudentCourseController.cs" />
+    <Compile Include="Controllers\TestTrainerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -288,6 +293,31 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\TestCourse\Create.cshtml" />
+    <Content Include="Views\TestCourse\Delete.cshtml" />
+    <Content Include="Views\TestCourse\Details.cshtml" />
+    <Content Include="Views\TestCourse\Edit.cshtml" />
+    <Content Include="Views\TestCourse\Index.cshtml" />
+    <Content Include="Views\TestAssignment\Create.cshtml" />
+    <Content Include="Views\TestAssignment\Delete.cshtml" />
+    <Content Include="Views\TestAssignment\Details.cshtml" />
+    <Content Include="Views\TestAssignment\Edit.cshtml" />
+    <Content Include="Views\TestAssignment\Index.cshtml" />
+    <Content Include="Views\TestTrainer\Create.cshtml" />
+    <Content Include="Views\TestTrainer\Delete.cshtml" />
+    <Content Include="Views\TestTrainer\Details.cshtml" />
+    <Content Include="Views\TestTrainer\Edit.cshtml" />
+    <Content Include="Views\TestTrainer\Index.cshtml" />
+    <Content Include="Views\TestStudentAssignment\Create.cshtml" />
+    <Content Include="Views\TestStudentAssignment\Delete.cshtml" />
+    <Content Include="Views\TestStudentAssignment\Details.cshtml" />
+    <Content Include="Views\TestStudentAssignment\Edit.cshtml" />
+    <Content Include="Views\TestStudentAssignment\Index.cshtml" />
+    <Content Include="Views\TestStudentCourse\Create.cshtml" />
+    <Content Include="Views\TestStudentCourse\Delete.cshtml" />
+    <Content Include="Views\TestStudentCourse\Details.cshtml" />
+    <Content Include="Views\TestStudentCourse\Edit.cshtml" />
+    <Content Include="Views\TestStudentCourse\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
