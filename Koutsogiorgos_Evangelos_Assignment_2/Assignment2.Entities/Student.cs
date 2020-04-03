@@ -20,7 +20,7 @@ namespace Assignment2.Entities
         [ MinLength(3, ErrorMessage = "The minimum length is 3 characters"), MaxLength(30, ErrorMessage = "The maximum length is 30 characters")]
         public string LastName { get; set; }
         [Display(Name = "Date of birth")]
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfBirth { get; set; }
         [Display(Name = "Student photo")]
         public string PhotoUrl { get; set; }

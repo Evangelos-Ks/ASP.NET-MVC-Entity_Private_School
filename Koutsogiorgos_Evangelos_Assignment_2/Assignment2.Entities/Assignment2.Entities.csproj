@@ -64,16 +64,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Photos\boy1.png" />
-    <Content Include="Photos\boy2.png" />
-    <Content Include="Photos\boy3.png" />
-    <Content Include="Photos\boy4.png" />
-    <Content Include="Photos\girl1.png" />
-    <Content Include="Photos\girl2.png" />
-    <Content Include="Photos\girl3.png" />
-    <Content Include="Photos\girl4.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -9,7 +9,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Assignment2.Database
 {
-    class MyDatabase : DbContext
+    public class MyDatabase : DbContext
     {
         public MyDatabase() : base("Connection") {}
 

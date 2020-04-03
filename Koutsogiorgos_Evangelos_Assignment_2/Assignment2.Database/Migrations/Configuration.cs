@@ -67,40 +67,40 @@
 
             #region Seed Students
             //==================== Seeding Students ===========================================
-            Student s1 = new Student() { FirstName= "Maria", LastName = "Fafouti", DateOfBirth = DateTime.Parse("12/2/1993"), PhotoUrl = "#" };
-            Student s2 = new Student() { FirstName = "Evangelos", LastName = "Koutsogiorgos", DateOfBirth = DateTime.Parse("10/12/1987"), PhotoUrl = "#" };
-            Student s3 = new Student() { FirstName = "Panagiotis", LastName = "Koutsogiorgos", DateOfBirth = DateTime.Parse("22/2/1991"), PhotoUrl = "#" };
-            Student s4 = new Student() { FirstName = "Ioannis", LastName = "Angelopoulos", DateOfBirth = DateTime.Parse("1/6/1985"), PhotoUrl = "#" };
-            Student s5 = new Student() { FirstName = "Sophia", LastName = "Georgiou", DateOfBirth = DateTime.Parse("30/3/1993"), PhotoUrl = "#" };
-            Student s6 = new Student() { FirstName = "Eleni", LastName = "Parisi", DateOfBirth = DateTime.Parse("20/8/1989"), PhotoUrl = "#" };
+            Student s1 = new Student() { FirstName = "Maria", LastName = "Fafouti", DateOfBirth = DateTime.Parse("12/2/1993"), PhotoUrl = "../Content/Students_Image/girl4.png" };
+            Student s2 = new Student() { FirstName = "Evangelos", LastName = "Koutsogiorgos", DateOfBirth = DateTime.Parse("10/12/1987"), PhotoUrl = "../Content/Students_Image/boy1.png" };
+            Student s3 = new Student() { FirstName = "Panagiotis", LastName = "Koutsogiorgos", DateOfBirth = DateTime.Parse("22/2/1991"), PhotoUrl = "../Content/Students_Image/boy3.png" };
+            Student s4 = new Student() { FirstName = "Ioannis", LastName = "Angelopoulos", DateOfBirth = DateTime.Parse("1/6/1985"), PhotoUrl = "../Content/Students_Image/boy2.png" };
+            Student s5 = new Student() { FirstName = "Sophia", LastName = "Georgiou", DateOfBirth = DateTime.Parse("30/3/1993"), PhotoUrl = "../Content/Students_Image/girl3.png" };
+            Student s6 = new Student() { FirstName = "Eleni", LastName = "Parisi", DateOfBirth = DateTime.Parse("20/8/1989"), PhotoUrl = "../Content/Students_Image/girl4.png" };
 
-            Student s7 = new Student() { FirstName = "Athanasios", LastName = "Sdralias", DateOfBirth = DateTime.Parse("11/9/1986"), PhotoUrl = "#" };
-            Student s8 = new Student() { FirstName = "Nikolaos", LastName = "Karageorgos", DateOfBirth = DateTime.Parse("5/11/1990"), PhotoUrl = "#" };
-            Student s9 = new Student() { FirstName = "Margarita", LastName = "Fafouti", DateOfBirth = DateTime.Parse("2/2/1990"), PhotoUrl = "#" };
-            Student s10 = new Student() { FirstName = "Panagiotis", LastName = "Sdralias", DateOfBirth = DateTime.Parse("12/7/1985"), PhotoUrl = "#" };
-            Student s11 = new Student() { FirstName = "Anna", LastName = "Koutsogiorgou", DateOfBirth = DateTime.Parse("21/3/1987"), PhotoUrl = "#" };
-            Student s12 = new Student() { FirstName = "Eirini", LastName = "Ntafou", DateOfBirth = DateTime.Parse("19/9/1984"), PhotoUrl = "#" };
+            Student s7 = new Student() { FirstName = "Athanasios", LastName = "Sdralias", DateOfBirth = DateTime.Parse("11/9/1986"), PhotoUrl = "../Content/Students_Image/boy1.png" };
+            Student s8 = new Student() { FirstName = "Nikolaos", LastName = "Karageorgos", DateOfBirth = DateTime.Parse("5/11/1990"), PhotoUrl = "../Content/Students_Image/boy4.png" };
+            Student s9 = new Student() { FirstName = "Margarita", LastName = "Fafouti", DateOfBirth = DateTime.Parse("2/2/1990"), PhotoUrl = "../Content/Students_Image/girl1.png" };
+            Student s10 = new Student() { FirstName = "Panagiotis", LastName = "Sdralias", DateOfBirth = DateTime.Parse("12/7/1985"), PhotoUrl = "../Content/Students_Image/boy3.png" };
+            Student s11 = new Student() { FirstName = "Anna", LastName = "Koutsogiorgou", DateOfBirth = DateTime.Parse("21/3/1987"), PhotoUrl = "../Content/Students_Image/girl2.png" };
+            Student s12 = new Student() { FirstName = "Eirini", LastName = "Ntafou", DateOfBirth = DateTime.Parse("19/9/1984"), PhotoUrl = "../Content/Students_Image/girl1.png" };
 
-            Student s13 = new Student() { FirstName = "Maria", LastName = "Dimitriou", DateOfBirth = DateTime.Parse("1/2/1991"), PhotoUrl = "#" };
-            Student s14 = new Student() { FirstName = "Dimitrios", LastName = "Perikleous", DateOfBirth = DateTime.Parse("11/12/1990"), PhotoUrl = "#" };
-            Student s15 = new Student() { FirstName = "Grigoris", LastName = "Arnaoutoglou", DateOfBirth = DateTime.Parse("13/6/1990"), PhotoUrl = "#" };
-            Student s16 = new Student() { FirstName = "Dimitrios", LastName = "Gogos", DateOfBirth = DateTime.Parse("11/11/1992"), PhotoUrl = "#" };
-            Student s17 = new Student() { FirstName = "Sotiris", LastName = "Apostolidis", DateOfBirth = DateTime.Parse("9/3/1984"), PhotoUrl = "#" };
-            Student s18 = new Student() { FirstName = "Markos", LastName = "Seferlis", DateOfBirth = DateTime.Parse("24/2/1983"), PhotoUrl = "#" };
+            Student s13 = new Student() { FirstName = "Maria", LastName = "Dimitriou", DateOfBirth = DateTime.Parse("1/2/1991"), PhotoUrl = "../Content/Students_Image/girl3.png" };
+            Student s14 = new Student() { FirstName = "Dimitrios", LastName = "Perikleous", DateOfBirth = DateTime.Parse("11/12/1990"), PhotoUrl = "../Content/Students_Image/boy4.png" };
+            Student s15 = new Student() { FirstName = "Grigoris", LastName = "Arnaoutoglou", DateOfBirth = DateTime.Parse("13/6/1990"), PhotoUrl = "../Content/Students_Image/boy1.png" };
+            Student s16 = new Student() { FirstName = "Dimitrios", LastName = "Gogos", DateOfBirth = DateTime.Parse("11/11/1992"), PhotoUrl = "../Content/Students_Image/boy3.png" };
+            Student s17 = new Student() { FirstName = "Sotiris", LastName = "Apostolidis", DateOfBirth = DateTime.Parse("9/3/1984"), PhotoUrl = "../Content/Students_Image/boy1.png" };
+            Student s18 = new Student() { FirstName = "Markos", LastName = "Seferlis", DateOfBirth = DateTime.Parse("24/2/1983"), PhotoUrl = "../Content/Students_Image/boy2.png" };
 
-            Student s19 = new Student() { FirstName = "Vasiliki", LastName = "Kaminioti", DateOfBirth = DateTime.Parse("7/6/1987"), PhotoUrl = "#" };
-            Student s20 = new Student() { FirstName = "Kleopatra", LastName = "Kotsovolou", DateOfBirth = DateTime.Parse("17/10/1991"), PhotoUrl = "#" };
-            Student s21 = new Student() { FirstName = "Rayan", LastName = "Kelly", DateOfBirth = DateTime.Parse("27/7/1987"), PhotoUrl = "#" };
-            Student s22 = new Student() { FirstName = "Panagiotis", LastName = "Zaxaris", DateOfBirth = DateTime.Parse("21/12/1986"), PhotoUrl = "#" };
-            Student s23 = new Student() { FirstName = "Olga", LastName = "Kiritsopoulou", DateOfBirth = DateTime.Parse("24/4/1986"), PhotoUrl = "#" };
-            Student s24 = new Student() { FirstName = "Xenofontas", LastName = "Vlaxogiannis", DateOfBirth = DateTime.Parse("18/8/1990"), PhotoUrl = "#" };
+            Student s19 = new Student() { FirstName = "Vasiliki", LastName = "Kaminioti", DateOfBirth = DateTime.Parse("7/6/1987"), PhotoUrl = "../Content/Students_Image/girl2.png" };
+            Student s20 = new Student() { FirstName = "Kleopatra", LastName = "Kotsovolou", DateOfBirth = DateTime.Parse("17/10/1991"), PhotoUrl = "../Content/Students_Image/girl1.png" };
+            Student s21 = new Student() { FirstName = "Rayan", LastName = "Kelly", DateOfBirth = DateTime.Parse("27/7/1987"), PhotoUrl = "../Content/Students_Image/boy3.png" };
+            Student s22 = new Student() { FirstName = "Panagiotis", LastName = "Zaxaris", DateOfBirth = DateTime.Parse("21/12/1986"), PhotoUrl = "../Content/Students_Image/boy4.png" };
+            Student s23 = new Student() { FirstName = "Olga", LastName = "Kiritsopoulou", DateOfBirth = DateTime.Parse("24/4/1986"), PhotoUrl = "../Content/Students_Image/girl1.png" };
+            Student s24 = new Student() { FirstName = "Xenofontas", LastName = "Vlaxogiannis", DateOfBirth = DateTime.Parse("18/8/1990"), PhotoUrl = "../Content/Students_Image/boy4.png" };
 
-            Student s25 = new Student() { FirstName = "Hector", LastName = "Gatsos", DateOfBirth = DateTime.Parse("29/9/1987"), PhotoUrl = "#" };
-            Student s26 = new Student() { FirstName = "Dimitra", LastName = "Alexiou", DateOfBirth = DateTime.Parse("16/8/1987"), PhotoUrl = "#" };
-            Student s27 = new Student() { FirstName = "Olga", LastName = "Karageorgiou", DateOfBirth = DateTime.Parse("3/6/1992"), PhotoUrl = "#" };
-            Student s28 = new Student() { FirstName = "Evangelos", LastName = "Mixail", DateOfBirth = DateTime.Parse("6/6/1985"), PhotoUrl = "#" };
-            Student s29 = new Student() { FirstName = "Angeliki", LastName = "Karvouniari", DateOfBirth = DateTime.Parse("22/5/1989"), PhotoUrl = "#" };
-            Student s30 = new Student() { FirstName = "Stephanos", LastName = "Adamos", DateOfBirth = DateTime.Parse("20/1/1986"), PhotoUrl = "#" };
+            Student s25 = new Student() { FirstName = "Hector", LastName = "Gatsos", DateOfBirth = DateTime.Parse("29/9/1987"), PhotoUrl = "../Content/Students_Image/boy3.png" };
+            Student s26 = new Student() { FirstName = "Dimitra", LastName = "Alexiou", DateOfBirth = DateTime.Parse("16/8/1987"), PhotoUrl = "../Content/Students_Image/girl3.png" };
+            Student s27 = new Student() { FirstName = "Olga", LastName = "Karageorgiou", DateOfBirth = DateTime.Parse("3/6/1992"), PhotoUrl = "../Content/Students_Image/girl4.png" };
+            Student s28 = new Student() { FirstName = "Evangelos", LastName = "Mixail", DateOfBirth = DateTime.Parse("6/6/1985"), PhotoUrl = "../Content/Students_Image/boy3.png" };
+            Student s29 = new Student() { FirstName = "Angeliki", LastName = "Karvouniari", DateOfBirth = DateTime.Parse("22/5/1989"), PhotoUrl = "../Content/Students_Image/girl1.png" };
+            Student s30 = new Student() { FirstName = "Stephanos", LastName = "Adamos", DateOfBirth = DateTime.Parse("20/1/1986"), PhotoUrl = "../Content/Students_Image/boy2.png" };
             #endregion
 
 
