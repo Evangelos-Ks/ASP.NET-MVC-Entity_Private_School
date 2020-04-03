@@ -26,6 +26,16 @@
             @Html.DisplayFor(model => model.Student.FirstName)
         </dd>
 
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.LastName)
+        </dt>
+
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.LastName)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.TuitionFees)
         </dt>
@@ -37,6 +47,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentCourseId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

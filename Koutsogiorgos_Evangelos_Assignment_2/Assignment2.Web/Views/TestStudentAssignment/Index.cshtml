@@ -18,6 +18,9 @@
             @Html.DisplayNameFor(model => model.Student.FirstName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Student.LastName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.OralMark)
         </th>
         <th>
@@ -27,25 +30,28 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Assignment.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OralMark)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalMark)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Assignment.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Student.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Student.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.OralMark)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalMark)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.StudentAssignmentId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.StudentAssignmentId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.StudentAssignmentId })
+    </td>
+</tr>
 }
 
 </table>

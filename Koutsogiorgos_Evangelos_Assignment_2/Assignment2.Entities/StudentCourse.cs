@@ -12,13 +12,14 @@ namespace Assignment2.Entities
     public class StudentCourse
     {
         //======================== Properties ================================================
-        [Key]
-        [Column(Order = 2)]
+        public int StudentCourseId { get; set; }
+        [Display(Name = "Student's name")]
+        [Required]
         public int StudentId { get; set; }
-        [Key]
-        [Column(Order = 1)]
+        [Display(Name = "Course title")]
+        [Required]
         public int CourseId { get; set; }
-        public decimal TuitionFees { get; set; }
+        public int TuitionFees { get; set; }
 
         //======================== Navigation Properties ================================================
         public virtual Student Student { get; set; }

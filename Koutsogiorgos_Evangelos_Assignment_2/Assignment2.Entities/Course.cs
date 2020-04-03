@@ -12,16 +12,17 @@ namespace Assignment2.Entities
     {
         //======================== Properties ================================================
         public int CourseId { get; set; }
+        [Display(Name = "Course title")]
         [Required(ErrorMessage = "Title is required")]
         [MinLength(3, ErrorMessage = "The title needs at least 3 characters"), MaxLength(30, ErrorMessage = "The maximum length is 30 characters")]
         public string Title { get; set; }
         public string Stream { get; set; }
         public string Type { get; set; }
         [Display(Name = "Start date")]
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
         [Display(Name = "End date")]
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? EndDate { get; set; }
 
         //======================== Navigation Properties ================================================

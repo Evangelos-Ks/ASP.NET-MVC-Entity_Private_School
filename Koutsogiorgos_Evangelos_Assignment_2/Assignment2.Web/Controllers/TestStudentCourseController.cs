@@ -50,7 +50,7 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CourseId,StudentId,TuitionFees")] StudentCourse studentCourse)
+        public ActionResult Create([Bind(Include = "StudentCourseId,StudentId,CourseId,TuitionFees")] StudentCourse studentCourse)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace Assignment2.Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Title", studentCourse.CourseId);
-            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "FirstName", studentCourse.StudentId);
+            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "LastName", studentCourse.StudentId);
             return View(studentCourse);
         }
 
@@ -86,7 +86,7 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CourseId,StudentId,TuitionFees")] StudentCourse studentCourse)
+        public ActionResult Edit([Bind(Include = "StudentCourseId,StudentId,CourseId,TuitionFees")] StudentCourse studentCourse)
         {
             if (ModelState.IsValid)
             {

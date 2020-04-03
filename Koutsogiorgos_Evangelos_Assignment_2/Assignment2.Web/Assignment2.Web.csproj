@@ -308,6 +308,8 @@
     <Content Include="Views\TestTrainer\Details.cshtml" />
     <Content Include="Views\TestTrainer\Edit.cshtml" />
     <Content Include="Views\TestTrainer\Index.cshtml" />
+    <Content Include="Views\Shared\Components\_NavigationBar.cshtml" />
+    <Content Include="Views\Shared\Components\_Footer.cshtml" />
     <Content Include="Views\TestStudentAssignment\Create.cshtml" />
     <Content Include="Views\TestStudentAssignment\Delete.cshtml" />
     <Content Include="Views\TestStudentAssignment\Details.cshtml" />

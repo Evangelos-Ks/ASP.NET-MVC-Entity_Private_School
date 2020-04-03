@@ -11,11 +11,12 @@ namespace Assignment2.Entities
     public class StudentAssignment
     {
         //======================== Properties ================================================
-        [Key]
-        [Column(Order = 2)]
+        public int StudentAssignmentId { get; set; }
+        [Display(Name = "Student's name")]
+        [Required]
         public int StudentId { get; set; }
-        [Key]
-        [Column(Order = 1)]
+        [Display(Name = "Assignment")]
+        [Required]
         public int AssignmentId { get; set; }
         public int OralMark { get; set; }
         public int TotalMark { get; set; }

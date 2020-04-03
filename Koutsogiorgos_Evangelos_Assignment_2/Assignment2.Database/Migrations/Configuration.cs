@@ -215,40 +215,40 @@
             //StudentCourse sc29 = new StudentCourse() { Course = c5, Student = s29, TuitionFees = 450M };
             //StudentCourse sc30 = new StudentCourse() { Course = c5, Student = s30, TuitionFees = 500M };
 
-            StudentCourse sc1 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc2 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc3 = new StudentCourse() { TuitionFees = 450M };
-            StudentCourse sc4 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc5 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc6 = new StudentCourse() { TuitionFees = 500M };
+            StudentCourse sc1 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc2 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc3 = new StudentCourse() { TuitionFees = 450 };
+            StudentCourse sc4 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc5 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc6 = new StudentCourse() { TuitionFees = 500 };
 
-            StudentCourse sc7 = new StudentCourse() {  TuitionFees = 500M };
-            StudentCourse sc8 = new StudentCourse() {  TuitionFees = 500M };
-            StudentCourse sc9 = new StudentCourse() {  TuitionFees = 450M };
-            StudentCourse sc10 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc11 = new StudentCourse() { TuitionFees = 450M };
-            StudentCourse sc12 = new StudentCourse() { TuitionFees = 500M };
+            StudentCourse sc7 = new StudentCourse() {  TuitionFees = 500 };
+            StudentCourse sc8 = new StudentCourse() {  TuitionFees = 500 };
+            StudentCourse sc9 = new StudentCourse() {  TuitionFees = 450 };
+            StudentCourse sc10 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc11 = new StudentCourse() { TuitionFees = 450 };
+            StudentCourse sc12 = new StudentCourse() { TuitionFees = 500 };
 
-            StudentCourse sc13 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc14 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc15 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc16 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc17 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc18 = new StudentCourse() { TuitionFees = 500M };
+            StudentCourse sc13 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc14 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc15 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc16 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc17 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc18 = new StudentCourse() { TuitionFees = 500 };
 
-            StudentCourse sc19 = new StudentCourse() { TuitionFees = 400M };
-            StudentCourse sc20 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc21 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc22 = new StudentCourse() { TuitionFees = 450M };
-            StudentCourse sc23 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc24 = new StudentCourse() { TuitionFees = 500M };
+            StudentCourse sc19 = new StudentCourse() { TuitionFees = 400 };
+            StudentCourse sc20 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc21 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc22 = new StudentCourse() { TuitionFees = 450 };
+            StudentCourse sc23 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc24 = new StudentCourse() { TuitionFees = 500 };
 
-            StudentCourse sc25 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc26 = new StudentCourse() { TuitionFees = 400M };
-            StudentCourse sc27 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc28 = new StudentCourse() { TuitionFees = 500M };
-            StudentCourse sc29 = new StudentCourse() { TuitionFees = 450M };
-            StudentCourse sc30 = new StudentCourse() { TuitionFees = 500M };
+            StudentCourse sc25 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc26 = new StudentCourse() { TuitionFees = 400 };
+            StudentCourse sc27 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc28 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc29 = new StudentCourse() { TuitionFees = 450 };
+            StudentCourse sc30 = new StudentCourse() { TuitionFees = 500 };
             #endregion
 
 
