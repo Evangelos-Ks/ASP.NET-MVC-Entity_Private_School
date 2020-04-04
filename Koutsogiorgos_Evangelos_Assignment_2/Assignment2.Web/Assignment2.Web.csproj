@@ -135,7 +135,6 @@
     <Compile Include="Controllers\TestCourseController.cs" />
     <Compile Include="Controllers\TestStudentAssignmentController.cs" />
     <Compile Include="Controllers\TestStudentCourseController.cs" />
-    <Compile Include="Controllers\TestTrainerController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -299,11 +298,6 @@
     <Content Include="Views\TestAssignment\Details.cshtml" />
     <Content Include="Views\TestAssignment\Edit.cshtml" />
     <Content Include="Views\TestAssignment\Index.cshtml" />
-    <Content Include="Views\TestTrainer\Create.cshtml" />
-    <Content Include="Views\TestTrainer\Delete.cshtml" />
-    <Content Include="Views\TestTrainer\Details.cshtml" />
-    <Content Include="Views\TestTrainer\Edit.cshtml" />
-    <Content Include="Views\TestTrainer\Index.cshtml" />
     <Content Include="Views\Shared\Components\_NavigationBar.cshtml" />
     <Content Include="Views\Shared\Components\_Footer.cshtml" />
     <Content Include="Views\TestStudentAssignment\Create.cshtml" />
