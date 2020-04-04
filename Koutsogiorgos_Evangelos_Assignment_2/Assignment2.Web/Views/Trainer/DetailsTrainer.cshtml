@@ -1,0 +1,65 @@
+﻿@model Assignment2.Entities.Trainer
+
+@{
+    ViewBag.Title = "Details Trainer";
+}
+
+<h2>Trainer details</h2>
+
+<div>
+    <h4>@Model.FirstName @Model.LastName</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            Courses
+        </dt>
+
+        <dd>
+            <ul>
+                @{
+                    foreach (var course in Model.Courses)
+                    {
+                        <li>@course.Title</li>
+                    }
+                }
+            </ul>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoUrl)
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(x => Model.PhotoUrl)" width="80" alt="Photo of @Html.DisplayFor(x => Model.FirstName) @Html.DisplayFor(x => Model.LastName)" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditTrainer", new { id = Model.TrainerId }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to List", "AllTrainers", null, new { @class = "btn btn-info" })
+</p>

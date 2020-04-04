@@ -136,6 +136,7 @@
     <Compile Include="Controllers\TestStudentAssignmentController.cs" />
     <Compile Include="Controllers\TestStudentCourseController.cs" />
     <Compile Include="Controllers\TestTrainerController.cs" />
+    <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -316,10 +317,15 @@
     <Content Include="Views\TestStudentCourse\Edit.cshtml" />
     <Content Include="Views\TestStudentCourse\Index.cshtml" />
     <Content Include="Views\Student\AllStudents.cshtml" />
-    <Content Include="Views\Student\StudentDetails.cshtml" />
     <Content Include="Views\Student\EditStudent.cshtml" />
     <Content Include="Views\Student\CreateStudent.cshtml" />
     <Content Include="Views\Student\DeleteStudent.cshtml" />
+    <Content Include="Views\Trainer\AllTrainers.cshtml" />
+    <Content Include="Views\Student\DetailsStudent.cshtml" />
+    <Content Include="Views\Trainer\DetailsTrainer.cshtml" />
+    <Content Include="Views\Trainer\EditTrainer.cshtml" />
+    <Content Include="Views\Trainer\CreateTrainer.cshtml" />
+    <Content Include="Views\Trainer\DeleteTrainer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

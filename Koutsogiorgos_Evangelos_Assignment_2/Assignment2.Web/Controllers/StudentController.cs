@@ -26,7 +26,7 @@ namespace Assignment2.Web.Controllers
         }
 
         // GET: TestStudent/Details/5
-        public ActionResult StudentDetails(int? id)
+        public ActionResult DetailsStudent(int? id)
         {
             StudentRepository studentRepository = new StudentRepository();
 
