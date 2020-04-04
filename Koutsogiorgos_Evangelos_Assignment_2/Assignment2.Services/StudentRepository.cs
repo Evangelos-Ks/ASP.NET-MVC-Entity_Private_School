@@ -8,6 +8,7 @@ using Assignment2.Entities;
 using System.Data.Entity;
 
 
+
 namespace Assignment2.Services
 {
     public class StudentRepository
@@ -21,7 +22,7 @@ namespace Assignment2.Services
         }
 
         //============================ Get GetById =========================================
-        public Student GetById(int? id)
+        public Student GetById(int? id) 
         {
             return db.Students.Find(id);
         }

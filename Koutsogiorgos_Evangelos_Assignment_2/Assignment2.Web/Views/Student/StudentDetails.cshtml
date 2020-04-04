@@ -1,0 +1,95 @@
+﻿@model Assignment2.Entities.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>@Model.FirstName @Model.LastName</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+
+        <dt>
+            Courses
+        </dt>
+
+        <dd>
+            @foreach (var item in Model.StudentCourses)
+            {
+                <ol>
+                    <li>
+                        @item.Course.Title
+                        <ul style="list-style-type: none">
+                            <li>
+                                Assignments
+                                <ul>
+                                    @foreach (var assignment in item.Course.Assignments)
+                                    {
+                                        <li>
+                                            @assignment.Title
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            }
+        </dd>
+
+        <dt>
+            Fees
+        </dt>
+
+        <dd>
+            @{ 
+                int totalFees = 0;
+
+                foreach (var item in Model.StudentCourses)
+                {
+                    totalFees += item.TuitionFees;
+                }
+            }
+
+            @totalFees
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoUrl)
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.PhotoUrl)" alt="Alternate Text" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentId }, new { @class = "btn btn-warning" }) 
+    @Html.ActionLink("Back to List", "AllStudents", null, new { @class = "btn btn-info" })
+</p>

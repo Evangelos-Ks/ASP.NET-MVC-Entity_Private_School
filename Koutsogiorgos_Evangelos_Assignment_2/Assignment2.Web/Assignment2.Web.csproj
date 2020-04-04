@@ -130,10 +130,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TestAssignmentController.cs" />
     <Compile Include="Controllers\TestCourseController.cs" />
     <Compile Include="Controllers\TestStudentAssignmentController.cs" />
-    <Compile Include="Controllers\TestStudentController.cs" />
     <Compile Include="Controllers\TestStudentCourseController.cs" />
     <Compile Include="Controllers\TestTrainerController.cs" />
     <Compile Include="Global.asax.cs">
@@ -278,11 +278,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\TestStudent\Create.cshtml" />
-    <Content Include="Views\TestStudent\Delete.cshtml" />
-    <Content Include="Views\TestStudent\Details.cshtml" />
-    <Content Include="Views\TestStudent\Edit.cshtml" />
-    <Content Include="Views\TestStudent\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -320,6 +315,11 @@
     <Content Include="Views\TestStudentCourse\Details.cshtml" />
     <Content Include="Views\TestStudentCourse\Edit.cshtml" />
     <Content Include="Views\TestStudentCourse\Index.cshtml" />
+    <Content Include="Views\Student\AllStudents.cshtml" />
+    <Content Include="Views\Student\StudentDetails.cshtml" />
+    <Content Include="Views\Student\EditStudent.cshtml" />
+    <Content Include="Views\Student\CreateStudent.cshtml" />
+    <Content Include="Views\Student\DeleteStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
