@@ -68,7 +68,7 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditTrainer([Bind(Include = "TrainerId,FirstName,LastName,DateOfBirth,PhotoUrl")] Trainer trainer)
+        public ActionResult EditTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,PhotoUrl")] Trainer trainer)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateTrainer([Bind(Include = "TrainerId,FirstName,LastName,DateOfBirth,PhotoUrl")] Trainer trainer)
+        public ActionResult CreateTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,PhotoUrl")] Trainer trainer)
         {
             if (ModelState.IsValid)
             {

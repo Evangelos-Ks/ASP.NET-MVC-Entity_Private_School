@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Assignment2.Entities.Course>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Courses";
 }
 
-<h2>Index</h2>
+<h2>All Courses</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Insert new course", "CreateCourse", null , new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -47,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CourseId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CourseId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CourseId })
+            @Html.ActionLink("Edit", "EditCourse", new { id=item.CourseId }, new { @class = "btn btn-warning" }) 
+            @Html.ActionLink("Details", "DetailsCourse", new { id=item.CourseId }, new { @class = "btn btn-info" }) 
+            @Html.ActionLink("Delete", "DeleteCourse", new { id=item.CourseId }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

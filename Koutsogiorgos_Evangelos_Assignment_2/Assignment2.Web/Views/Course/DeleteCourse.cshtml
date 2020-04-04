@@ -1,10 +1,10 @@
 ﻿@model Assignment2.Entities.Course
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Course";
 }
 
-<h2>Delete</h2>
+<h2>Delete course</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -57,8 +57,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("Back to List", "AllCourses", null, new { @class = "btn btn-info"})
         </div>
     }
 </div>

@@ -1,10 +1,10 @@
 ﻿@model Assignment2.Entities.Course
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details Course";
 }
 
-<h2>Details</h2>
+    <h2>Course details</h2>
 
 <div>
     <h4>Course</h4>
@@ -53,6 +53,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CourseId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "EditCourse", new { id = Model.CourseId }, new { @class = "btn btn-warning" }) 
+    @Html.ActionLink("Back to List", "AllCourses", null, new { @class = "btn btn-info" })
 </p>
