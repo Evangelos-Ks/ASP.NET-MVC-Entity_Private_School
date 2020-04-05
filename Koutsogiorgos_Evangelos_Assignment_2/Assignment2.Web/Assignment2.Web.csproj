@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AssignmentController.cs" />
+    <Compile Include="Controllers\AssignmentsPerCourseController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -317,7 +318,8 @@
     <Content Include="Views\Assignment\CreateAssignment.cshtml" />
     <Content Include="Views\Assignment\DeleteAssignment.cshtml" />
     <Content Include="Views\StudentPerCourse\AllStudentCourses.cshtml" />
-    <Content Include="Views\TrainersPerCourse\AllTrainersCourses.cshtml" />
+    <Content Include="Views\TrainersPerCourse\AllTrainerCourse.cshtml" />
+    <Content Include="Views\AssignmentsPerCourse\AllAssignmentsPerCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

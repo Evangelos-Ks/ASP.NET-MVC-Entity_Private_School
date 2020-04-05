@@ -11,9 +11,9 @@ namespace Assignment2.Web.Controllers
     public class TrainersPerCourseController : Controller
     {
         // GET: TrainersPerCourse
-        public ActionResult AllTrainersCourses()
+        public ActionResult AllTrainerCourse()
         {
-             TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+            TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
             var trainerCourse = trainerCourseRepository.GetAll();
 
             return View(trainerCourse);
