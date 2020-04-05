@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using Assignment2.Entities.Custom_Validations;
 
 namespace Assignment2.Entities
 {
@@ -29,7 +25,5 @@ namespace Assignment2.Entities
         public virtual ICollection<Assignment> Assignments { get; set; }
         public virtual ICollection<StudentCourse> StudentCourses { get; set; }
         public virtual ICollection<TrainerCourse> TrainerCourses { get; set; }
-
-
     }
 }

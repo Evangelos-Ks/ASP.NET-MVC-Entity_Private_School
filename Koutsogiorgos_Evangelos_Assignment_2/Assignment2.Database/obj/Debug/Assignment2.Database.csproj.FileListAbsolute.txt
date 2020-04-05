@@ -12,3 +12,5 @@ C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignm
 C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Database\obj\Debug\Assignment2.Database.csproj.CopyComplete
 C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Database\obj\Debug\Assignment2.Database.dll
 C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Database\obj\Debug\Assignment2.Database.pdb
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Database\obj\Debug\Assignment2.Database.Migrations.Initial.resources
+C:\Users\wwwev\Desktop\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Database\obj\Debug\Assignment2.Database.csproj.GenerateResource.cache

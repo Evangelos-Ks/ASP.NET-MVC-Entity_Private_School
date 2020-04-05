@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Assignment2.Database;
 using Assignment2.Entities;
 using System.Data.Entity;
@@ -67,7 +65,5 @@ namespace Assignment2.Services
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
-
     }
 }
