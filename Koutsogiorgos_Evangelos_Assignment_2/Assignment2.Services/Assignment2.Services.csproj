@@ -57,6 +57,7 @@
     <Compile Include="StudentAssignmentRepository.cs" />
     <Compile Include="StudentCourseRepository.cs" />
     <Compile Include="StudentRepository.cs" />
+    <Compile Include="TrainerCourseRepository.cs" />
     <Compile Include="TrainerRepository.cs" />
   </ItemGroup>
   <ItemGroup>

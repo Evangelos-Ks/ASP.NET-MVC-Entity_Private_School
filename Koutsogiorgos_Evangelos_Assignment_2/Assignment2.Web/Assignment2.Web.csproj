@@ -135,8 +135,8 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\StudentPerCourseController.cs" />
     <Compile Include="Controllers\TestStudentAssignmentController.cs" />
-    <Compile Include="Controllers\TestStudentCourseController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
+    <Compile Include="Controllers\TrainersPerCourseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -296,11 +296,6 @@
     <Content Include="Views\TestStudentAssignment\Details.cshtml" />
     <Content Include="Views\TestStudentAssignment\Edit.cshtml" />
     <Content Include="Views\TestStudentAssignment\Index.cshtml" />
-    <Content Include="Views\TestStudentCourse\Create.cshtml" />
-    <Content Include="Views\TestStudentCourse\Delete.cshtml" />
-    <Content Include="Views\TestStudentCourse\Details.cshtml" />
-    <Content Include="Views\TestStudentCourse\Edit.cshtml" />
-    <Content Include="Views\TestStudentCourse\Index.cshtml" />
     <Content Include="Views\Student\AllStudents.cshtml" />
     <Content Include="Views\Student\EditStudent.cshtml" />
     <Content Include="Views\Student\CreateStudent.cshtml" />
@@ -322,7 +317,7 @@
     <Content Include="Views\Assignment\CreateAssignment.cshtml" />
     <Content Include="Views\Assignment\DeleteAssignment.cshtml" />
     <Content Include="Views\StudentPerCourse\AllStudentCourses.cshtml" />
-    <Content Include="Views\StudentPerCourse\AllStudentCourses2.cshtml" />
+    <Content Include="Views\TrainersPerCourse\AllTrainersCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

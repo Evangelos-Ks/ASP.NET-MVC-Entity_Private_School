@@ -24,7 +24,8 @@ namespace Assignment2.Entities
         public string PhotoUrl { get; set; }
 
         //======================== Navigation Properties ================================================
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<TrainerCourse> TrainerCourses { get; set; }
+
 
     }
 }

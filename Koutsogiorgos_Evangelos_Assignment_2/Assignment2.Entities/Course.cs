@@ -27,7 +27,9 @@ namespace Assignment2.Entities
 
         //======================== Navigation Properties ================================================
         public virtual ICollection<Assignment> Assignments { get; set; }
-        public virtual ICollection<Trainer> Trainers { get; set; }
         public virtual ICollection<StudentCourse> StudentCourses { get; set; }
+        public virtual ICollection<TrainerCourse> TrainerCourses { get; set; }
+
+
     }
 }

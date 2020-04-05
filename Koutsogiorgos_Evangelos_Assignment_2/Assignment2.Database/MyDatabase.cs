@@ -19,7 +19,9 @@ namespace Assignment2.Database
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<StudentAssignment> StudentsAssignments { get; set; }
         public DbSet<StudentCourse> StudentsCourses { get; set; }
+        public DbSet<TrainerCourse> TrainerCourses { get; set; }
 
-       
+
+
     }
 }

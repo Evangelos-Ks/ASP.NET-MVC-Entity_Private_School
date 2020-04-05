@@ -252,6 +252,20 @@
             #endregion
 
 
+            #region Seed TrainerCourse
+            TrainerCourse tc1 = new TrainerCourse();
+            TrainerCourse tc2 = new TrainerCourse();
+            TrainerCourse tc3 = new TrainerCourse();
+            TrainerCourse tc4 = new TrainerCourse();
+            TrainerCourse tc5 = new TrainerCourse();
+            TrainerCourse tc6 = new TrainerCourse();
+            TrainerCourse tc7 = new TrainerCourse();
+            TrainerCourse tc8 = new TrainerCourse();
+            TrainerCourse tc9 = new TrainerCourse();
+            TrainerCourse tc10 = new TrainerCourse();
+            #endregion
+
+
             #region Asign Assignments, Trainers and StudentCourses to Courses
             //=================== Asign Assignments, Trainers and StudentCourses to Courses ==========================
             c1.Assignments = new List<Assignment>() { a1, a2, a3 };
@@ -260,11 +274,11 @@
             c4.Assignments = new List<Assignment>() { a10, a11, a12 };
             c5.Assignments = new List<Assignment>() { a13, a14, a15 };
 
-            c1.Trainers = new List<Trainer>() { t1, t2 };
-            c2.Trainers = new List<Trainer>() { t3, t4 };
-            c3.Trainers = new List<Trainer>() { t5, t6 };
-            c4.Trainers = new List<Trainer>() { t7, t8 };
-            c5.Trainers = new List<Trainer>() { t9, t10 };
+            c1.TrainerCourses = new List<TrainerCourse>() { tc1, tc2 };
+            c2.TrainerCourses = new List<TrainerCourse>() { tc3, tc4 };
+            c3.TrainerCourses = new List<TrainerCourse>() { tc5, tc6 };
+            c4.TrainerCourses = new List<TrainerCourse>() { tc7, tc8 };
+            c5.TrainerCourses = new List<TrainerCourse>() { tc9, tc10 };
 
             c1.StudentCourses = new List<StudentCourse> { sc1, sc2, sc3, sc4, sc5, sc6 };
             c2.StudentCourses = new List<StudentCourse> { sc7, sc8, sc9, sc10, sc11, sc12, };
@@ -359,7 +373,18 @@
             a15.StudentAssignments = new List<StudentAssignment>() {sa29, sa30 };
             #endregion
 
-
+            #region Asign Trainers to TrainerCourse
+            t1.TrainerCourses = new List<TrainerCourse>() { tc1 };
+            t2.TrainerCourses = new List<TrainerCourse>() { tc2 };
+            t3.TrainerCourses = new List<TrainerCourse>() { tc3 };
+            t4.TrainerCourses = new List<TrainerCourse>() { tc4 };
+            t5.TrainerCourses = new List<TrainerCourse>() { tc5 };
+            t6.TrainerCourses = new List<TrainerCourse>() { tc6 };
+            t7.TrainerCourses = new List<TrainerCourse>() { tc7 };
+            t8.TrainerCourses = new List<TrainerCourse>() { tc8 };
+            t9.TrainerCourses = new List<TrainerCourse>() { tc9 };
+            t10.TrainerCourses = new List<TrainerCourse>() { tc10 };
+            #endregion
 
             //a1.Course = c1;
             //a2.Course = c1;
@@ -397,7 +422,7 @@
             //=================== Insert data to the database ========================================
             context.Courses.AddOrUpdate(x => x.Title, c1, c2, c3, c4, c5);
             //context.Assignments.AddOrUpdate(x => x.Title  , a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
-            //context.Trainers.AddOrUpdate(x => new { x.FirstName, x.LastName }, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
+            context.Trainers.AddOrUpdate(x => new { x.FirstName, x.LastName }, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
             context.Students.AddOrUpdate(x => new { x.FirstName, x.LastName }, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30);
             //context.StudentsCourses.AddOrUpdate(x => new { x.CourseId, x.StudentId }, sc1, sc2, sc3, sc4, sc5, sc6, sc7, sc8, sc9, sc10, sc11, sc12, sc13, sc14, sc15, sc16, sc17, sc18, sc19, sc20, sc21, sc22, sc23, sc24, sc25, sc26, sc27, sc28, sc29, sc30);
             //context.StudentsAssignments.AddOrUpdate(x => new { x.StudentId, x.AssignmentId }, sa1, sa2, sa3, sa4, sa5, sa6, sa7, sa8, sa9, sa10, sa11, sa12, sa13, sa14, sa15, sa16, sa17, sa18, sa19, sa20, sa21, sa22, sa23, sa24, sa25, sa26, sa27, sa28, sa29, sa30);

@@ -59,6 +59,7 @@
     <Compile Include="StudentAssignment.cs" />
     <Compile Include="StudentCourse.cs" />
     <Compile Include="Trainer.cs" />
+    <Compile Include="TrainerCourse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
