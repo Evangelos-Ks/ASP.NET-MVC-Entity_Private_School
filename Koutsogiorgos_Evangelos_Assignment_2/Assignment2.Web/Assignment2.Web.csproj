@@ -135,7 +135,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\StudentPerCourseController.cs" />
-    <Compile Include="Controllers\TestStudentAssignmentController.cs" />
+    <Compile Include="Controllers\StudentsPerCoursePerAssignmentController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Controllers\TrainersPerCourseController.cs" />
     <Compile Include="Global.asax.cs">
@@ -292,11 +292,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\Components\_NavigationBar.cshtml" />
     <Content Include="Views\Shared\Components\_Footer.cshtml" />
-    <Content Include="Views\TestStudentAssignment\Create.cshtml" />
-    <Content Include="Views\TestStudentAssignment\Delete.cshtml" />
-    <Content Include="Views\TestStudentAssignment\Details.cshtml" />
-    <Content Include="Views\TestStudentAssignment\Edit.cshtml" />
-    <Content Include="Views\TestStudentAssignment\Index.cshtml" />
     <Content Include="Views\Student\AllStudents.cshtml" />
     <Content Include="Views\Student\EditStudent.cshtml" />
     <Content Include="Views\Student\CreateStudent.cshtml" />
@@ -320,6 +315,7 @@
     <Content Include="Views\StudentPerCourse\AllStudentCourses.cshtml" />
     <Content Include="Views\TrainersPerCourse\AllTrainerCourse.cshtml" />
     <Content Include="Views\AssignmentsPerCourse\AllAssignmentsPerCourse.cshtml" />
+    <Content Include="Views\StudentsPerCoursePerAssignment\AllStudentsPerCoursePerAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

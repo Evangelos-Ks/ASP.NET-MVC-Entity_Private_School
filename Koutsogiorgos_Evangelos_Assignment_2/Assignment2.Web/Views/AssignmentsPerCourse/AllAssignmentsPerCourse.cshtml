@@ -17,20 +17,21 @@
         </th>
     </tr>
 
-@foreach (var course in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(x => course.Title)
-        </td>
-        <td>
-            <ol>
-                @foreach (var assignment in course.Assignments)
-                {
-                    <li>@assignment.Title</li>
-                }
-            </ol>
-        </td>
-    </tr>
-}
+    @foreach (var course in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(x => course.Title)
+            </td>
+            <td>
+                <ol>
+                    @foreach (var assignment in course.Assignments)
+                    {
+                        <li>@assignment.Title</li>
+                    }
+                </ol>
+            </td>
+        </tr>
+    }
 
 </table>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Assignment2.Entities.Course>
+
+@{
+    ViewBag.Title = "AllStudentsPerCoursePerAssignment";
+}
+
+<h2>Students per course per assignment</h2>
+
+<div class="container-fluid">
+    <table class="table">
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>
+                    <b>Course title</b>
+                    <br />
+                    @Html.DisplayFor(x => course.Title)
+                </td>
+                <td>
+                    @foreach (var assignment in course.Assignments)
+                    {
+                        <b> Assignment title</b>
+                        <ul>
+                            <li>
+                                @Html.DisplayFor(x => assignment.Title)
+                            </li>
+                        </ul>
+                        <b>Students</b>
+                        <ol>
+                            @foreach (var studentAssignment in assignment.StudentAssignments)
+                            {
+                                <li>@studentAssignment.Student.FirstName @studentAssignment.Student.LastName</li>
+                            }
+                        </ol>
+                        <br />
+                    }
+                </td>
+
+
+            </tr>
+        }
+
+    </table>
+</div>
