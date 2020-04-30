@@ -386,46 +386,13 @@
             t10.TrainerCourses = new List<TrainerCourse>() { tc10 };
             #endregion
 
-            //a1.Course = c1;
-            //a2.Course = c1;
-            //a3.Course = c1;
-
-            //a4.Course = c2;
-            //a5.Course = c2;
-            //a6.Course = c2;
-
-            //a7.Course = c3;
-            //a8.Course = c3;
-            //a9.Course = c3;
-
-            //a10.Course = c4;
-            //a11.Course = c4;
-            //a12.Course = c4;
-
-            //a13.Course = c5;
-            //a14.Course = c5;
-            //a15.Course = c5;
-
-            //=================== Asign Courses to Trainers =========================================
-            //t1.Courses = new List<Course>() { c1 };
-            //t2.Courses = new List<Course>() { c1 };
-            //t3.Courses = new List<Course>() { c2 };
-            //t4.Courses = new List<Course>() { c2 };
-            //t5.Courses = new List<Course>() { c3 };
-            //t6.Courses = new List<Course>() { c3 };
-            //t7.Courses = new List<Course>() { c4 };
-            //t8.Courses = new List<Course>() { c4 };
-            //t9.Courses = new List<Course>() { c5 };
-            //t10.Courses = new List<Course>() { c5 };
+            
 
 
             //=================== Insert data to the database ========================================
             context.Courses.AddOrUpdate(x => x.Title, c1, c2, c3, c4, c5);
-            //context.Assignments.AddOrUpdate(x => x.Title  , a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
             context.Trainers.AddOrUpdate(x => new { x.FirstName, x.LastName }, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
             context.Students.AddOrUpdate(x => new { x.FirstName, x.LastName }, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30);
-            //context.StudentsCourses.AddOrUpdate(x => new { x.CourseId, x.StudentId }, sc1, sc2, sc3, sc4, sc5, sc6, sc7, sc8, sc9, sc10, sc11, sc12, sc13, sc14, sc15, sc16, sc17, sc18, sc19, sc20, sc21, sc22, sc23, sc24, sc25, sc26, sc27, sc28, sc29, sc30);
-            //context.StudentsAssignments.AddOrUpdate(x => new { x.StudentId, x.AssignmentId }, sa1, sa2, sa3, sa4, sa5, sa6, sa7, sa8, sa9, sa10, sa11, sa12, sa13, sa14, sa15, sa16, sa17, sa18, sa19, sa20, sa21, sa22, sa23, sa24, sa25, sa26, sa27, sa28, sa29, sa30);
 
 
             context.SaveChanges();

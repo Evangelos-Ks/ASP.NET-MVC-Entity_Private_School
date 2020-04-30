@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assignment2.Entities;
-using Assignment2.Database;
 using Assignment2.Services;
 
 namespace Assignment2.Desktop

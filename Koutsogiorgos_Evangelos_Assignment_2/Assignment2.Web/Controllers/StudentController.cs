@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Assignment2.Services;
 using Assignment2.Entities;
-using System.Data.Entity;
 
 
 namespace Assignment2.Web.Controllers
