@@ -28,16 +28,16 @@
 
             #region Seed Trainers
             //==================== Seeding Trainers ===========================================
-            Trainer t1 = new Trainer() { FirstName = "Albert", LastName = "Einstain", Subject = "Phisics", PhotoUrl= "../Content/Students_Image/boy4.png" };
-            Trainer t2 = new Trainer() { FirstName = "Richard", LastName = "Faynman", Subject = "Phisics", PhotoUrl = "../Content/Students_Image/boy1.png" };
-            Trainer t3 = new Trainer() { FirstName = "Marie", LastName = "Curie", Subject = "Chemistry", PhotoUrl = "../Content/Students_Image/girl4.png" };
-            Trainer t4 = new Trainer() { FirstName = "Luis", LastName = "Pasteur", Subject = "Chemistry", PhotoUrl = "../Content/Students_Image/boy3.png" };
-            Trainer t5 = new Trainer() { FirstName = "Francis", LastName = "Crick", Subject = "Biology", PhotoUrl = "../Content/Students_Image/boy2.png" };
-            Trainer t6 = new Trainer() { FirstName = "James", LastName = "Watson", Subject = "Biology", PhotoUrl = "../Content/Students_Image/boy1.png" };
-            Trainer t7 = new Trainer() { FirstName = "Leonhard", LastName = "Euler", Subject = "Mathematics", PhotoUrl = "../Content/Students_Image/boy3.png" };
-            Trainer t8 = new Trainer() { FirstName = "Carl", LastName = "Gauss", Subject = "Mathematics", PhotoUrl = "../Content/Students_Image/boy4.png" };
-            Trainer t9 = new Trainer() { FirstName = "Alan", LastName = "Turing", Subject = "Computer science", PhotoUrl = "../Content/Students_Image/boy1.png" };
-            Trainer t10 = new Trainer() { FirstName = "Dennis", LastName = "Ritchie", Subject = "Computer science", PhotoUrl = "../Content/Students_Image/boy3.png" };
+            Trainer t1 = new Trainer() { FirstName = "Albert", LastName = "Einstain", Subject = "Phisics", PhotoUrl= "../../Content/Students_Image/boy4.png" };
+            Trainer t2 = new Trainer() { FirstName = "Richard", LastName = "Faynman", Subject = "Phisics", PhotoUrl = "../../Content/Students_Image/boy1.png" };
+            Trainer t3 = new Trainer() { FirstName = "Marie", LastName = "Curie", Subject = "Chemistry", PhotoUrl = "../../Content/Students_Image/girl4.png" };
+            Trainer t4 = new Trainer() { FirstName = "Luis", LastName = "Pasteur", Subject = "Chemistry", PhotoUrl = "../../Content/Students_Image/boy3.png" };
+            Trainer t5 = new Trainer() { FirstName = "Francis", LastName = "Crick", Subject = "Biology", PhotoUrl = "../../Content/Students_Image/boy2.png" };
+            Trainer t6 = new Trainer() { FirstName = "James", LastName = "Watson", Subject = "Biology", PhotoUrl = "../../Content/Students_Image/boy1.png" };
+            Trainer t7 = new Trainer() { FirstName = "Leonhard", LastName = "Euler", Subject = "Mathematics", PhotoUrl = "../../Content/Students_Image/boy3.png" };
+            Trainer t8 = new Trainer() { FirstName = "Carl", LastName = "Gauss", Subject = "Mathematics", PhotoUrl = "../../Content/Students_Image/boy4.png" };
+            Trainer t9 = new Trainer() { FirstName = "Alan", LastName = "Turing", Subject = "Computer science", PhotoUrl = "../../Content/Students_Image/boy1.png" };
+            Trainer t10 = new Trainer() { FirstName = "Dennis", LastName = "Ritchie", Subject = "Computer science", PhotoUrl = "../../Content/Students_Image/boy3.png" };
             #endregion
 
 
