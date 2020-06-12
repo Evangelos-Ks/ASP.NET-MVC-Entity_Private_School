@@ -11,7 +11,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Assignment2.Database.MyDatabase context)
@@ -24,7 +24,6 @@
             Course c4 = new Course() { Title = "Mathematics", Stream = "Full time", Type = "Science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/5/30") };
             Course c5 = new Course() { Title = "Information Technology", Stream = "Full time", Type = "Computer science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/6/2") };
             #endregion
-
 
             #region Seed Trainers
             //==================== Seeding Trainers ===========================================
@@ -39,7 +38,6 @@
             Trainer t9 = new Trainer() { FirstName = "Alan", LastName = "Turing", Subject = "Computer science", PhotoUrl = "../../Content/Students_Image/boy1.png" };
             Trainer t10 = new Trainer() { FirstName = "Dennis", LastName = "Ritchie", Subject = "Computer science", PhotoUrl = "../../Content/Students_Image/boy3.png" };
             #endregion
-
 
             #region Seed Assignmets
             //==================== Seeding Assignments ===========================================
@@ -64,45 +62,43 @@
             Assignment a15 = new Assignment() { Title = "ITPM", Description = "Programming methodology", SubDateTime = DateTime.Parse("2020/5/25"), Course = c5 };
             #endregion
 
-
             #region Seed Students
-            //==================== Seeding Students ===========================================
-            Student s1 = new Student() { FirstName = "Maria", LastName = "Fafouti", DateOfBirth = DateTime.Parse("12/2/1993"), PhotoUrl = "../Content/Students_Image/girl4.png" };
-            Student s2 = new Student() { FirstName = "Evangelos", LastName = "Koutsogiorgos", DateOfBirth = DateTime.Parse("10/12/1987"), PhotoUrl = "../Content/Students_Image/boy1.png" };
-            Student s3 = new Student() { FirstName = "Panagiotis", LastName = "Koutsogiorgos", DateOfBirth = DateTime.Parse("22/2/1991"), PhotoUrl = "../Content/Students_Image/boy3.png" };
-            Student s4 = new Student() { FirstName = "Ioannis", LastName = "Angelopoulos", DateOfBirth = DateTime.Parse("1/6/1985"), PhotoUrl = "../Content/Students_Image/boy2.png" };
-            Student s5 = new Student() { FirstName = "Sophia", LastName = "Georgiou", DateOfBirth = DateTime.Parse("30/3/1993"), PhotoUrl = "../Content/Students_Image/girl3.png" };
-            Student s6 = new Student() { FirstName = "Eleni", LastName = "Parisi", DateOfBirth = DateTime.Parse("20/8/1989"), PhotoUrl = "../Content/Students_Image/girl4.png" };
+            //==================================== Seeding Students ========================================================
+            Student s1 = new Student() { FirstName = "Maria", LastName = "Fafouti", DateOfBirth = new DateTime(1993, 2, 12), PhotoUrl = "../../Content/Students_Image/girl4.png" };
+            Student s2 = new Student() { FirstName = "Evangelos", LastName = "Koutsogiorgos", DateOfBirth = new DateTime(1987, 12, 10), PhotoUrl = "../../Content/Students_Image/boy1.png" };
+            Student s3 = new Student() { FirstName = "Panagiotis", LastName = "Koutsogiorgos", DateOfBirth = new DateTime(1991, 2, 22), PhotoUrl = "../../Content/Students_Image/boy3.png" };
+            Student s4 = new Student() { FirstName = "Ioannis", LastName = "Angelopoulos", DateOfBirth = new DateTime(1985, 6, 1), PhotoUrl = "../../Content/Students_Image/boy2.png" };
+            Student s5 = new Student() { FirstName = "Sophia", LastName = "Georgiou", DateOfBirth = new DateTime(1993, 3, 30), PhotoUrl = "../../Content/Students_Image/girl3.png" };
+            Student s6 = new Student() { FirstName = "Eleni", LastName = "Parisi", DateOfBirth = new DateTime(1989, 8, 20), PhotoUrl = "../../Content/Students_Image/girl4.png" };
 
-            Student s7 = new Student() { FirstName = "Athanasios", LastName = "Sdralias", DateOfBirth = DateTime.Parse("11/9/1986"), PhotoUrl = "../Content/Students_Image/boy1.png" };
-            Student s8 = new Student() { FirstName = "Nikolaos", LastName = "Karageorgos", DateOfBirth = DateTime.Parse("5/11/1990"), PhotoUrl = "../Content/Students_Image/boy4.png" };
-            Student s9 = new Student() { FirstName = "Margarita", LastName = "Fafouti", DateOfBirth = DateTime.Parse("2/2/1990"), PhotoUrl = "../Content/Students_Image/girl1.png" };
-            Student s10 = new Student() { FirstName = "Panagiotis", LastName = "Sdralias", DateOfBirth = DateTime.Parse("12/7/1985"), PhotoUrl = "../Content/Students_Image/boy3.png" };
-            Student s11 = new Student() { FirstName = "Anna", LastName = "Koutsogiorgou", DateOfBirth = DateTime.Parse("21/3/1987"), PhotoUrl = "../Content/Students_Image/girl2.png" };
-            Student s12 = new Student() { FirstName = "Eirini", LastName = "Ntafou", DateOfBirth = DateTime.Parse("19/9/1984"), PhotoUrl = "../Content/Students_Image/girl1.png" };
+            Student s7 = new Student() { FirstName = "Athanasios", LastName = "Sdralias", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/boy1.png" };
+            Student s8 = new Student() { FirstName = "Nikolaos", LastName = "Karageorgos", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/boy4.png" };
+            Student s9 = new Student() { FirstName = "Margarita", LastName = "Fafouti", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/girl1.png" };
+            Student s10 = new Student() { FirstName = "Panagiotis", LastName = "Sdralias", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/boy3.png" };
+            Student s11 = new Student() { FirstName = "Anna", LastName = "Koutsogiorgou", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/girl2.png" };
+            Student s12 = new Student() { FirstName = "Eirini", LastName = "Ntafou", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/girl1.png" };
 
-            Student s13 = new Student() { FirstName = "Maria", LastName = "Dimitriou", DateOfBirth = DateTime.Parse("1/2/1991"), PhotoUrl = "../Content/Students_Image/girl3.png" };
-            Student s14 = new Student() { FirstName = "Dimitrios", LastName = "Perikleous", DateOfBirth = DateTime.Parse("11/12/1990"), PhotoUrl = "../Content/Students_Image/boy4.png" };
-            Student s15 = new Student() { FirstName = "Grigoris", LastName = "Arnaoutoglou", DateOfBirth = DateTime.Parse("13/6/1990"), PhotoUrl = "../Content/Students_Image/boy1.png" };
-            Student s16 = new Student() { FirstName = "Dimitrios", LastName = "Gogos", DateOfBirth = DateTime.Parse("11/11/1992"), PhotoUrl = "../Content/Students_Image/boy3.png" };
-            Student s17 = new Student() { FirstName = "Sotiris", LastName = "Apostolidis", DateOfBirth = DateTime.Parse("9/3/1984"), PhotoUrl = "../Content/Students_Image/boy1.png" };
-            Student s18 = new Student() { FirstName = "Markos", LastName = "Seferlis", DateOfBirth = DateTime.Parse("24/2/1983"), PhotoUrl = "../Content/Students_Image/boy2.png" };
+            Student s13 = new Student() { FirstName = "Maria", LastName = "Dimitriou", DateOfBirth = new DateTime(1991, 2, 1), PhotoUrl = "../../Content/Students_Image/girl3.png" };
+            Student s14 = new Student() { FirstName = "Dimitrios", LastName = "Perikleous", DateOfBirth = new DateTime(1990, 12, 11), PhotoUrl = "../../Content/Students_Image/boy4.png" };
+            Student s15 = new Student() { FirstName = "Grigoris", LastName = "Arnaoutoglou", DateOfBirth = new DateTime(1990, 6, 13), PhotoUrl = "../../Content/Students_Image/boy1.png" };
+            Student s16 = new Student() { FirstName = "Dimitrios", LastName = "Gogos", DateOfBirth = new DateTime(1992, 11, 11), PhotoUrl = "../../Content/Students_Image/boy3.png" };
+            Student s17 = new Student() { FirstName = "Sotiris", LastName = "Apostolidis", DateOfBirth = new DateTime(1984, 3, 9), PhotoUrl = "../../Content/Students_Image/boy1.png" };
+            Student s18 = new Student() { FirstName = "Markos", LastName = "Seferlis", DateOfBirth = new DateTime(1983, 2, 24), PhotoUrl = "../../Content/Students_Image/boy2.png" };
 
-            Student s19 = new Student() { FirstName = "Vasiliki", LastName = "Kaminioti", DateOfBirth = DateTime.Parse("7/6/1987"), PhotoUrl = "../Content/Students_Image/girl2.png" };
-            Student s20 = new Student() { FirstName = "Kleopatra", LastName = "Kotsovolou", DateOfBirth = DateTime.Parse("17/10/1991"), PhotoUrl = "../Content/Students_Image/girl1.png" };
-            Student s21 = new Student() { FirstName = "Rayan", LastName = "Kelly", DateOfBirth = DateTime.Parse("27/7/1987"), PhotoUrl = "../Content/Students_Image/boy3.png" };
-            Student s22 = new Student() { FirstName = "Panagiotis", LastName = "Zaxaris", DateOfBirth = DateTime.Parse("21/12/1986"), PhotoUrl = "../Content/Students_Image/boy4.png" };
-            Student s23 = new Student() { FirstName = "Olga", LastName = "Kiritsopoulou", DateOfBirth = DateTime.Parse("24/4/1986"), PhotoUrl = "../Content/Students_Image/girl1.png" };
-            Student s24 = new Student() { FirstName = "Xenofontas", LastName = "Vlaxogiannis", DateOfBirth = DateTime.Parse("18/8/1990"), PhotoUrl = "../Content/Students_Image/boy4.png" };
+            Student s19 = new Student() { FirstName = "Vasiliki", LastName = "Kaminioti", DateOfBirth = new DateTime(1987, 6, 7), PhotoUrl = "../../Content/Students_Image/girl2.png" };
+            Student s20 = new Student() { FirstName = "Kleopatra", LastName = "Kotsovolou", DateOfBirth = new DateTime(1991, 10, 17), PhotoUrl = "../../Content/Students_Image/girl1.png" };
+            Student s21 = new Student() { FirstName = "Rayan", LastName = "Kelly", DateOfBirth = new DateTime(1987, 7, 27), PhotoUrl = "../../Content/Students_Image/boy3.png" };
+            Student s22 = new Student() { FirstName = "Panagiotis", LastName = "Zaxaris", DateOfBirth = new DateTime(1986, 12, 21), PhotoUrl = "../../Content/Students_Image/boy4.png" };
+            Student s23 = new Student() { FirstName = "Olga", LastName = "Kiritsopoulou", DateOfBirth = new DateTime(1986, 4, 24), PhotoUrl = "../../Content/Students_Image/girl1.png" };
+            Student s24 = new Student() { FirstName = "Xenofontas", LastName = "Vlaxogiannis", DateOfBirth = new DateTime(1990, 8, 18), PhotoUrl = "../../Content/Students_Image/boy4.png" };
 
-            Student s25 = new Student() { FirstName = "Hector", LastName = "Gatsos", DateOfBirth = DateTime.Parse("29/9/1987"), PhotoUrl = "../Content/Students_Image/boy3.png" };
-            Student s26 = new Student() { FirstName = "Dimitra", LastName = "Alexiou", DateOfBirth = DateTime.Parse("16/8/1987"), PhotoUrl = "../Content/Students_Image/girl3.png" };
-            Student s27 = new Student() { FirstName = "Olga", LastName = "Karageorgiou", DateOfBirth = DateTime.Parse("3/6/1992"), PhotoUrl = "../Content/Students_Image/girl4.png" };
-            Student s28 = new Student() { FirstName = "Evangelos", LastName = "Mixail", DateOfBirth = DateTime.Parse("6/6/1985"), PhotoUrl = "../Content/Students_Image/boy3.png" };
-            Student s29 = new Student() { FirstName = "Angeliki", LastName = "Karvouniari", DateOfBirth = DateTime.Parse("22/5/1989"), PhotoUrl = "../Content/Students_Image/girl1.png" };
-            Student s30 = new Student() { FirstName = "Stephanos", LastName = "Adamos", DateOfBirth = DateTime.Parse("20/1/1986"), PhotoUrl = "../Content/Students_Image/boy2.png" };
+            Student s25 = new Student() { FirstName = "Hector", LastName = "Gatsos", DateOfBirth = new DateTime(1987, 9, 29), PhotoUrl = "../../Content/Students_Image/boy3.png" };
+            Student s26 = new Student() { FirstName = "Dimitra", LastName = "Alexiou", DateOfBirth = new DateTime(1987, 8, 16), PhotoUrl = "../../Content/Students_Image/girl3.png" };
+            Student s27 = new Student() { FirstName = "Olga", LastName = "Karageorgiou", DateOfBirth = new DateTime(1992, 6, 3), PhotoUrl = "../../Content/Students_Image/girl4.png" };
+            Student s28 = new Student() { FirstName = "Evangelos", LastName = "Mixail", DateOfBirth = new DateTime(1985, 6, 6), PhotoUrl = "../../Content/Students_Image/boy3.png" };
+            Student s29 = new Student() { FirstName = "Angeliki", LastName = "Karvouniari", DateOfBirth = new DateTime(1989, 5, 22), PhotoUrl = "../../Content/Students_Image/girl1.png" };
+            Student s30 = new Student() { FirstName = "Stephanos", LastName = "Adamos", DateOfBirth = new DateTime(1986, 1, 20), PhotoUrl = "../../Content/Students_Image/boy2.png" };
             #endregion
-
 
             #region Seed StudentAssignment
             //==================== Seeding StudentAssignment ===========================================
@@ -177,7 +173,6 @@
             StudentAssignment sa30 = new StudentAssignment() { OralMark = 73, TotalMark = 69 };
             #endregion
 
-
             #region Seed StudentCourse
             //==================== Seeding StudentCourse ===========================================
             //StudentCourse sc1 = new StudentCourse() { Course = c1, Student = s1, TuitionFees = 500M };
@@ -251,7 +246,6 @@
             StudentCourse sc30 = new StudentCourse() { TuitionFees = 500 };
             #endregion
 
-
             #region Seed TrainerCourse
             TrainerCourse tc1 = new TrainerCourse();
             TrainerCourse tc2 = new TrainerCourse();
@@ -264,7 +258,6 @@
             TrainerCourse tc9 = new TrainerCourse();
             TrainerCourse tc10 = new TrainerCourse();
             #endregion
-
 
             #region Asign Assignments, Trainers and StudentCourses to Courses
             //=================== Asign Assignments, Trainers and StudentCourses to Courses ==========================
@@ -286,7 +279,6 @@
             c4.StudentCourses = new List<StudentCourse> { sc19, sc20, sc21, sc22, sc23, sc24 };
             c5.StudentCourses = new List<StudentCourse> { sc25, sc26, sc27, sc28, sc29, sc30 };
             #endregion
-
 
             #region Asign StudentCourses and StudentAssignments to Students
             //=================== Asign StudentCourses and StudentAssignments to Students ==========================
@@ -353,7 +345,6 @@
             s30.StudentAssignments = new List<StudentAssignment> { sa30 };
             #endregion
 
-
             #region Asign StudentAssignments to Assignments
             //=================== Asign StudentAssignments to Assignments ==========================
             a1.StudentAssignments = new List<StudentAssignment>() {sa1, sa2 };
@@ -389,7 +380,7 @@
             
 
 
-            //=================== Insert data to the database ========================================
+            //=================== Insert data to the database ==============================================================
             context.Courses.AddOrUpdate(x => x.Title, c1, c2, c3, c4, c5);
             context.Trainers.AddOrUpdate(x => new { x.FirstName, x.LastName }, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
             context.Students.AddOrUpdate(x => new { x.FirstName, x.LastName }, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30);
