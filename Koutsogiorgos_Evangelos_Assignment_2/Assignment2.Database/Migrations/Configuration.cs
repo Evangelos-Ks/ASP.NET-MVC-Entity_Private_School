@@ -11,7 +11,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Assignment2.Database.MyDatabase context)
@@ -24,7 +24,6 @@
             Course c4 = new Course() { Title = "Mathematics", Stream = "Full time", Type = "Science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/5/30") };
             Course c5 = new Course() { Title = "Information Technology", Stream = "Full time", Type = "Computer science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/6/2") };
             #endregion
-
 
             #region Seed Trainers
             //==================== Seeding Trainers ===========================================
@@ -39,7 +38,6 @@
             Trainer t9 = new Trainer() { FirstName = "Alan", LastName = "Turing", Subject = "Computer science", PhotoUrl = "../../Content/Students_Image/boy1.png" };
             Trainer t10 = new Trainer() { FirstName = "Dennis", LastName = "Ritchie", Subject = "Computer science", PhotoUrl = "../../Content/Students_Image/boy3.png" };
             #endregion
-
 
             #region Seed Assignmets
             //==================== Seeding Assignments ===========================================
