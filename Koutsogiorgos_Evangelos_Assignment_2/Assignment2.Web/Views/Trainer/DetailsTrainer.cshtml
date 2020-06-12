@@ -41,9 +41,9 @@
         <dd>
             <ul>
                 @{
-                    foreach (var course in Model.Courses)
+                    foreach (var course in Model.TrainerCourses)
                     {
-                        <li>@course.Title</li>
+                        <li>@course.Course.Title</li>
                     }
                 }
             </ul>
