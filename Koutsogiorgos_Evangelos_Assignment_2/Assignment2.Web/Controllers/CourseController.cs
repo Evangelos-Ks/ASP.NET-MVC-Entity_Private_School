@@ -9,13 +9,24 @@ namespace Assignment2.Web.Controllers
     public class CourseController : Controller
     {
         // GET: Course
-        public ActionResult AllCourses()
+        public ActionResult AllCourses(string sort)
         {
+            ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
+            
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
             courseRepository.Dispose();
 
-            courses = courses.OrderBy(x => x.Title);
+            switch (sort)
+            {
+                case "courseTitleDesc" :
+                    courses = courses.OrderByDescending(x => x.Title);
+                    break;
+                default:
+                    courses = courses.OrderBy(x => x.Title);
+                    break;
+            }
+
 
             return View(courses);
         }

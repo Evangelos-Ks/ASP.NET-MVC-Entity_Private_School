@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.ActionLink("Course title", "AllCourses", new {sort = ViewBag.CourseTitle})
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Stream)
