@@ -12,13 +12,14 @@ namespace Assignment2.Web.Controllers
         // GET: Course
         public ActionResult AllCourses(string sort)
         {
-            ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
-            ViewBag.Stream = sort == "streamAsc" ? "streamDesc" : "streamAsc";
-            ViewBag.Type = sort == "typeAsc" ? "typeDesc" : "typeAsc";
-
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
             courseRepository.Dispose();
+
+            ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
+            ViewBag.Stream = sort == "streamAsc" ? "streamDesc" : "streamAsc";
+            ViewBag.Type = sort == "typeAsc" ? "typeDesc" : "typeAsc";
+            ViewBag.StartDate = sort == "startDateAsc" ? "startDateDesc" : "startDateAsc";
 
             switch (sort)
             {
@@ -36,6 +37,12 @@ namespace Assignment2.Web.Controllers
                     break;
                 case "typeDesc":
                     courses = courses.OrderByDescending(x => x.Type);
+                    break;
+                case "startDateAsc":
+                    courses = courses.OrderBy(x => x.StartDate);
+                    break;
+                case "startDateDesc":
+                    courses = courses.OrderByDescending(x => x.StartDate);
                     break;
                 default:
                     courses = courses.OrderBy(x => x.Title);
