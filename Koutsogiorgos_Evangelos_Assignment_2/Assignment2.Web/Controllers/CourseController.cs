@@ -14,6 +14,7 @@ namespace Assignment2.Web.Controllers
         {
             ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
             ViewBag.Stream = sort == "streamAsc" ? "streamDesc" : "streamAsc";
+            ViewBag.Type = sort == "typeAsc" ? "typeDesc" : "typeAsc";
 
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
@@ -29,6 +30,12 @@ namespace Assignment2.Web.Controllers
                     break;
                 case "streamDesc":
                     courses = courses.OrderByDescending(x => x.Stream);
+                    break;
+                case "typeAsc":
+                    courses = courses.OrderBy(x => x.Type);
+                    break;
+                case "typeDesc":
+                    courses = courses.OrderByDescending(x => x.Type);
                     break;
                 default:
                     courses = courses.OrderBy(x => x.Title);
