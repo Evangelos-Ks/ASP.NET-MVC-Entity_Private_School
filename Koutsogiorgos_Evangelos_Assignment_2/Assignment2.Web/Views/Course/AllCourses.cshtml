@@ -15,7 +15,7 @@
             @Html.ActionLink("Course title", "AllCourses", new {sort = ViewBag.CourseTitle})
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Stream)
+            @Html.ActionLink("Stream", "AllCourses", new { sort = ViewBag.Stream })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Type)

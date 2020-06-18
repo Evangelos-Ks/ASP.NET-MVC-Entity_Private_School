@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Assignment2.Services;
 using Assignment2.Entities;
 using System.Net;
+using System.Security.Policy;
 
 namespace Assignment2.Web.Controllers
 {
@@ -12,15 +13,22 @@ namespace Assignment2.Web.Controllers
         public ActionResult AllCourses(string sort)
         {
             ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
-            
+            ViewBag.Stream = sort == "streamAsc" ? "streamDesc" : "streamAsc";
+
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
             courseRepository.Dispose();
 
             switch (sort)
             {
-                case "courseTitleDesc" :
+                case "courseTitleDesc":
                     courses = courses.OrderByDescending(x => x.Title);
+                    break;
+                case "streamAsc":
+                    courses = courses.OrderBy(x => x.Stream);
+                    break;
+                case "streamDesc":
+                    courses = courses.OrderByDescending(x => x.Stream);
                     break;
                 default:
                     courses = courses.OrderBy(x => x.Title);
