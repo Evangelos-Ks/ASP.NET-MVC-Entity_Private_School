@@ -20,6 +20,7 @@ namespace Assignment2.Web.Controllers
             ViewBag.Stream = sort == "streamAsc" ? "streamDesc" : "streamAsc";
             ViewBag.Type = sort == "typeAsc" ? "typeDesc" : "typeAsc";
             ViewBag.StartDate = sort == "startDateAsc" ? "startDateDesc" : "startDateAsc";
+            ViewBag.EndDate = sort == "endDateAsc" ? "endDateDesc" : "endDateAsc";
 
             switch (sort)
             {
@@ -43,6 +44,12 @@ namespace Assignment2.Web.Controllers
                     break;
                 case "startDateDesc":
                     courses = courses.OrderByDescending(x => x.StartDate);
+                    break;
+                case "endDateAsc":
+                    courses = courses.OrderBy(x => x.EndDate);
+                    break;
+                case "endDateDesc":
+                    courses = courses.OrderByDescending(x => x.EndDate);
                     break;
                 default:
                     courses = courses.OrderBy(x => x.Title);
