@@ -16,11 +16,18 @@ namespace Assignment2.Web.Controllers
             trainerRepository.Dispose();
 
             ViewBag.FirstName = string.IsNullOrEmpty(sort) ? "firstNameDesc" : "";
+            ViewBag.LastName = sort == "lastNameAsc" ? "lastNameDesc" : "lastNameAsc";
 
             switch (sort)
             {
                 case "firstNameDesc":
                     trainers = trainers.OrderByDescending(x => x.FirstName);
+                    break;
+                case "lastNameAsc":
+                    trainers = trainers.OrderBy(x => x.LastName);
+                    break;
+                case "lastNameDesc":
+                    trainers = trainers.OrderByDescending(x => x.LastName);
                     break;
                 default:
                     trainers = trainers.OrderBy(x => x.FirstName);
