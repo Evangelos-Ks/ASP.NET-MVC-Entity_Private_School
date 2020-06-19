@@ -56,7 +56,6 @@ namespace Assignment2.Web.Controllers
         public ActionResult DetailsAssignment(int? id)
         {
             AssignmentRepository assignmentRepository = new AssignmentRepository();
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -66,7 +65,7 @@ namespace Assignment2.Web.Controllers
             {
                 return HttpNotFound();
             }
-            //AssignmentRepository.Dispose();
+            assignmentRepository.Dispose();
 
             return View(assignment);
 

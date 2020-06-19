@@ -22,7 +22,7 @@ namespace Assignment2.Services
         //============================ Get GetById =========================================
         public Student GetById(int? id) 
         {
-            return db.Students.Find(id);
+            return db.Students.Include(x => x.StudentCourses.Select(y => y.Course)).Include(x => x.StudentAssignments.Select(y => y.Assignment)).FirstOrDefault(x => x.StudentId == id);
         }
 
         //============================ Insert =========================================

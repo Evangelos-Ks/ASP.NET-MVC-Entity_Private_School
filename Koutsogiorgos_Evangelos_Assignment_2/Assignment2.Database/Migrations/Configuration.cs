@@ -102,41 +102,6 @@
 
             #region Seed StudentAssignment
             //==================== Seeding StudentAssignment ===========================================
-            //StudentAssignment sa1 = new StudentAssignment() { Assignment = a1, Student = s1, OralMark = 80, TotalMark = 90 };
-            //StudentAssignment sa2 = new StudentAssignment() { Assignment = a1, Student = s2, OralMark = 82, TotalMark = 94 };
-            //StudentAssignment sa3 = new StudentAssignment() { Assignment = a2, Student = s3, OralMark = 70, TotalMark = 82 };
-            //StudentAssignment sa4 = new StudentAssignment() { Assignment = a2, Student = s4, OralMark = 83, TotalMark = 80 };
-            //StudentAssignment sa5 = new StudentAssignment() { Assignment = a3, Student = s5, OralMark = 70, TotalMark = 79 };
-            //StudentAssignment sa6 = new StudentAssignment() { Assignment = a3, Student = s6, OralMark = 75, TotalMark = 76 };
-
-            //StudentAssignment sa7 = new StudentAssignment() { Assignment = a4, Student = s7, OralMark = 84, TotalMark = 87 };
-            //StudentAssignment sa8 = new StudentAssignment() { Assignment = a4, Student = s8, OralMark = 82, TotalMark = 82 };
-            //StudentAssignment sa9 = new StudentAssignment() { Assignment = a5, Student = s9, OralMark = 81, TotalMark = 92 };
-            //StudentAssignment sa10 = new StudentAssignment() { Assignment = a5, Student = s10, OralMark = 65, TotalMark = 75 };
-            //StudentAssignment sa11 = new StudentAssignment() { Assignment = a6, Student = s11, OralMark = 70, TotalMark = 73 };
-            //StudentAssignment sa12 = new StudentAssignment() { Assignment = a6, Student = s12, OralMark = 69, TotalMark = 74 };
-
-            //StudentAssignment sa13 = new StudentAssignment() { Assignment = a7, Student = s13, OralMark = 78, TotalMark = 81 };
-            //StudentAssignment sa14 = new StudentAssignment() { Assignment = a7, Student = s14, OralMark = 70, TotalMark = 72 };
-            //StudentAssignment sa15 = new StudentAssignment() { Assignment = a8, Student = s15, OralMark = 74, TotalMark = 81 };
-            //StudentAssignment sa16 = new StudentAssignment() { Assignment = a8, Student = s16, OralMark = 81, TotalMark = 79 };
-            //StudentAssignment sa17 = new StudentAssignment() { Assignment = a9, Student = s17, OralMark = 82, TotalMark = 85 };
-            //StudentAssignment sa18 = new StudentAssignment() { Assignment = a9, Student = s18, OralMark = 89, TotalMark = 78 };
-
-            //StudentAssignment sa19 = new StudentAssignment() { Assignment = a10, Student = s19, OralMark = 92, TotalMark = 93 };
-            //StudentAssignment sa20 = new StudentAssignment() { Assignment = a10, Student = s20, OralMark = 90, TotalMark = 82 };
-            //StudentAssignment sa21 = new StudentAssignment() { Assignment = a11, Student = s21, OralMark = 75, TotalMark = 70 };
-            //StudentAssignment sa22 = new StudentAssignment() { Assignment = a11, Student = s22, OralMark = 93, TotalMark = 80 };
-            //StudentAssignment sa23 = new StudentAssignment() { Assignment = a12, Student = s23, OralMark = 86, TotalMark = 79 };
-            //StudentAssignment sa24 = new StudentAssignment() { Assignment = a12, Student = s24, OralMark = 88, TotalMark = 81 };
-
-            //StudentAssignment sa25 = new StudentAssignment() { Assignment = a13, Student = s25, OralMark = 80, TotalMark = 91 };
-            //StudentAssignment sa26 = new StudentAssignment() { Assignment = a13, Student = s26, OralMark = 70, TotalMark = 70 };
-            //StudentAssignment sa27 = new StudentAssignment() { Assignment = a14, Student = s27, OralMark = 88, TotalMark = 81 };
-            //StudentAssignment sa28 = new StudentAssignment() { Assignment = a14, Student = s28, OralMark = 89, TotalMark = 87 };
-            //StudentAssignment sa29 = new StudentAssignment() { Assignment = a15, Student = s29, OralMark = 75, TotalMark = 71 };
-            //StudentAssignment sa30 = new StudentAssignment() { Assignment = a15, Student = s30, OralMark = 73, TotalMark = 69 };
-
             StudentAssignment sa1 = new StudentAssignment() { OralMark = 80, TotalMark = 90 };
             StudentAssignment sa2 = new StudentAssignment() { OralMark = 82, TotalMark = 94 };
             StudentAssignment sa3 = new StudentAssignment() { OralMark = 70, TotalMark = 82 };
@@ -175,41 +140,6 @@
 
             #region Seed StudentCourse
             //==================== Seeding StudentCourse ===========================================
-            //StudentCourse sc1 = new StudentCourse() { Course = c1, Student = s1, TuitionFees = 500M };
-            //StudentCourse sc2 = new StudentCourse() { Course = c1, Student = s2, TuitionFees = 500M };
-            //StudentCourse sc3 = new StudentCourse() { Course = c1, Student = s3, TuitionFees = 450M };
-            //StudentCourse sc4 = new StudentCourse() { Course = c1, Student = s4, TuitionFees = 500M };
-            //StudentCourse sc5 = new StudentCourse() { Course = c1, Student = s5, TuitionFees = 500M };
-            //StudentCourse sc6 = new StudentCourse() { Course = c1, Student = s6, TuitionFees = 500M };
-
-            //StudentCourse sc7  = new StudentCourse() { Course = c2, Student = s7, TuitionFees = 500M };
-            //StudentCourse sc8  = new StudentCourse() { Course = c2, Student = s8 , TuitionFees = 500M };
-            //StudentCourse sc9  = new StudentCourse() { Course = c2, Student = s9 , TuitionFees = 450M };
-            //StudentCourse sc10 = new StudentCourse() { Course = c2, Student = s10, TuitionFees = 500M };
-            //StudentCourse sc11 = new StudentCourse() { Course = c2, Student = s11, TuitionFees = 450M };
-            //StudentCourse sc12 = new StudentCourse() { Course = c2, Student = s12, TuitionFees = 500M };
-
-            //StudentCourse sc13 = new StudentCourse() { Course = c3, Student = s13, TuitionFees = 500M };
-            //StudentCourse sc14 = new StudentCourse() { Course = c3, Student = s14, TuitionFees = 500M };
-            //StudentCourse sc15 = new StudentCourse() { Course = c3, Student = s15, TuitionFees = 500M };
-            //StudentCourse sc16 = new StudentCourse() { Course = c3, Student = s16, TuitionFees = 500M };
-            //StudentCourse sc17 = new StudentCourse() { Course = c3, Student = s17, TuitionFees = 500M };
-            //StudentCourse sc18 = new StudentCourse() { Course = c3, Student = s18, TuitionFees = 500M };
-
-            //StudentCourse sc19 = new StudentCourse() { Course = c4, Student = s19, TuitionFees = 400M };
-            //StudentCourse sc20 = new StudentCourse() { Course = c4, Student = s20, TuitionFees = 500M };
-            //StudentCourse sc21 = new StudentCourse() { Course = c4, Student = s21, TuitionFees = 500M };
-            //StudentCourse sc22 = new StudentCourse() { Course = c4, Student = s22, TuitionFees = 450M };
-            //StudentCourse sc23 = new StudentCourse() { Course = c4, Student = s23, TuitionFees = 500M };
-            //StudentCourse sc24 = new StudentCourse() { Course = c4, Student = s24, TuitionFees = 500M };
-
-            //StudentCourse sc25 = new StudentCourse() { Course = c5, Student = s25, TuitionFees = 500M };
-            //StudentCourse sc26 = new StudentCourse() { Course = c5, Student = s26, TuitionFees = 400M };
-            //StudentCourse sc27 = new StudentCourse() { Course = c5, Student = s27, TuitionFees = 500M };
-            //StudentCourse sc28 = new StudentCourse() { Course = c5, Student = s28, TuitionFees = 500M };
-            //StudentCourse sc29 = new StudentCourse() { Course = c5, Student = s29, TuitionFees = 450M };
-            //StudentCourse sc30 = new StudentCourse() { Course = c5, Student = s30, TuitionFees = 500M };
-
             StudentCourse sc1 = new StudentCourse() { TuitionFees = 500 };
             StudentCourse sc2 = new StudentCourse() { TuitionFees = 500 };
             StudentCourse sc3 = new StudentCourse() { TuitionFees = 450 };

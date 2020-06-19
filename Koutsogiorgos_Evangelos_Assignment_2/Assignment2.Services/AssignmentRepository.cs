@@ -21,7 +21,7 @@ namespace Assignment2.Services
         //============================ Get GetById =========================================
         public Assignment GetById(int? id)
         {
-            return db.Assignments.Find(id);
+            return db.Assignments.Include(x => x.Course).FirstOrDefault(x => x.AssignmentId == id);
         }
 
         //============================ Insert =========================================

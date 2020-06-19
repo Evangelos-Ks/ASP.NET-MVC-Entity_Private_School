@@ -4,7 +4,7 @@ using System.Linq;
 using Assignment2.Database;
 using Assignment2.Entities;
 using System.Data.Entity;
-
+using System.Security.Cryptography.X509Certificates;
 
 namespace Assignment2.Services
 {
@@ -21,7 +21,7 @@ namespace Assignment2.Services
         //============================ Get GetById =========================================
         public Trainer GetById(int? id)
         {
-            return db.Trainers.Find(id);
+            return db.Trainers.Include(x => x.TrainerCourses.Select(course => course.Course)).FirstOrDefault(x => x.TrainerId == id);
         }
 
         //============================ Insert =========================================

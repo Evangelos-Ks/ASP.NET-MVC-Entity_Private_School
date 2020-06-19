@@ -48,10 +48,10 @@
                             <li>
                                 Assignments
                                 <ul>
-                                    @foreach (var assignment in item.Course.Assignments)
+                                    @foreach (var sa in Model.StudentAssignments)
                                     {
                                         <li>
-                                            @assignment.Title
+                                            @sa.Assignment.Title
                                         </li>
                                     }
                                 </ul>

@@ -59,7 +59,7 @@ namespace Assignment2.Web.Controllers
             {
                 return HttpNotFound();
             }
-            //TrainerRepository.Dispose();
+            trainerRepository.Dispose();
 
             return View(trainer);
 
