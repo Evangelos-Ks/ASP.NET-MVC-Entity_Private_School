@@ -9,13 +9,23 @@ namespace Assignment2.Web.Controllers
     public class TrainerController : Controller
     {
         // GET: Trainer
-        public ActionResult AllTrainers()
+        public ActionResult AllTrainers(string sort)
         {
             TrainerRepository trainerRepository = new TrainerRepository();
             var trainers = trainerRepository.GetAll();
             trainerRepository.Dispose();
 
-            trainers = trainers.OrderBy(x => x.FirstName);
+            ViewBag.FirstName = string.IsNullOrEmpty(sort) ? "firstNameDesc" : "";
+
+            switch (sort)
+            {
+                case "firstNameDesc":
+                    trainers = trainers.OrderByDescending(x => x.FirstName);
+                    break;
+                default:
+                    trainers = trainers.OrderBy(x => x.FirstName);
+                    break;
+            }
 
             return View(trainers);
         }
