@@ -17,6 +17,8 @@ namespace Assignment2.Web.Controllers
 
             ViewBag.FirstName = string.IsNullOrEmpty(sort) ? "firstNameDesc" : "";
             ViewBag.LastName = sort == "lastNameAsc" ? "lastNameDesc" : "lastNameAsc";
+            ViewBag.Subject = sort == "subjectAsc" ? "subjectDesc" : "subjectAsc";
+            
 
             switch (sort)
             {
@@ -28,6 +30,12 @@ namespace Assignment2.Web.Controllers
                     break;
                 case "lastNameDesc":
                     trainers = trainers.OrderByDescending(x => x.LastName);
+                    break;
+                case "subjectAsc":
+                    trainers = trainers.OrderBy(x => x.Subject);
+                    break;
+                case "subjectDesc":
+                    trainers = trainers.OrderByDescending(x => x.Subject);
                     break;
                 default:
                     trainers = trainers.OrderBy(x => x.FirstName);
