@@ -17,7 +17,7 @@
             @Html.DisplayNameFor(model => model.PhotoUrl)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.ActionLink("First name", "AllStudents", new { sort = ViewBag.FirstName })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LastName)

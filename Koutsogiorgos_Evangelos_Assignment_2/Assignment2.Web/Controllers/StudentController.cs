@@ -10,13 +10,23 @@ namespace Assignment2.Web.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult AllStudents()
+        public ActionResult AllStudents(string sort)
         {
             StudentRepository studentRepository = new StudentRepository();
             var students = studentRepository.GetAll();
             studentRepository.Dispose();
 
-            students = students.OrderBy(x => x.FirstName);
+            ViewBag.FirstName = string.IsNullOrEmpty(sort) ? "firstNameDesc" : "";
+
+            switch (sort)
+            {
+                case "firstNameDesc":
+                    students = students.OrderByDescending(x => x.FirstName);
+                    break;
+                default:
+                    students = students.OrderBy(x => x.FirstName);
+                    break;
+            }
 
             return View(students);
         }
@@ -26,7 +36,7 @@ namespace Assignment2.Web.Controllers
         {
             StudentRepository studentRepository = new StudentRepository();
 
-                if (id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -67,7 +77,7 @@ namespace Assignment2.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditStudent([Bind(Include = "StudentId,FirstName,LastName,DateOfBirth,PhotoUrl")] Student student)
-        {            
+        {
             if (ModelState.IsValid)
             {
                 StudentRepository studentRepository = new StudentRepository();
