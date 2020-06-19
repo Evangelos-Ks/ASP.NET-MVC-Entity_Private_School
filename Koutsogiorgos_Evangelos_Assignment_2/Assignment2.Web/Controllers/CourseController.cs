@@ -3,19 +3,59 @@ using System.Web.Mvc;
 using Assignment2.Services;
 using Assignment2.Entities;
 using System.Net;
+using System.Security.Policy;
 
 namespace Assignment2.Web.Controllers
 {
     public class CourseController : Controller
     {
         // GET: Course
-        public ActionResult AllCourses()
+        public ActionResult AllCourses(string sort)
         {
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
             courseRepository.Dispose();
 
-            courses = courses.OrderBy(x => x.Title);
+            ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
+            ViewBag.Stream = sort == "streamAsc" ? "streamDesc" : "streamAsc";
+            ViewBag.Type = sort == "typeAsc" ? "typeDesc" : "typeAsc";
+            ViewBag.StartDate = sort == "startDateAsc" ? "startDateDesc" : "startDateAsc";
+            ViewBag.EndDate = sort == "endDateAsc" ? "endDateDesc" : "endDateAsc";
+
+            switch (sort)
+            {
+                case "courseTitleDesc":
+                    courses = courses.OrderByDescending(x => x.Title);
+                    break;
+                case "streamAsc":
+                    courses = courses.OrderBy(x => x.Stream);
+                    break;
+                case "streamDesc":
+                    courses = courses.OrderByDescending(x => x.Stream);
+                    break;
+                case "typeAsc":
+                    courses = courses.OrderBy(x => x.Type);
+                    break;
+                case "typeDesc":
+                    courses = courses.OrderByDescending(x => x.Type);
+                    break;
+                case "startDateAsc":
+                    courses = courses.OrderBy(x => x.StartDate);
+                    break;
+                case "startDateDesc":
+                    courses = courses.OrderByDescending(x => x.StartDate);
+                    break;
+                case "endDateAsc":
+                    courses = courses.OrderBy(x => x.EndDate);
+                    break;
+                case "endDateDesc":
+                    courses = courses.OrderByDescending(x => x.EndDate);
+                    break;
+                default:
+                    courses = courses.OrderBy(x => x.Title);
+                    break;
+            }
+
 
             return View(courses);
         }

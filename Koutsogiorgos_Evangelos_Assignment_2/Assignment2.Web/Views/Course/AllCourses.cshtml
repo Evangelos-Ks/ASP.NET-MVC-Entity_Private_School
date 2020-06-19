@@ -12,19 +12,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.ActionLink("Course title", "AllCourses", new {sort = ViewBag.CourseTitle})
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Stream)
+            @Html.ActionLink("Stream", "AllCourses", new { sort = ViewBag.Stream })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.ActionLink("Type", "AllCourses", new { sort = ViewBag.Type })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.ActionLink("Start date", "AllCourses", new { sort = ViewBag.StartDate })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Html.ActionLink("End date", "AllCourses", new { sort = ViewBag.EndDate })
         </th>
         <th></th>
     </tr>
