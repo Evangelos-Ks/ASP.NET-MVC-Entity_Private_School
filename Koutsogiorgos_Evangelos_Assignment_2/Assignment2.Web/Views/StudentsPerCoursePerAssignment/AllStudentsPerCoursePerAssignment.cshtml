@@ -27,9 +27,9 @@
                         </ul>
                         <b>Students</b>
                         <ol>
-                            @foreach (var studentAssignment in assignment.StudentAssignments)
+                            @foreach (var studentCourse in course.StudentCourses)
                             {
-                                <li>@studentAssignment.Student.FirstName @studentAssignment.Student.LastName</li>
+                                <li>@studentCourse.Student.FirstName @studentCourse.Student.LastName</li>
                             }
                         </ol>
                         <br />

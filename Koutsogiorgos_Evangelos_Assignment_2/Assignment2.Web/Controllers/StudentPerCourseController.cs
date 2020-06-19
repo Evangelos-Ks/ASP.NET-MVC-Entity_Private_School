@@ -10,14 +10,7 @@ namespace Assignment2.Web.Controllers
         {
             StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
             var studentCourses = studentCourseRepository.GetAll();
-
-            //List<Student> students = new List<Student>();
-            //foreach (var studentcourse in studentCourses)
-            //{
-            //    students.Add(studentcourse.Student);
-            //}
-            //ViewBag.Students = students;
-            //studentCourseRepository.Dispose();
+            studentCourseRepository.Dispose();
 
             return View(studentCourses);
         }

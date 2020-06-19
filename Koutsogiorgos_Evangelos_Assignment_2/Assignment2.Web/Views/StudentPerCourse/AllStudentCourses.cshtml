@@ -25,7 +25,7 @@
             </td>
             <td>
                 <ol>
-                    @foreach (var studentCourse in item.Key.StudentCourses.ToList())
+                    @foreach (var studentCourse in item)
                     {
                         <li>@studentCourse.Student.FirstName @studentCourse.Student.LastName</li>
                     }

@@ -4,7 +4,9 @@ using System.Linq;
 using Assignment2.Database;
 using Assignment2.Entities;
 using System.Data.Entity;
- 
+using System.Security.Cryptography.X509Certificates;
+using System.Runtime.CompilerServices;
+using System.Security.Policy;
 
 namespace Assignment2.Services
 {
@@ -15,7 +17,7 @@ namespace Assignment2.Services
         //============================ Get All =========================================
         public IEnumerable<Course> GetAll()
         {
-            return db.Courses.ToList();
+            return db.Courses.Include(x => x.Assignments).Include(y => y.StudentCourses.Select(k => k.Student)).ToList();
         }
 
         //============================ Get GetById =========================================

@@ -10,6 +10,7 @@ namespace Assignment2.Web.Controllers
         {
             TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
             var trainerCourse = trainerCourseRepository.GetAll();
+            trainerCourseRepository.Dispose();
 
             return View(trainerCourse);
         }
