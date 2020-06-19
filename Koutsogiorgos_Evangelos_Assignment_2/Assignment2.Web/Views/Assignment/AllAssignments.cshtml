@@ -12,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Course.Title)
+            @Html.ActionLink("Course title", "AllAssignments", new { sort = ViewBag.CourseTitle})
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.ActionLink("Assignment title", "AllAssignments", new { sort = ViewBag.AssignmentTitle })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.ActionLink("Description", "AllAssignments", new { sort = ViewBag.Description })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SubDateTime)
+            @Html.ActionLink("Submission date", "AllAssignments", new { sort = ViewBag.SubmissionDate})
         </th>
         <th></th>
     </tr>

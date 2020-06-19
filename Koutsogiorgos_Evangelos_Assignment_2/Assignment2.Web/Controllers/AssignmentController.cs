@@ -9,13 +9,45 @@ namespace Assignment2.Web.Controllers
     public class AssignmentController : Controller
     {
         // GET: Assignment
-        public ActionResult AllAssignments()
+        public ActionResult AllAssignments(string sort)
         {
             AssignmentRepository assignmentRepository = new AssignmentRepository();
             var assignments = assignmentRepository.GetAll();
-            //assignmentRepository.Dispose();
+            assignmentRepository.Dispose();
 
-            assignments = assignments.OrderBy(x => x.Title);
+            ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
+            ViewBag.AssignmentTitle = sort == "assignmentTitleAsc" ? "assignmentTitleDesc" : "assignmentTitleAsc";
+            ViewBag.Description = sort == "descriptionAsc" ? "descriptionDesc" : "descriptionAsc";
+            ViewBag.SubmissionDate = sort == "submissionDateAsc" ? "submissionDateDesc" : "submissionDateAsc";
+
+
+            switch (sort)
+            {
+                case "courseTitleDesc":
+                    assignments = assignments.OrderByDescending(x => x.Course.Title);
+                    break;
+                case "assignmentTitleAsc":
+                    assignments = assignments.OrderBy(x => x.Title);
+                    break;
+                case "assignmentTitleDesc":
+                    assignments = assignments.OrderByDescending(x => x.Title);
+                    break;
+                case "descriptionAsc":
+                    assignments = assignments.OrderBy(x => x.Description);
+                    break;
+                case "descriptionDesc":
+                    assignments = assignments.OrderByDescending(x => x.Description);
+                    break;
+                case "submissionDateAsc":
+                    assignments = assignments.OrderBy(x => x.SubDateTime);
+                    break;
+                case "submissionDateDesc":
+                    assignments = assignments.OrderByDescending(x => x.SubDateTime);
+                    break;
+                default:
+                    assignments = assignments.OrderBy(x => x.Course.Title);
+                    break;
+            }
 
             return View(assignments);
         }
