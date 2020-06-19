@@ -17,11 +17,18 @@ namespace Assignment2.Web.Controllers
             studentRepository.Dispose();
 
             ViewBag.FirstName = string.IsNullOrEmpty(sort) ? "firstNameDesc" : "";
+            ViewBag.LastName = sort == "lastNameAsc" ? "lastNameDesc" : "lastNameAsc";
 
             switch (sort)
             {
                 case "firstNameDesc":
                     students = students.OrderByDescending(x => x.FirstName);
+                    break;
+                case "lastNameAsc":
+                    students = students.OrderBy(x => x.LastName);
+                    break;
+                case "lastNameDesc":
+                    students = students.OrderByDescending(x => x.LastName);
                     break;
                 default:
                     students = students.OrderBy(x => x.FirstName);
