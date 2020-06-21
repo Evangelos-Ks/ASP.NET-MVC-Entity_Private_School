@@ -10,7 +10,7 @@
 <table class="table">
     <tr>
         <th>
-            Course title
+            @Html.ActionLink("Course title", "AllAssignmentsPerCourse", new {  sort = ViewBag.CourseTitle})
         </th>
         <th>
             Assignmets
