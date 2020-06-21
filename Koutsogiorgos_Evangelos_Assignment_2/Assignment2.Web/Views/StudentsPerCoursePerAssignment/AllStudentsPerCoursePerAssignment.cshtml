@@ -6,13 +6,18 @@
 
 <h2>Students per course per assignment</h2>
 
-<div class="container-fluid">
     <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Course title", "AllStudentsPerCoursePerAssignment", new { sort = ViewBag.CourseTitle })
+            </th>
+            <th></th>
+        </tr>
         @foreach (var course in Model)
         {
             <tr>
                 <td>
-                    <b>Course title</b>
+                    <b>Title</b>
                     <br />
                     @Html.DisplayFor(x => course.Title)
                 </td>
@@ -41,4 +46,3 @@
         }
 
     </table>
-</div>
