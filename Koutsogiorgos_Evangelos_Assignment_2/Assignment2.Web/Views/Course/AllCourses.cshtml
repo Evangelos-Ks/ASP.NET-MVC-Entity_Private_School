@@ -6,13 +6,20 @@
 
 <h2>All Courses</h2>
 
-<p>
-    @Html.ActionLink("Insert new course", "CreateCourse", null , new { @class = "btn btn-primary" })
-</p>
+<div class="text-right mb-1" style="width:100%">
+    @using (Html.BeginForm())
+    {
+        <!--Change style of searchbar-->
+        <p>
+            Find by title : @Html.TextBox("search", null, new { @class = "" })
+            <input type="submit" value="Search" class="btn btn-info"/>
+        </p>
+    }
+</div>
 <table class="table">
-    <tr>
+    <tr >
         <th>
-            @Html.ActionLink("Course title", "AllCourses", new {sort = ViewBag.CourseTitle})
+            @Html.ActionLink("Course title", "AllCourses", new { sort = ViewBag.CourseTitle })
         </th>
         <th>
             @Html.ActionLink("Stream", "AllCourses", new { sort = ViewBag.Stream })
@@ -26,7 +33,12 @@
         <th>
             @Html.ActionLink("End date", "AllCourses", new { sort = ViewBag.EndDate })
         </th>
-        <th></th>
+
+        <th>
+            <div class="text-center" style="width:100%">
+                @Html.ActionLink("Insert new course", "CreateCourse", null, new { @class = "btn btn-primary" })
+            </div>
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -47,9 +59,11 @@
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditCourse", new { id=item.CourseId }, new { @class = "btn btn-warning" }) 
-            @Html.ActionLink("Details", "DetailsCourse", new { id=item.CourseId }, new { @class = "btn btn-info" }) 
-            @Html.ActionLink("Delete", "DeleteCourse", new { id=item.CourseId }, new { @class = "btn btn-danger" })
+            <div class="text-center" style="width:100%">
+                @Html.ActionLink("Edit", "EditCourse", new { id = item.CourseId }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Details", "DetailsCourse", new { id = item.CourseId }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Delete", "DeleteCourse", new { id = item.CourseId }, new { @class = "btn btn-danger" })
+            </div>
         </td>
     </tr>
 }
