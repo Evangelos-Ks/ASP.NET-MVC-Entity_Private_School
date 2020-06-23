@@ -22,3 +22,29 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/*=============================================== My CSS =================================================================*/
+
+.searchBar {
+    height: 38px;
+    border: none;
+    border-radius: 4px 0px 0px 4px;
+    background-color: lightgray;
+    outline: none;
+}
+
+
+.btn-search {
+    height: 38px;
+    border: none;
+    border-radius: 0px 4px 4px 0px;
+    background-color: lightblue;
+    outline: none;
+    font-weight: 600;
+}
+
+input[type=submit].btn-search:hover {
+    background-color: Highlight;
+}
+
