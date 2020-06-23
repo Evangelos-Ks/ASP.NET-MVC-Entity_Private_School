@@ -6,18 +6,20 @@
 
 <h2>All Courses</h2>
 
-<div class="text-left mb-1" style="width:100%">
+<div class="d-inline-block mb-1 w-100">
     @using (Html.BeginForm())
     {
-        <!--Change style of searchbar-->
-        <p>
+        <div class="float-left d-inline">
+            @Html.ActionLink("Insert new course", "CreateCourse", null, new { @class = "btn btn-primary" })
+        </div>
+        <div class="float-right d-inline">
             @Html.Label("search", "Find by title or by type :", null)
-            @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..."})<input type="submit" value="Search" class="btn-search"/>
-        </p>
+            @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
+        </div>
     }
 </div>
 <table class="table">
-    <tr >
+    <tr>
         <th>
             @Html.ActionLink("Course title", "AllCourses", new { sort = ViewBag.CourseTitle })
         </th>
@@ -33,39 +35,35 @@
         <th>
             @Html.ActionLink("End date", "AllCourses", new { sort = ViewBag.EndDate })
         </th>
-
         <th>
-            <div class="text-center" style="width:100%">
-                @Html.ActionLink("Insert new course", "CreateCourse", null, new { @class = "btn btn-primary" })
-            </div>
         </th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stream)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td>
-            <div class="text-center" style="width:100%">
-                @Html.ActionLink("Edit", "EditCourse", new { id = item.CourseId }, new { @class = "btn btn-warning" })
-                @Html.ActionLink("Details", "DetailsCourse", new { id = item.CourseId }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Delete", "DeleteCourse", new { id = item.CourseId }, new { @class = "btn btn-danger" })
-            </div>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stream)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                <div class="text-center" style="width:100%">
+                    @Html.ActionLink("Edit", "EditCourse", new { id = item.CourseId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Details", "DetailsCourse", new { id = item.CourseId }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "DeleteCourse", new { id = item.CourseId }, new { @class = "btn btn-danger" })
+                </div>
+            </td>
+        </tr>
+    }
 
 </table>
