@@ -3,18 +3,27 @@ using System.Web.Mvc;
 using Assignment2.Services;
 using Assignment2.Entities;
 using System.Net;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Assignment2.Web.Controllers
 {
     public class AssignmentController : Controller
     {
         // GET: Assignment
-        public ActionResult AllAssignments(string sort)
+        public ActionResult AllAssignments(string sort, string search)
         {
             AssignmentRepository assignmentRepository = new AssignmentRepository();
             var assignments = assignmentRepository.GetAll();
             assignmentRepository.Dispose();
 
+            //============================================== searching =====================================================
+            if (!string.IsNullOrEmpty(search))
+            {
+                assignments = assignments.Where(x => x.Course.Title.ToUpper().Contains(search.ToUpper()) ||
+                x.Title.ToUpper().Contains(search.ToUpper()) || x.Description.ToUpper().Contains(search.ToUpper()));
+            }
+
+            //============================================== sorting =======================================================
             ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
             ViewBag.AssignmentTitle = sort == "assignmentTitleAsc" ? "assignmentTitleDesc" : "assignmentTitleAsc";
             ViewBag.Description = sort == "descriptionAsc" ? "descriptionDesc" : "descriptionAsc";

@@ -39,12 +39,13 @@ textarea {
     height: 38px;
     border: none;
     border-radius: 0px 4px 4px 0px;
-    background-color: lightblue;
+    background-color: #007bff;
     outline: none;
     font-weight: 600;
+    color: white;
 }
 
 input[type=submit].btn-search:hover {
-    background-color: Highlight;
+    background-color: #016bdc;
 }
 

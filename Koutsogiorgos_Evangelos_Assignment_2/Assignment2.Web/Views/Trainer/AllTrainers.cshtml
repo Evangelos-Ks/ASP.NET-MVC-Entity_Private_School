@@ -6,16 +6,25 @@
 
 <h2>All Trainers</h2>
 
-<p>
-    @Html.ActionLink("Insert new trainer", "CreateTrainer", null, new { @class = "btn btn-primary" })
-</p>
+<div class="d-inline-block mb-1 w-100">
+    @using (Html.BeginForm())
+    {
+        <div class="float-left d-inline">
+            @Html.ActionLink("Insert new trainer", "CreateTrainer", null, new { @class = "btn btn-primary" })
+        </div>
+        <div class="float-right d-inline">
+            @Html.Label("search", "Find by first name or by last name :", null)
+            @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
+        </div>
+    }
+</div>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PhotoUrl)
         </th>
         <th>
-            @Html.ActionLink("First name", "AllTrainers", new { sort = ViewBag.FirstName})
+            @Html.ActionLink("First name", "AllTrainers", new { sort = ViewBag.FirstName })
         </th>
         <th>
             @Html.ActionLink("Last name", "AllTrainers", new { sort = ViewBag.LastName })
@@ -42,8 +51,8 @@
                 @Html.DisplayFor(modelItem => trainer.Subject)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-warning" }) 
-                @Html.ActionLink("Details", "DetailsTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-info" }) 
+                @Html.ActionLink("Edit", "EditTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Details", "DetailsTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-info" })
                 @Html.ActionLink("Delete", "DeleteTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-danger" })
             </td>
         </tr>

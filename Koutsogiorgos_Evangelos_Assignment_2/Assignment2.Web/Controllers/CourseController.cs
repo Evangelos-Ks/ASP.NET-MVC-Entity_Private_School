@@ -19,7 +19,7 @@ namespace Assignment2.Web.Controllers
             //============================================== searching =====================================================
             if (!string.IsNullOrEmpty(search))
             {
-                courses = courses.Where(c => c.Title.Contains(search) || c.Type.Contains(search));
+                courses = courses.Where(c => c.Title.ToUpper().Contains(search.ToUpper()) || c.Type.ToUpper().Contains(search.ToUpper()));
             }
 
             //============================================== sorting =======================================================

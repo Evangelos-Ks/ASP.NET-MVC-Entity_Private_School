@@ -19,7 +19,7 @@ namespace Assignment2.Web.Controllers
             //============================================== searching =====================================================
             if (!string.IsNullOrEmpty(search))
             {
-                students = students.Where(n => n.FirstName.Contains(search) || n.LastName.Contains(search));
+                students = students.Where(n => n.FirstName.ToUpper().Contains(search.ToUpper()) || n.LastName.ToUpper().Contains(search.ToUpper()));
             }
 
             //============================================== sorting =======================================================

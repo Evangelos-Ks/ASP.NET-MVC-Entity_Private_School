@@ -3,18 +3,25 @@ using System.Net;
 using System.Web.Mvc;
 using Assignment2.Services;
 using Assignment2.Entities;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Assignment2.Web.Controllers
 {
     public class TrainerController : Controller
     {
         // GET: Trainer
-        public ActionResult AllTrainers(string sort)
+        public ActionResult AllTrainers(string sort, string search)
         {
             TrainerRepository trainerRepository = new TrainerRepository();
             var trainers = trainerRepository.GetAll();
             trainerRepository.Dispose();
 
+            //============================================== searching =====================================================
+            if (!string.IsNullOrEmpty(search))
+            {
+                trainers = trainers.Where(x => x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper()));
+            }
+            //============================================== sorting =======================================================
             ViewBag.FirstName = string.IsNullOrEmpty(sort) ? "firstNameDesc" : "";
             ViewBag.LastName = sort == "lastNameAsc" ? "lastNameDesc" : "lastNameAsc";
             ViewBag.Subject = sort == "subjectAsc" ? "subjectDesc" : "subjectAsc";
