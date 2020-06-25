@@ -7,12 +7,19 @@ namespace Assignment2.Web.Controllers
     public class StudentsPerCoursePerAssignmentController : Controller
     {
         // GET: StudentsPerCoursePerAssignment
-        public ActionResult AllStudentsPerCoursePerAssignment(string sort)
+        public ActionResult AllStudentsPerCoursePerAssignment(string sort, string search)
         {
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
             courseRepository.Dispose();
 
+            //============================================== searching =====================================================
+            if (!string.IsNullOrEmpty(search))
+            {
+                courses = courses.Where(x => x.Title.ToUpper().Contains(search.ToUpper()));
+            }
+
+            //============================================== sorting =======================================================
             ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
 
             switch (sort)
