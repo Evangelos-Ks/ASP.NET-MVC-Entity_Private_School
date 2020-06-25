@@ -18,12 +18,11 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Course title", "AllTrainerCourse", new { sort = ViewBag.CourseTitle})
+            @Html.ActionLink("Course title", "AllTrainerCourse", new { sort = ViewBag.CourseTitle })
         </th>
         <th>
             Trainers
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model.GroupBy(x => x.Course))
