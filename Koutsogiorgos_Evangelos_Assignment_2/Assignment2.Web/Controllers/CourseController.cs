@@ -10,12 +10,19 @@ namespace Assignment2.Web.Controllers
     public class CourseController : Controller
     {
         // GET: Course
-        public ActionResult AllCourses(string sort)
+        public ActionResult AllCourses(string sort, string search)
         {
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
             courseRepository.Dispose();
 
+            //============================================== searching =====================================================
+            if (!string.IsNullOrEmpty(search))
+            {
+                courses = courses.Where(c => c.Title.ToUpper().Contains(search.ToUpper()) || c.Type.ToUpper().Contains(search.ToUpper()));
+            }
+
+            //============================================== sorting =======================================================
             ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
             ViewBag.Stream = sort == "streamAsc" ? "streamDesc" : "streamAsc";
             ViewBag.Type = sort == "typeAsc" ? "typeDesc" : "typeAsc";

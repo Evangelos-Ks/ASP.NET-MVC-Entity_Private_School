@@ -7,10 +7,18 @@
 <h2>All Students</h2>
 
 
-<p>
-    @Html.ActionLink("Insert new student", "CreateStudent", null, new { @class = "btn btn-primary" })
-</p>
-
+<div class="d-inline-block mb-1 w-100">
+    @using (Html.BeginForm())
+    {
+        <div class="float-left d-inline">
+            @Html.ActionLink("Insert new student", "CreateStudent", null, new { @class = "btn btn-primary" })
+        </div>
+        <div class="float-right d-inline">
+            @Html.Label("search", "Find by first name or by last name :", null)
+            @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
+        </div>
+    }
+</div>
 <table class="table">
     <tr>
         <th>
@@ -25,9 +33,9 @@
         <th>
             @Html.ActionLink("Date of birth", "AllStudents", new { sort = ViewBag.DateOfBirth })
         </th>
-        <th></th>
+        <th>
+        </th>
     </tr>
-
     @foreach (var student in Model)
     {
         <tr>
@@ -43,7 +51,7 @@
             <td>
                 @Html.DisplayFor(x => student.DateOfBirth)
             </td>
-            <td>
+            <td class="text-right">
                 @Html.ActionLink("Edit", "EditStudent", new { id = student.StudentId }, new { @class = "btn btn-warning" })
                 @Html.ActionLink("Details", "DetailsStudent", new { id = student.StudentId }, new { @class = "btn btn-info" })
                 @Html.ActionLink("Delete", "DeleteStudent", new { id = student.StudentId }, new { @class = "btn btn-danger" })

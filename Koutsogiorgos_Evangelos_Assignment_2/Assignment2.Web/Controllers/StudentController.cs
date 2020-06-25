@@ -10,12 +10,19 @@ namespace Assignment2.Web.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult AllStudents(string sort)
+        public ActionResult AllStudents(string sort, string search)
         {
             StudentRepository studentRepository = new StudentRepository();
             var students = studentRepository.GetAll();
             studentRepository.Dispose();
 
+            //============================================== searching =====================================================
+            if (!string.IsNullOrEmpty(search))
+            {
+                students = students.Where(n => n.FirstName.ToUpper().Contains(search.ToUpper()) || n.LastName.ToUpper().Contains(search.ToUpper()));
+            }
+
+            //============================================== sorting =======================================================
             ViewBag.FirstName = string.IsNullOrEmpty(sort) ? "firstNameDesc" : "";
             ViewBag.LastName = sort == "lastNameAsc" ? "lastNameDesc" : "lastNameAsc";
             ViewBag.DateOfBirth = sort == "dateOfBirthAsc" ? "dateOfBirthDesc" : "dateOfBirthAsc";

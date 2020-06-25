@@ -6,13 +6,23 @@
 
 <h2>All assignments</h2>
 
-<p>
-    @Html.ActionLink("Insert new assignment", "CreateAssignment", null , new { @class = "btn btn-primary" })
-</p>
+<div class="d-inline-block mb-1 w-100">
+    @using (Html.BeginForm())
+    {
+        <div class="float-left d-inline">
+            @Html.ActionLink("Insert new assignment", "CreateAssignment", null, new { @class = "btn btn-primary" })
+        </div>
+        <div class="float-right d-inline">
+            @Html.Label("search", "Find by title or by description :", null)
+            @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
+        </div>
+    }
+</div>
+
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Course title", "AllAssignments", new { sort = ViewBag.CourseTitle})
+            @Html.ActionLink("Course title", "AllAssignments", new { sort = ViewBag.CourseTitle })
         </th>
         <th>
             @Html.ActionLink("Assignment title", "AllAssignments", new { sort = ViewBag.AssignmentTitle })
@@ -21,31 +31,32 @@
             @Html.ActionLink("Description", "AllAssignments", new { sort = ViewBag.Description })
         </th>
         <th>
-            @Html.ActionLink("Submission date", "AllAssignments", new { sort = ViewBag.SubmissionDate})
+            @Html.ActionLink("Submission date", "AllAssignments", new { sort = ViewBag.SubmissionDate })
         </th>
         <th></th>
     </tr>
 
-@foreach (var assignment in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => assignment.Course.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => assignment.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => assignment.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => assignment.SubDateTime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditAssignment", new { id=assignment.AssignmentId }, new { @class = "btn btn-warning" }) 
-            @Html.ActionLink("Details", "DetailsAssignment", new { id=assignment.AssignmentId }, new { @class = "btn btn-info" }) 
-            @Html.ActionLink("Delete", "DeleteAssignment", new { id=assignment.AssignmentId }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+    @foreach (var assignment in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => assignment.Course.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => assignment.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => assignment.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => assignment.SubDateTime)
+            </td>
+            <td class="text-right">
+                @Html.ActionLink("Edit", "EditAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Details", "DetailsAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Delete", "DeleteAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>
