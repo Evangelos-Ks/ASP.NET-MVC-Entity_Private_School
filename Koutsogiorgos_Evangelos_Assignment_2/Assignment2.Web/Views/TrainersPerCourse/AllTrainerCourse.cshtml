@@ -6,6 +6,15 @@
 
 <h2>All trainers per course</h2>
 
+<div class="d-inline-block mb-1 w-100">
+    @using (Html.BeginForm())
+    {
+        <div class="float-right d-inline">
+            @Html.Label("search", "Find by title, first name or last name :", null)
+            @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
+        </div>
+    }
+</div>
 <table class="table">
     <tr>
         <th>

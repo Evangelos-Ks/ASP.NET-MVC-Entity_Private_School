@@ -51,7 +51,7 @@
             <td>
                 @Html.DisplayFor(x => student.DateOfBirth)
             </td>
-            <td>
+            <td class="text-right">
                 @Html.ActionLink("Edit", "EditStudent", new { id = student.StudentId }, new { @class = "btn btn-warning" })
                 @Html.ActionLink("Details", "DetailsStudent", new { id = student.StudentId }, new { @class = "btn btn-info" })
                 @Html.ActionLink("Delete", "DeleteStudent", new { id = student.StudentId }, new { @class = "btn btn-danger" })

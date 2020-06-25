@@ -10,7 +10,7 @@
     @using (Html.BeginForm())
     {       
         <div class="float-right d-inline">
-            @Html.Label("search", "Find by title or by student :", null)
+            @Html.Label("search", "Find by title, first name or last name :", null)
             @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
         </div>
     }

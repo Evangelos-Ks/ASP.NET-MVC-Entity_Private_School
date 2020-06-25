@@ -18,7 +18,7 @@
         {
             #region Seed Courses
             //==================== Seeding Courses ===========================================
-            Course c1 = new Course() { Title = "Phisics", Stream = "Full time", Type = "Science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/6/16") };
+            Course c1 = new Course() { Title = "Physics", Stream = "Full time", Type = "Science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/6/16") };
             Course c2 = new Course() { Title = "Chemistry", Stream = "Full time", Type = "Science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/6/11") };
             Course c3 = new Course() { Title = "Biology", Stream = "Full time", Type = "Science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/7/1") };
             Course c4 = new Course() { Title = "Mathematics", Stream = "Full time", Type = "Science" , StartDate = DateTime.Parse("2019/10/1"), EndDate = DateTime.Parse("2020/5/30") };
@@ -27,8 +27,8 @@
 
             #region Seed Trainers
             //==================== Seeding Trainers ===========================================
-            Trainer t1 = new Trainer() { FirstName = "Albert", LastName = "Einstain", Subject = "Phisics", PhotoUrl= "../../Content/Students_Image/boy4.png" };
-            Trainer t2 = new Trainer() { FirstName = "Richard", LastName = "Faynman", Subject = "Phisics", PhotoUrl = "../../Content/Students_Image/boy1.png" };
+            Trainer t1 = new Trainer() { FirstName = "Albert", LastName = "Einstain", Subject = "Physics", PhotoUrl= "../../Content/Students_Image/boy4.png" };
+            Trainer t2 = new Trainer() { FirstName = "Richard", LastName = "Faynman", Subject = "Physics", PhotoUrl = "../../Content/Students_Image/boy1.png" };
             Trainer t3 = new Trainer() { FirstName = "Marie", LastName = "Curie", Subject = "Chemistry", PhotoUrl = "../../Content/Students_Image/girl4.png" };
             Trainer t4 = new Trainer() { FirstName = "Luis", LastName = "Pasteur", Subject = "Chemistry", PhotoUrl = "../../Content/Students_Image/boy3.png" };
             Trainer t5 = new Trainer() { FirstName = "Francis", LastName = "Crick", Subject = "Biology", PhotoUrl = "../../Content/Students_Image/boy2.png" };

@@ -50,7 +50,7 @@
             <td>
                 @Html.DisplayFor(modelItem => trainer.Subject)
             </td>
-            <td>
+            <td class="text-right">
                 @Html.ActionLink("Edit", "EditTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-warning" })
                 @Html.ActionLink("Details", "DetailsTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-info" })
                 @Html.ActionLink("Delete", "DeleteTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-danger" })

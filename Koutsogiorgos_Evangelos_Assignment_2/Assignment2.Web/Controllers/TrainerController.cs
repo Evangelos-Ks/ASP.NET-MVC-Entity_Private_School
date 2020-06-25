@@ -19,7 +19,9 @@ namespace Assignment2.Web.Controllers
             //============================================== searching =====================================================
             if (!string.IsNullOrEmpty(search))
             {
-                trainers = trainers.Where(x => x.FirstName.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper()));
+                trainers = trainers.Where(x => x.FirstName.ToUpper().Contains(search.ToUpper()) ||
+                x.LastName.ToUpper().Contains(search.ToUpper()) ||
+                x.Subject.ToUpper().Contains(search.ToUpper()));
             }
             //============================================== sorting =======================================================
             ViewBag.FirstName = string.IsNullOrEmpty(sort) ? "firstNameDesc" : "";

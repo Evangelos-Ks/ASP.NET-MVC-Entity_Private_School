@@ -51,7 +51,7 @@
             <td>
                 @Html.DisplayFor(modelItem => assignment.SubDateTime)
             </td>
-            <td>
+            <td class="text-right">
                 @Html.ActionLink("Edit", "EditAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-warning" })
                 @Html.ActionLink("Details", "DetailsAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-info" })
                 @Html.ActionLink("Delete", "DeleteAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-danger" })
