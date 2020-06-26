@@ -273,3 +273,7 @@ C:\Users\wwwev\Desktop\Code_Lab\Assignment_2\Koutsogiorgos_Evangelos_Assignment_
 C:\Users\wwwev\Desktop\Code_Lab\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Web\obj\Debug\Assignment2.Web.csproj.CopyComplete
 C:\Users\wwwev\Desktop\Code_Lab\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Web\obj\Debug\Assignment2.Web.dll
 C:\Users\wwwev\Desktop\Code_Lab\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Web\obj\Debug\Assignment2.Web.pdb
+C:\Users\wwwev\Desktop\Code_Lab\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Web\bin\PagedList.dll
+C:\Users\wwwev\Desktop\Code_Lab\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Web\bin\PagedList.Mvc.dll
+C:\Users\wwwev\Desktop\Code_Lab\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Web\bin\PagedList.xml
+C:\Users\wwwev\Desktop\Code_Lab\Assignment_2\Koutsogiorgos_Evangelos_Assignment_2\Assignment2.Web\bin\PagedList.Mvc.xml
