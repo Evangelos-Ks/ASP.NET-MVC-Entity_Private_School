@@ -24,24 +24,27 @@
         </div>
     </div>
 
+    string currentSort = ViewBag.CurrentSort;
+    @Html.TextBox("sort", currentSort, new { type = "hidden", @class = "form-control" })
 
+   
 
     <table class="table">
         <tr>
             <th>
-                @Html.ActionLink("Course title", "AllCourses", new { sort = ViewBag.CourseTitle, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("Course title", "AllCourses", new { sort = ViewBag.CourseTitle, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
             </th>
             <th>
-                @Html.ActionLink("Stream", "AllCourses", new { sort = ViewBag.Stream, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("Stream", "AllCourses", new { sort = ViewBag.Stream, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
             </th>
             <th>
-                @Html.ActionLink("Type", "AllCourses", new { sort = ViewBag.Type, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("Type", "AllCourses", new { sort = ViewBag.Type, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
             </th>
             <th>
-                @Html.ActionLink("Start date", "AllCourses", new { sort = ViewBag.StartDate, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("Start date", "AllCourses", new { sort = ViewBag.StartDate, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
             </th>
             <th>
-                @Html.ActionLink("End date", "AllCourses", new { sort = ViewBag.EndDate, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("End date", "AllCourses", new { sort = ViewBag.EndDate, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
             </th>
             <th>
             </th>
@@ -77,7 +80,7 @@
     </table>
 
     <div class="float-left">
-        Items per page: @Html.DropDownList("pageSize")
+        Items per page: @Html.DropDownList("pageSize", null, new { @selected = ViewBag.CurrentPageSize })
         @Html.PagedListPager(Model, page => Url.Action("AllCourses", new { page }))
     </div>
 }

@@ -1,5 +1,5 @@
 ﻿(function () {
-    document.getElementById("pageSize").addEventListener("change", change)
+    document.getElementById("pageSize").addEventListener("change", change);
 })();
 
 function change() {

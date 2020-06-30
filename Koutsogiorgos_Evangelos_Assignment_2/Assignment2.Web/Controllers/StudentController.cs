@@ -3,18 +3,29 @@ using System.Net;
 using System.Web.Mvc;
 using Assignment2.Services;
 using Assignment2.Entities;
-
+using System.Collections.Generic;
+using PagedList;
 
 namespace Assignment2.Web.Controllers
 {
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult AllStudents(string sort, string search)
+        public ActionResult AllStudents(string sort, string search, string currentFilter, int? page, int? pageSize)
         {
             StudentRepository studentRepository = new StudentRepository();
             var students = studentRepository.GetAll();
             studentRepository.Dispose();
+
+            //============================================== Paging ========================================================
+            if (search != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                search = currentFilter;
+            }
 
             //============================================== searching =====================================================
             if (!string.IsNullOrEmpty(search))
@@ -22,10 +33,25 @@ namespace Assignment2.Web.Controllers
                 students = students.Where(n => n.FirstName.ToUpper().Contains(search.ToUpper()) || n.LastName.ToUpper().Contains(search.ToUpper()));
             }
 
+            int pSize = pageSize ?? 3;
+            int pageNumber = page ?? 1;
+
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+             new SelectListItem() { Value="3", Text= "3" },
+             new SelectListItem() { Value="5", Text= "5" },
+             new SelectListItem() { Value="10", Text= "10" },
+             new SelectListItem() { Value="15", Text= "15" },
+             new SelectListItem() { Value="25", Text= "25" },
+             new SelectListItem() { Value="50", Text= "50" }
+            };
+
             //============================================== sorting =======================================================
             ViewBag.FirstName = string.IsNullOrEmpty(sort) ? "firstNameDesc" : "";
             ViewBag.LastName = sort == "lastNameAsc" ? "lastNameDesc" : "lastNameAsc";
             ViewBag.DateOfBirth = sort == "dateOfBirthAsc" ? "dateOfBirthDesc" : "dateOfBirthAsc";
+            ViewBag.CurrentSort = sort;
+
 
             switch (sort)
             {
@@ -49,7 +75,7 @@ namespace Assignment2.Web.Controllers
                     break;
             }
 
-            return View(students);
+            return View(students.ToPagedList(pageNumber, pSize));
         }
 
         // GET: TestStudent/Details/5
@@ -66,7 +92,7 @@ namespace Assignment2.Web.Controllers
             {
                 return HttpNotFound();
             }
-           
+
             studentRepository.Dispose();
 
             return View(student);

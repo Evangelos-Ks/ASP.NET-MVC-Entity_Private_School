@@ -6,10 +6,9 @@
 
 <h2>All Students</h2>
 
-
-<div class="d-inline-block mb-1 w-100">
-    @using (Html.BeginForm())
-    {
+@using (Html.BeginForm())
+{
+    <div class="d-inline-block mb-1 w-100">
         <div class="float-left d-inline">
             @Html.ActionLink("Insert new student", "CreateStudent", null, new { @class = "btn btn-primary" })
         </div>
@@ -17,45 +16,45 @@
             @Html.Label("search", "Find by first name or by last name :", null)
             @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
         </div>
-    }
-</div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PhotoUrl)
-        </th>
-        <th>
-            @Html.ActionLink("First name", "AllStudents", new { sort = ViewBag.FirstName })
-        </th>
-        <th>
-            @Html.ActionLink("Last name", "AllStudents", new { sort = ViewBag.LastName })
-        </th>
-        <th>
-            @Html.ActionLink("Date of birth", "AllStudents", new { sort = ViewBag.DateOfBirth })
-        </th>
-        <th>
-        </th>
-    </tr>
-    @foreach (var student in Model)
-    {
+    </div>
+    <table class="table">
         <tr>
-            <td>
-                <img src="@Html.DisplayFor(x => student.PhotoUrl)" width="80" alt="Photo of @Html.DisplayFor(x => student.FirstName) @Html.DisplayFor(x => student.LastName)" />
-            </td>
-            <td>
-                @Html.DisplayFor(x => student.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(x => student.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(x => student.DateOfBirth)
-            </td>
-            <td class="text-right">
-                @Html.ActionLink("Edit", "EditStudent", new { id = student.StudentId }, new { @class = "btn btn-warning" })
-                @Html.ActionLink("Details", "DetailsStudent", new { id = student.StudentId }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Delete", "DeleteStudent", new { id = student.StudentId }, new { @class = "btn btn-danger" })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoUrl)
+            </th>
+            <th>
+                @Html.ActionLink("First name", "AllStudents", new { sort = ViewBag.FirstName })
+            </th>
+            <th>
+                @Html.ActionLink("Last name", "AllStudents", new { sort = ViewBag.LastName })
+            </th>
+            <th>
+                @Html.ActionLink("Date of birth", "AllStudents", new { sort = ViewBag.DateOfBirth })
+            </th>
+            <th>
+            </th>
         </tr>
-    }
-</table>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Html.DisplayFor(x => student.PhotoUrl)" width="80" alt="Photo of @Html.DisplayFor(x => student.FirstName) @Html.DisplayFor(x => student.LastName)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(x => student.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => student.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => student.DateOfBirth)
+                </td>
+                <td class="text-right">
+                    @Html.ActionLink("Edit", "EditStudent", new { id = student.StudentId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Details", "DetailsStudent", new { id = student.StudentId }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "DeleteStudent", new { id = student.StudentId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+}
