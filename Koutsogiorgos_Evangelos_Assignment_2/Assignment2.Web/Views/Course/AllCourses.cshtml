@@ -27,8 +27,6 @@
     string currentSort = ViewBag.CurrentSort;
     @Html.TextBox("sort", currentSort, new { type = "hidden", @class = "form-control" })
 
-   
-
     <table class="table">
         <tr>
             <th>
@@ -76,11 +74,11 @@
                 </td>
             </tr>
         }
-
     </table>
 
     <div class="float-left">
-        Items per page: @Html.DropDownList("pageSize", null, new { @selected = ViewBag.CurrentPageSize })
+        @{ string currentPageSize = Convert.ToString(ViewBag.CurrentPageSize);}
+        Items per page: @Html.DropDownList("pageSize", currentPageSize)
         @Html.PagedListPager(Model, page => Url.Action("AllCourses", new { page }))
     </div>
 }

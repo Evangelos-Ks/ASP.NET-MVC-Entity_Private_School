@@ -11,13 +11,15 @@ namespace Assignment2.Web.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult AllStudents(string sort, string search, string currentFilter, int? page, int? pageSize)
+        public ActionResult AllStudents(string sort, string search, string currentFilter, int? page, int? pageSize, int? currentPageSize)
         {
             StudentRepository studentRepository = new StudentRepository();
             var students = studentRepository.GetAll();
             studentRepository.Dispose();
 
             //============================================== Paging ========================================================
+            int pSize = pageSize ?? 3;
+
             if (search != null)
             {
                 page = 1;
@@ -27,13 +29,15 @@ namespace Assignment2.Web.Controllers
                 search = currentFilter;
             }
 
-            //============================================== searching =====================================================
-            if (!string.IsNullOrEmpty(search))
+            if (currentPageSize == null)
             {
-                students = students.Where(n => n.FirstName.ToUpper().Contains(search.ToUpper()) || n.LastName.ToUpper().Contains(search.ToUpper()));
+                pSize = pageSize ?? 3;
+            }
+            else
+            {
+                pSize = (int)currentPageSize;
             }
 
-            int pSize = pageSize ?? 3;
             int pageNumber = page ?? 1;
 
             ViewBag.PageSize = new List<SelectListItem>()
@@ -46,12 +50,16 @@ namespace Assignment2.Web.Controllers
              new SelectListItem() { Value="50", Text= "50" }
             };
 
+            //============================================== searching =====================================================
+            if (!string.IsNullOrEmpty(search))
+            {
+                students = students.Where(n => n.FirstName.ToUpper().Contains(search.ToUpper()) || n.LastName.ToUpper().Contains(search.ToUpper()));
+            }
+
             //============================================== sorting =======================================================
             ViewBag.FirstName = string.IsNullOrEmpty(sort) ? "firstNameDesc" : "";
             ViewBag.LastName = sort == "lastNameAsc" ? "lastNameDesc" : "lastNameAsc";
             ViewBag.DateOfBirth = sort == "dateOfBirthAsc" ? "dateOfBirthDesc" : "dateOfBirthAsc";
-            ViewBag.CurrentSort = sort;
-
 
             switch (sort)
             {
@@ -74,6 +82,10 @@ namespace Assignment2.Web.Controllers
                     students = students.OrderBy(x => x.FirstName);
                     break;
             }
+
+            ViewBag.CurrentFilter = search;
+            ViewBag.CurrentSort = sort;
+            ViewBag.CurrentPageSize = pSize;
 
             return View(students.ToPagedList(pageNumber, pSize));
         }

@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Assignment2.Entities.Student>
+﻿@model PagedList.IPagedList<Assignment2.Entities.Student>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "Students";
@@ -6,7 +9,7 @@
 
 <h2>All Students</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("AllStudents", "Student", FormMethod.Get, new { id = "form" }))
 {
     <div class="d-inline-block mb-1 w-100">
         <div class="float-left d-inline">
@@ -17,19 +20,23 @@
             @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
         </div>
     </div>
+
+    string currentSort = ViewBag.CurrentSort;
+    @Html.TextBox("sort", currentSort, new { type = "hidden", @class = "form-control" })
+
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PhotoUrl)
+                Student photo
             </th>
             <th>
-                @Html.ActionLink("First name", "AllStudents", new { sort = ViewBag.FirstName })
+                @Html.ActionLink("First name", "AllStudents", new { sort = ViewBag.FirstName, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
             </th>
             <th>
-                @Html.ActionLink("Last name", "AllStudents", new { sort = ViewBag.LastName })
+                @Html.ActionLink("Last name", "AllStudents", new { sort = ViewBag.LastName, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
             </th>
             <th>
-                @Html.ActionLink("Date of birth", "AllStudents", new { sort = ViewBag.DateOfBirth })
+                @Html.ActionLink("Date of birth", "AllStudents", new { sort = ViewBag.DateOfBirth, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
             </th>
             <th>
             </th>
@@ -57,4 +64,11 @@
             </tr>
         }
     </table>
+
+    <div class="float-left">
+        @{ string currentPageSize = Convert.ToString(ViewBag.CurrentPageSize);}
+        Items per page: @Html.DropDownList("pageSize", currentPageSize)
+        @Html.PagedListPager(Model, page => Url.Action("AllStudents", new { page }))
+    </div>
 }
+<script src="~/Content/MyJs/GeneralJs.js"></script>
