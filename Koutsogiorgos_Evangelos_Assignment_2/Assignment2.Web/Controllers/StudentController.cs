@@ -18,7 +18,7 @@ namespace Assignment2.Web.Controllers
             studentRepository.Dispose();
 
             //============================================== Paging ========================================================
-            int pSize = pageSize ?? 3;
+            int pSize;
 
             if (search != null)
             {
@@ -35,7 +35,7 @@ namespace Assignment2.Web.Controllers
             }
             else
             {
-                pSize = (int)currentPageSize;
+                pSize = pageSize ?? (int)currentPageSize;
             }
 
             int pageNumber = page ?? 1;

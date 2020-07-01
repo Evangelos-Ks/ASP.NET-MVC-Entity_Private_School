@@ -40,7 +40,6 @@
             </th>
             <th></th>
         </tr>
-
         @foreach (var trainer in Model)
         {
             <tr>
@@ -66,9 +65,12 @@
     </table>
 
     <div class="float-left">
-        @{ string currentPageSize = Convert.ToString(ViewBag.CurrentPageSize);}
-        Items per page: @Html.DropDownList("pageSize", currentPageSize)
-        @Html.PagedListPager(Model, page => Url.Action("AllTrainers", new { page }))
+        @{ string cps = Convert.ToString(ViewBag.CurrentPageSize); }
+        Items per page: @Html.DropDownList("pageSize", cps)
+        @Html.PagedListPager(Model, page => Url.Action("AllTrainers", new { page, sort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize }))
+
+        @{int currentPageSize = ViewBag.CurrentPageSize;}
+        @Html.TextBox("currentPageSize", currentPageSize, new { type = "hidden", @class = "form-control" })
     </div>
 }
 

@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Assignment2.Entities.Assignment>
+﻿@model PagedList.IPagedList<Assignment2.Entities.Assignment>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "All Assignments";
@@ -6,9 +9,9 @@
 
 <h2>All assignments</h2>
 
-<div class="d-inline-block mb-1 w-100">
-    @using (Html.BeginForm())
-    {
+@using (Html.BeginForm("AllAssignments", "Assignment", FormMethod.Get, new { id = "form" }))
+{
+    <div class="d-inline-block mb-1 w-100">
         <div class="float-left d-inline">
             @Html.ActionLink("Insert new assignment", "CreateAssignment", null, new { @class = "btn btn-primary" })
         </div>
@@ -16,47 +19,59 @@
             @Html.Label("search", "Find by title or by description :", null)
             @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
         </div>
-    }
-</div>
+    </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Course title", "AllAssignments", new { sort = ViewBag.CourseTitle })
-        </th>
-        <th>
-            @Html.ActionLink("Assignment title", "AllAssignments", new { sort = ViewBag.AssignmentTitle })
-        </th>
-        <th>
-            @Html.ActionLink("Description", "AllAssignments", new { sort = ViewBag.Description })
-        </th>
-        <th>
-            @Html.ActionLink("Submission date", "AllAssignments", new { sort = ViewBag.SubmissionDate })
-        </th>
-        <th></th>
-    </tr>
+    string currentSort = ViewBag.CurrentSort;
+    @Html.TextBox("sort", currentSort, new { type = "hidden", @class = "form-control" })
 
-    @foreach (var assignment in Model)
-    {
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => assignment.Course.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => assignment.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => assignment.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => assignment.SubDateTime)
-            </td>
-            <td class="text-right">
-                @Html.ActionLink("Edit", "EditAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-warning" })
-                @Html.ActionLink("Details", "DetailsAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Delete", "DeleteAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-danger" })
-            </td>
+            <th>
+                @Html.ActionLink("Course title", "AllAssignments", new { sort = ViewBag.CourseTitle, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th>
+                @Html.ActionLink("Assignment title", "AllAssignments", new { sort = ViewBag.AssignmentTitle, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th>
+                @Html.ActionLink("Description", "AllAssignments", new { sort = ViewBag.Description, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th>
+                @Html.ActionLink("Submission date", "AllAssignments", new { sort = ViewBag.SubmissionDate, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th></th>
         </tr>
-    }
+        @foreach (var assignment in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => assignment.Course.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => assignment.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => assignment.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => assignment.SubDateTime)
+                </td>
+                <td class="text-right">
+                    @Html.ActionLink("Edit", "EditAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Details", "DetailsAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "DeleteAssignment", new { id = assignment.AssignmentId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
 
-</table>
+    <div class="float-left">
+        @{ string cps = Convert.ToString(ViewBag.CurrentPageSize); }
+        Items per page: @Html.DropDownList("pageSize", cps)
+        @Html.PagedListPager(Model, page => Url.Action("AllAssignments", new { page, sort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize }))
+
+        @{int currentPageSize = ViewBag.CurrentPageSize;}
+        @Html.TextBox("currentPageSize", currentPageSize, new { type = "hidden", @class = "form-control" })
+    </div>
+}
+
+<script src="~/Content/MyJs/GeneralJs.js"></script>
