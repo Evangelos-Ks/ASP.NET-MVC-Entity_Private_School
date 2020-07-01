@@ -4,17 +4,52 @@ using System.Web.Mvc;
 using Assignment2.Services;
 using Assignment2.Entities;
 using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
+using PagedList;
 
 namespace Assignment2.Web.Controllers
 {
     public class TrainerController : Controller
     {
         // GET: Trainer
-        public ActionResult AllTrainers(string sort, string search)
+        public ActionResult AllTrainers(string sort, string search, string currentFilter, int? page, int? pageSize, int? currentPageSize)
         {
             TrainerRepository trainerRepository = new TrainerRepository();
             var trainers = trainerRepository.GetAll();
             trainerRepository.Dispose();
+
+            //============================================== Paging ========================================================
+            int pSize = pageSize ?? 3;
+
+            if (search != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                search = currentFilter;
+            }
+
+            if (currentPageSize == null)
+            {
+                pSize = pageSize ?? 3;
+            }
+            else
+            {
+                pSize = (int)currentPageSize;
+            }
+
+            int pageNumber = page ?? 1;
+
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+             new SelectListItem() { Value="3", Text= "3" },
+             new SelectListItem() { Value="5", Text= "5" },
+             new SelectListItem() { Value="10", Text= "10" },
+             new SelectListItem() { Value="15", Text= "15" },
+             new SelectListItem() { Value="25", Text= "25" },
+             new SelectListItem() { Value="50", Text= "50" }
+            };
 
             //============================================== searching =====================================================
             if (!string.IsNullOrEmpty(search))
@@ -51,7 +86,11 @@ namespace Assignment2.Web.Controllers
                     break;
             }
 
-            return View(trainers);
+            ViewBag.CurrentFilter = search;
+            ViewBag.CurrentSort = sort;
+            ViewBag.CurrentPageSize = pSize;
+
+            return View(trainers.ToPagedList(pageNumber, pSize));
         }
 
         // GET: TestTrainer/Details/5
@@ -71,7 +110,6 @@ namespace Assignment2.Web.Controllers
             trainerRepository.Dispose();
 
             return View(trainer);
-
         }
 
         // GET: TestTrainer/Edit/5

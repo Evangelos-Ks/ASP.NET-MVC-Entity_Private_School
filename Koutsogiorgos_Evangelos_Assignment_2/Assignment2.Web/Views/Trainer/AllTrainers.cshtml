@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Assignment2.Entities.Trainer>
+﻿@model PagedList.IPagedList<Assignment2.Entities.Trainer>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "All Trainers";
@@ -6,9 +9,9 @@
 
 <h2>All Trainers</h2>
 
-<div class="d-inline-block mb-1 w-100">
-    @using (Html.BeginForm())
-    {
+@using (Html.BeginForm("AllTrainers", "Trainer", FormMethod.Get, new { id = "form" }))
+{
+    <div class="d-inline-block mb-1 w-100">
         <div class="float-left d-inline">
             @Html.ActionLink("Insert new trainer", "CreateTrainer", null, new { @class = "btn btn-primary" })
         </div>
@@ -16,46 +19,57 @@
             @Html.Label("search", "Find by first name or by last name :", null)
             @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
         </div>
-    }
-</div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PhotoUrl)
-        </th>
-        <th>
-            @Html.ActionLink("First name", "AllTrainers", new { sort = ViewBag.FirstName })
-        </th>
-        <th>
-            @Html.ActionLink("Last name", "AllTrainers", new { sort = ViewBag.LastName })
-        </th>
-        <th>
-            @Html.ActionLink("Subject", "AllTrainers", new { sort = ViewBag.Subject })
-        </th>
-        <th></th>
-    </tr>
+    </div>
 
-    @foreach (var trainer in Model)
-    {
+    string currentSort = ViewBag.CurrentSort;
+    @Html.TextBox("sort", currentSort, new { type = "hidden", @class = "form-control" })
+
+    <table class="table">
         <tr>
-            <td>
-                <img src="@Html.DisplayFor(x => trainer.PhotoUrl)" width="80" alt="Photo of @Html.DisplayFor(x => trainer.FirstName) @Html.DisplayFor(x => trainer.LastName)" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => trainer.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => trainer.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => trainer.Subject)
-            </td>
-            <td class="text-right">
-                @Html.ActionLink("Edit", "EditTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-warning" })
-                @Html.ActionLink("Details", "DetailsTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Delete", "DeleteTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-danger" })
-            </td>
+            <th>
+                Trainer photo
+            </th>
+            <th>
+                @Html.ActionLink("First name", "AllTrainers", new { sort = ViewBag.FirstName, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th>
+                @Html.ActionLink("Last name", "AllTrainers", new { sort = ViewBag.LastName, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th>
+                @Html.ActionLink("Subject", "AllTrainers", new { sort = ViewBag.Subject, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var trainer in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Html.DisplayFor(x => trainer.PhotoUrl)" width="80" alt="Photo of @Html.DisplayFor(x => trainer.FirstName) @Html.DisplayFor(x => trainer.LastName)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => trainer.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => trainer.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => trainer.Subject)
+                </td>
+                <td class="text-right">
+                    @Html.ActionLink("Edit", "EditTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Details", "DetailsTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "DeleteTrainer", new { id = trainer.TrainerId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="float-left">
+        @{ string currentPageSize = Convert.ToString(ViewBag.CurrentPageSize);}
+        Items per page: @Html.DropDownList("pageSize", currentPageSize)
+        @Html.PagedListPager(Model, page => Url.Action("AllTrainers", new { page }))
+    </div>
+}
+
+<script src="~/Content/MyJs/GeneralJs.js"></script>
