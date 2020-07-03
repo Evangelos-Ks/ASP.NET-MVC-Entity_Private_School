@@ -1,17 +1,52 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Assignment2.Services;
+using PagedList;
 
 namespace Assignment2.Web.Controllers
 {
     public class StudentPerCourseController : Controller
     {
         // GET: StudentCourse
-        public ActionResult AllStudentCourses(string sort, string search)
+        public ActionResult AllStudentCourses(string sort, string search, string currentFilter, int? page, int? pageSize, int? currentPageSize)
         {
             StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
             var studentCourses = studentCourseRepository.GetAll();
             studentCourseRepository.Dispose();
+
+            //============================================== Paging ========================================================
+            int pSize;
+
+            if (search != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                search = currentFilter;
+            }
+
+            if (currentPageSize == null)
+            {
+                pSize = pageSize ?? 3;
+            }
+            else
+            {
+                pSize = pageSize ?? (int)currentPageSize;
+            }
+
+            int pageNumber = page ?? 1;
+
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+             new SelectListItem() { Value="3", Text= "3" },
+             new SelectListItem() { Value="5", Text= "5" },
+             new SelectListItem() { Value="10", Text= "10" },
+             new SelectListItem() { Value="15", Text= "15" },
+             new SelectListItem() { Value="25", Text= "25" },
+             new SelectListItem() { Value="50", Text= "50" }
+            };
 
             //============================================== searching =====================================================
             if (!string.IsNullOrEmpty(search))
@@ -33,7 +68,11 @@ namespace Assignment2.Web.Controllers
                     break;
             }
 
-            return View(studentCourses);
+            ViewBag.CurrentFilter = search;
+            ViewBag.CurrentSort = sort;
+            ViewBag.CurrentPageSize = pSize;
+
+            return View(studentCourses.GroupBy(x => x.Course.Title).ToPagedList(pageNumber, pSize));
         }
     }
 }
