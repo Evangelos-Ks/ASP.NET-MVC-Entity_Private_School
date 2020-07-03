@@ -30,13 +30,13 @@
                 Trainer photo
             </th>
             <th>
-                @Html.ActionLink("First name", "AllTrainers", new { sort = ViewBag.FirstName, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
+                @Html.ActionLink("First name", "AllTrainers", new { sort = ViewBag.FirstName, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize })
             </th>
             <th>
-                @Html.ActionLink("Last name", "AllTrainers", new { sort = ViewBag.LastName, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
+                @Html.ActionLink("Last name", "AllTrainers", new { sort = ViewBag.LastName, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize })
             </th>
             <th>
-                @Html.ActionLink("Subject", "AllTrainers", new { sort = ViewBag.Subject, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
+                @Html.ActionLink("Subject", "AllTrainers", new { sort = ViewBag.Subject, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize })
             </th>
             <th></th>
         </tr>
@@ -67,10 +67,10 @@
     <div class="float-left">
         @{ string cps = Convert.ToString(ViewBag.CurrentPageSize); }
         Items per page: @Html.DropDownList("pageSize", cps)
-        @Html.PagedListPager(Model, page => Url.Action("AllTrainers", new { page, sort = ViewBag.CurrentSort, search = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize }))
+        @Html.PagedListPager(Model, page => Url.Action("AllTrainers", new { page, sort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize }))
 
-        @{int currentPageSize = ViewBag.CurrentPageSize;}
-        @Html.TextBox("currentPageSize", currentPageSize, new { type = "hidden", @class = "form-control" })
+        @{string currentfilter = ViewBag.CurrentFilter;}
+        @Html.TextBox("currentFilter", currentfilter, new { type = "hidden", @class = "form-control" })
     </div>
 }
 

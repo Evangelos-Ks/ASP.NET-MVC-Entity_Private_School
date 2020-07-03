@@ -12,16 +12,15 @@ namespace Assignment2.Web.Controllers
     public class CourseController : Controller
     {
         // GET: Course
-        public ActionResult AllCourses(string sort, string search, string currentFilter, int? page, int? pageSize, int? currentPageSize)
+        public ActionResult AllCourses(string sort, string search, string currentFilter, int? page, int? pageSize)
         {
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
             courseRepository.Dispose();
 
-            //============================================== Paging ========================================================
-            int pSize;
 
-            if (search != null)
+            //============================================== Paging ========================================================
+            if (!string.IsNullOrEmpty(search))
             {
                 page = 1;
             }
@@ -30,15 +29,7 @@ namespace Assignment2.Web.Controllers
                 search = currentFilter;
             }
 
-            if (currentPageSize == null)
-            {
-                pSize = pageSize ?? 3;
-            }
-            else
-            {
-                pSize = pageSize ?? (int)currentPageSize;
-            }
-
+            int pSize = pageSize ?? 3;
             int pageNumber = page ?? 1;
 
             ViewBag.PageSize = new List<SelectListItem>()
@@ -50,9 +41,8 @@ namespace Assignment2.Web.Controllers
              new SelectListItem() { Value="25", Text= "25" },
              new SelectListItem() { Value="50", Text= "50" }
             };
-
             //============================================== searching =====================================================
-            if (!string.IsNullOrEmpty(search))
+            if (!string.IsNullOrEmpty(search) || !string.IsNullOrEmpty(currentFilter))
             {
                 courses = courses.Where(c => c.Title.ToUpper().Contains(search.ToUpper()) || c.Type.ToUpper().Contains(search.ToUpper()));
             }
@@ -63,7 +53,6 @@ namespace Assignment2.Web.Controllers
             ViewBag.Type = sort == "typeAsc" ? "typeDesc" : "typeAsc";
             ViewBag.StartDate = sort == "startDateAsc" ? "startDateDesc" : "startDateAsc";
             ViewBag.EndDate = sort == "endDateAsc" ? "endDateDesc" : "endDateAsc";
-
 
             switch (sort)
             {
@@ -99,11 +88,9 @@ namespace Assignment2.Web.Controllers
                     break;
             }
 
-
             ViewBag.CurrentSort = sort;
             ViewBag.CurrentFilter = search;
             ViewBag.CurrentPageSize = pSize;
-
 
             return View(courses.ToPagedList(pageNumber, pSize));
         }

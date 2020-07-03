@@ -24,7 +24,7 @@
     <table class="table">
         <tr>
             <th>
-                @Html.ActionLink("Course title", "AllStudentCourses", new { sort = ViewBag.CourseTitle, currentFilter = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize })
+                @Html.ActionLink("Course title", "AllStudentCourses", new { sort = ViewBag.CourseTitle, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize })
             </th>
             <th>
                 Students
@@ -54,10 +54,10 @@
     <div class="float-left">
         @{ string cps = Convert.ToString(ViewBag.CurrentPageSize); }
         Items per page: @Html.DropDownList("pageSize", cps)
-        @Html.PagedListPager(Model, page => Url.Action("AllStudentCourses", new { page, sort = ViewBag.CurrentSort, search = ViewBag.CurrentFilter, currentPageSize = ViewBag.CurrentPageSize }))
+        @Html.PagedListPager(Model, page => Url.Action("AllStudentCourses", new { page, sort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize }))
 
-        @{int currentPageSize = ViewBag.CurrentPageSize;}
-        @Html.TextBox("currentPageSize", currentPageSize, new { type = "hidden", @class = "form-control" })
+        @{string currentfilter = ViewBag.CurrentFilter;}
+        @Html.TextBox("currentFilter", currentfilter, new { type = "hidden", @class = "form-control" })
     </div>
 }
 
