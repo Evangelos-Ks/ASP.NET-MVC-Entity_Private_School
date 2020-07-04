@@ -51,7 +51,10 @@
                             <ol>
                                 @foreach (var studentCourse in course.StudentCourses)
                                 {
-                                    <li>@studentCourse.Student.FirstName @studentCourse.Student.LastName</li>
+                                    <li>
+                                        <img src="@studentCourse.Student.PhotoUrl" width="20" height="20" alt="Alternate Text" />
+                                        @studentCourse.Student.FirstName @studentCourse.Student.LastName
+                                    </li>
                                 }
                             </ol>
                             <br />
