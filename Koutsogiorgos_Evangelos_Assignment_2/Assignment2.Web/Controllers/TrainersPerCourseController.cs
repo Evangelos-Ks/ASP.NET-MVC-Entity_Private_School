@@ -16,28 +16,8 @@ namespace Assignment2.Web.Controllers
             var trainerCourse = trainerCourseRepository.GetAll();
             trainerCourseRepository.Dispose();
 
-            //============================================== searching =====================================================
-            if (!string.IsNullOrEmpty(search))
-            {
-                trainerCourse = trainerCourse.Where(x => x.Course.Title.ToUpper().Contains(search.ToUpper()) ||
-                x.Trainer.FirstName.ToUpper().Contains(search.ToUpper()) || x.Trainer.LastName.ToUpper().Contains(search.ToUpper()));
-            }
-
-            //============================================== sorting =======================================================
-            ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
-
-            switch (sort)
-            {
-                case "courseTitleDesc":
-                    trainerCourse = trainerCourse.OrderByDescending(x => x.Course.Title);
-                    break;
-                default:
-                    trainerCourse = trainerCourse.OrderBy(x => x.Course.Title);
-                    break;
-            }
-
             //============================================== Paging ========================================================
-            if (!string.IsNullOrEmpty(search))
+            if (!string.IsNullOrWhiteSpace(search) || search == "")
             {
                 page = 1;
             }
@@ -57,6 +37,26 @@ namespace Assignment2.Web.Controllers
              new SelectListItem() { Value="25", Text= "25" },
              new SelectListItem() { Value="50", Text= "50" }
             };
+
+            //============================================== searching =====================================================
+            if (!string.IsNullOrEmpty(search))
+            {
+                trainerCourse = trainerCourse.Where(x => x.Course.Title.ToUpper().Contains(search.ToUpper()) ||
+                x.Trainer.FirstName.ToUpper().Contains(search.ToUpper()) || x.Trainer.LastName.ToUpper().Contains(search.ToUpper()));
+            }
+
+            //============================================== sorting =======================================================
+            ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
+
+            switch (sort)
+            {
+                case "courseTitleDesc":
+                    trainerCourse = trainerCourse.OrderByDescending(x => x.Course.Title);
+                    break;
+                default:
+                    trainerCourse = trainerCourse.OrderBy(x => x.Course.Title);
+                    break;
+            }
 
             ViewBag.CurrentFilter = search;
             ViewBag.CurrentSort = sort;

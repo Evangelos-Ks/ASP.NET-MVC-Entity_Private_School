@@ -14,7 +14,7 @@
     <div class="d-inline-block mb-1 w-100">
         <div class="float-right d-inline">
             @Html.Label("search", "Find by title, first name or last name :", null)
-            @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
+            @Html.TextBox("search", ViewBag.CurrentFilter as string, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
         </div>
     </div>
 

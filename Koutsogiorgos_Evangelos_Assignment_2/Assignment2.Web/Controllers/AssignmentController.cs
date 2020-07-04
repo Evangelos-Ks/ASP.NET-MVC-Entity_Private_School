@@ -17,9 +17,32 @@ namespace Assignment2.Web.Controllers
             AssignmentRepository assignmentRepository = new AssignmentRepository();
             var assignments = assignmentRepository.GetAll();
             assignmentRepository.Dispose();
-        
+
+            //============================================== Paging ========================================================
+            if (!string.IsNullOrWhiteSpace(search) || search == "")
+            {
+                page = 1;
+            }
+            else
+            {
+                search = currentFilter;
+            }
+
+            int pSize = pageSize ?? 3;
+            int pageNumber = page ?? 1;
+
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+             new SelectListItem() { Value="3", Text= "3" },
+             new SelectListItem() { Value="5", Text= "5" },
+             new SelectListItem() { Value="10", Text= "10" },
+             new SelectListItem() { Value="15", Text= "15" },
+             new SelectListItem() { Value="25", Text= "25" },
+             new SelectListItem() { Value="50", Text= "50" }
+            };
+
             //============================================== searching =====================================================
-            if (!string.IsNullOrEmpty(search) || !string.IsNullOrEmpty(currentFilter))
+            if (!string.IsNullOrEmpty(search))
             {
                 assignments = assignments.Where(x => x.Course.Title.ToUpper().Contains(search.ToUpper()) ||
                 x.Title.ToUpper().Contains(search.ToUpper()) || x.Description.ToUpper().Contains(search.ToUpper()));
@@ -30,7 +53,6 @@ namespace Assignment2.Web.Controllers
             ViewBag.AssignmentTitle = sort == "assignmentTitleAsc" ? "assignmentTitleDesc" : "assignmentTitleAsc";
             ViewBag.Description = sort == "descriptionAsc" ? "descriptionDesc" : "descriptionAsc";
             ViewBag.SubmissionDate = sort == "submissionDateAsc" ? "submissionDateDesc" : "submissionDateAsc";
-
 
             switch (sort)
             {
@@ -59,28 +81,6 @@ namespace Assignment2.Web.Controllers
                     assignments = assignments.OrderBy(x => x.Course.Title);
                     break;
             }
-
-            //============================================== Paging ========================================================
-            if (!string.IsNullOrEmpty(search))
-            {
-                page = 1;
-            }
-            else
-            {
-                search = currentFilter;
-            }
-            int pSize = pageSize ?? 3;
-            int pageNumber = page ?? 1;
-
-            ViewBag.PageSize = new List<SelectListItem>()
-            {
-             new SelectListItem() { Value="3", Text= "3" },
-             new SelectListItem() { Value="5", Text= "5" },
-             new SelectListItem() { Value="10", Text= "10" },
-             new SelectListItem() { Value="15", Text= "15" },
-             new SelectListItem() { Value="25", Text= "25" },
-             new SelectListItem() { Value="50", Text= "50" }
-            };
 
             ViewBag.CurrentFilter = search;
             ViewBag.CurrentSort = sort;

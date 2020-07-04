@@ -20,7 +20,7 @@ namespace Assignment2.Web.Controllers
 
 
             //============================================== Paging ========================================================
-            if (!string.IsNullOrEmpty(search))
+            if (!string.IsNullOrWhiteSpace(search) || search == "")
             {
                 page = 1;
             }
@@ -42,7 +42,7 @@ namespace Assignment2.Web.Controllers
              new SelectListItem() { Value="50", Text= "50" }
             };
             //============================================== searching =====================================================
-            if (!string.IsNullOrEmpty(search) || !string.IsNullOrEmpty(currentFilter))
+            if (!string.IsNullOrEmpty(search))
             {
                 courses = courses.Where(c => c.Title.ToUpper().Contains(search.ToUpper()) || c.Type.ToUpper().Contains(search.ToUpper()));
             }
