@@ -4,18 +4,43 @@ using Assignment2.Services;
 using Assignment2.Entities;
 using System.Net;
 using System.Security.Policy;
+using PagedList;
+using System.Collections.Generic;
 
 namespace Assignment2.Web.Controllers
 {
     public class CourseController : Controller
     {
         // GET: Course
-        public ActionResult AllCourses(string sort, string search)
+        public ActionResult AllCourses(string sort, string search, string currentFilter, int? page, int? pageSize)
         {
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
             courseRepository.Dispose();
 
+
+            //============================================== Paging ========================================================
+            if (!string.IsNullOrWhiteSpace(search) || search == "")
+            {
+                page = 1;
+            }
+            else
+            {
+                search = currentFilter;
+            }
+
+            int pSize = pageSize ?? 3;
+            int pageNumber = page ?? 1;
+
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+             new SelectListItem() { Value="3", Text= "3" },
+             new SelectListItem() { Value="5", Text= "5" },
+             new SelectListItem() { Value="10", Text= "10" },
+             new SelectListItem() { Value="15", Text= "15" },
+             new SelectListItem() { Value="25", Text= "25" },
+             new SelectListItem() { Value="50", Text= "50" }
+            };
             //============================================== searching =====================================================
             if (!string.IsNullOrEmpty(search))
             {
@@ -63,8 +88,11 @@ namespace Assignment2.Web.Controllers
                     break;
             }
 
+            ViewBag.CurrentSort = sort;
+            ViewBag.CurrentFilter = search;
+            ViewBag.CurrentPageSize = pSize;
 
-            return View(courses);
+            return View(courses.ToPagedList(pageNumber, pSize));
         }
 
         // GET: TestCourse/Details/5

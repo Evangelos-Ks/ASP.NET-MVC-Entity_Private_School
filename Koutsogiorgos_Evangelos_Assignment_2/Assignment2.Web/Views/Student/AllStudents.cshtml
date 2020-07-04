@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Assignment2.Entities.Student>
+﻿@model PagedList.IPagedList<Assignment2.Entities.Student>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "Students";
@@ -6,56 +9,69 @@
 
 <h2>All Students</h2>
 
-
-<div class="d-inline-block mb-1 w-100">
-    @using (Html.BeginForm())
-    {
+@using (Html.BeginForm("AllStudents", "Student", FormMethod.Get, new { id = "form" }))
+{
+    <div class="d-inline-block mb-1 w-100">
         <div class="float-left d-inline">
             @Html.ActionLink("Insert new student", "CreateStudent", null, new { @class = "btn btn-primary" })
         </div>
         <div class="float-right d-inline">
             @Html.Label("search", "Find by first name or by last name :", null)
-            @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
+            @Html.TextBox("search", ViewBag.CurrentFilter as string, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
         </div>
-    }
-</div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PhotoUrl)
-        </th>
-        <th>
-            @Html.ActionLink("First name", "AllStudents", new { sort = ViewBag.FirstName })
-        </th>
-        <th>
-            @Html.ActionLink("Last name", "AllStudents", new { sort = ViewBag.LastName })
-        </th>
-        <th>
-            @Html.ActionLink("Date of birth", "AllStudents", new { sort = ViewBag.DateOfBirth })
-        </th>
-        <th>
-        </th>
-    </tr>
-    @foreach (var student in Model)
-    {
+    </div>
+
+    string currentSort = ViewBag.CurrentSort;
+    @Html.TextBox("sort", currentSort, new { type = "hidden", @class = "form-control" })
+
+    <table class="table">
         <tr>
-            <td>
-                <img src="@Html.DisplayFor(x => student.PhotoUrl)" width="80" alt="Photo of @Html.DisplayFor(x => student.FirstName) @Html.DisplayFor(x => student.LastName)" />
-            </td>
-            <td>
-                @Html.DisplayFor(x => student.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(x => student.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(x => student.DateOfBirth)
-            </td>
-            <td class="text-right">
-                @Html.ActionLink("Edit", "EditStudent", new { id = student.StudentId }, new { @class = "btn btn-warning" })
-                @Html.ActionLink("Details", "DetailsStudent", new { id = student.StudentId }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Delete", "DeleteStudent", new { id = student.StudentId }, new { @class = "btn btn-danger" })
-            </td>
+            <th>
+                Student photo
+            </th>
+            <th>
+                @Html.ActionLink("First name", "AllStudents", new { sort = ViewBag.FirstName, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th>
+                @Html.ActionLink("Last name", "AllStudents", new { sort = ViewBag.LastName, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th>
+                @Html.ActionLink("Date of birth", "AllStudents", new { sort = ViewBag.DateOfBirth, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th>
+            </th>
         </tr>
-    }
-</table>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Html.DisplayFor(x => student.PhotoUrl)" width="80" alt="Photo of @Html.DisplayFor(x => student.FirstName) @Html.DisplayFor(x => student.LastName)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(x => student.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => student.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => student.DateOfBirth)
+                </td>
+                <td class="text-right">
+                    @Html.ActionLink("Edit", "EditStudent", new { id = student.StudentId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Details", "DetailsStudent", new { id = student.StudentId }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "DeleteStudent", new { id = student.StudentId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="float-left">
+        @{ string cps = Convert.ToString(ViewBag.CurrentPageSize); }
+        Items per page: @Html.DropDownList("pageSize", cps)
+        @Html.PagedListPager(Model, page => Url.Action("AllStudents", new { page, sort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize }))
+
+        @{string currentfilter = ViewBag.CurrentFilter;}
+        @Html.TextBox("currentFilter", currentfilter, new { type = "hidden", @class = "form-control" })
+    </div>
+}
+<script src="~/Content/MyJs/GeneralJs.js"></script>

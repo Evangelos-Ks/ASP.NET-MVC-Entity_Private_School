@@ -4,17 +4,42 @@ using Assignment2.Services;
 using Assignment2.Entities;
 using System.Net;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Collections.Generic;
+using PagedList;
 
 namespace Assignment2.Web.Controllers
 {
     public class AssignmentController : Controller
     {
         // GET: Assignment
-        public ActionResult AllAssignments(string sort, string search)
+        public ActionResult AllAssignments(string sort, string search, string currentFilter, int? page, int? pageSize)
         {
             AssignmentRepository assignmentRepository = new AssignmentRepository();
             var assignments = assignmentRepository.GetAll();
             assignmentRepository.Dispose();
+
+            //============================================== Paging ========================================================
+            if (!string.IsNullOrWhiteSpace(search) || search == "")
+            {
+                page = 1;
+            }
+            else
+            {
+                search = currentFilter;
+            }
+
+            int pSize = pageSize ?? 3;
+            int pageNumber = page ?? 1;
+
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+             new SelectListItem() { Value="3", Text= "3" },
+             new SelectListItem() { Value="5", Text= "5" },
+             new SelectListItem() { Value="10", Text= "10" },
+             new SelectListItem() { Value="15", Text= "15" },
+             new SelectListItem() { Value="25", Text= "25" },
+             new SelectListItem() { Value="50", Text= "50" }
+            };
 
             //============================================== searching =====================================================
             if (!string.IsNullOrEmpty(search))
@@ -28,7 +53,6 @@ namespace Assignment2.Web.Controllers
             ViewBag.AssignmentTitle = sort == "assignmentTitleAsc" ? "assignmentTitleDesc" : "assignmentTitleAsc";
             ViewBag.Description = sort == "descriptionAsc" ? "descriptionDesc" : "descriptionAsc";
             ViewBag.SubmissionDate = sort == "submissionDateAsc" ? "submissionDateDesc" : "submissionDateAsc";
-
 
             switch (sort)
             {
@@ -58,7 +82,11 @@ namespace Assignment2.Web.Controllers
                     break;
             }
 
-            return View(assignments);
+            ViewBag.CurrentFilter = search;
+            ViewBag.CurrentSort = sort;
+            ViewBag.CurrentPageSize = pSize;
+
+            return View(assignments.ToPagedList(pageNumber, pSize));
         }
 
         // GET: TestAssignment/Details/5

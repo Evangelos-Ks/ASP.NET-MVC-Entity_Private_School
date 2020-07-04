@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Assignment2.Entities.Course>
+﻿@model PagedList.IPagedList<IEnumerable<Assignment2.Entities.Course>>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "AllAssignmentsPerCourse";
@@ -6,42 +9,56 @@
 
 <h2>Assignments per course</h2>
 
-<div class="d-inline-block mb-1 w-100">
-    @using (Html.BeginForm())
-    {
+@using (Html.BeginForm("AllAssignmentsPerCourse", "AssignmentsPerCourse", FormMethod.Get, new { id = "form" }))
+{
+    <div class="d-inline-block mb-1 w-100">
         <div class="float-right d-inline">
             @Html.Label("search", "Find by title :", null)
-            @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
+            @Html.TextBox("search", ViewBag.CurrentFilter as string, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
         </div>
-    }
-</div>
+    </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Course title", "AllAssignmentsPerCourse", new { sort = ViewBag.CourseTitle })
-        </th>
-        <th>
-            Assignmets
-        </th>
-    </tr>
+    string currentSort = ViewBag.CurrentSort;
+    @Html.TextBox("sort", currentSort, new { type = "hidden", @class = "form-control" })
 
-    @foreach (var course in Model)
-    {
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(x => course.Title)
-            </td>
-            <td>
-                <ol>
-                    @foreach (var assignment in course.Assignments)
-                    {
-                        <li>@assignment.Title</li>
-                    }
-                </ol>
-            </td>
+            <th>
+                @Html.ActionLink("Course title", "AllAssignmentsPerCourse", new { sort = ViewBag.CourseTitle, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th>
+                Assignmets
+            </th>
         </tr>
+        @foreach (var group in Model)
+        {
+            foreach (var course in group)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(x => course.Title)
+                    </td>
+                    <td>
+                        <ol>
+                            @foreach (var assignment in course.Assignments)
+                            {
+                                <li>@assignment.Title</li>
+                            }
+                        </ol>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
 
-    }
+    <div class="float-left">
+        @{ string cps = Convert.ToString(ViewBag.CurrentPageSize); }
+        Items per page: @Html.DropDownList("pageSize", cps)
+        @Html.PagedListPager(Model, page => Url.Action("AllAssignmentsPerCourse", new { page, sort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize }))
 
-</table>
+        @{string currentfilter = ViewBag.CurrentFilter;}
+        @Html.TextBox("currentFilter", currentfilter, new { type = "hidden", @class = "form-control" })
+    </div>
+}
+
+<script src="~/Content/MyJs/GeneralJs.js"></script>

@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Assignment2.Entities.TrainerCourse>
+﻿@model PagedList.IPagedList<IEnumerable<Assignment2.Entities.TrainerCourse>>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "AllTrainersCourses";
@@ -6,40 +9,59 @@
 
 <h2>All trainers per course</h2>
 
-<div class="d-inline-block mb-1 w-100">
-    @using (Html.BeginForm())
-    {
+@using (Html.BeginForm("AllTrainerCourse", "TrainersPerCourse", FormMethod.Get, new { id = "form" }))
+{
+    <div class="d-inline-block mb-1 w-100">
         <div class="float-right d-inline">
             @Html.Label("search", "Find by title, first name or last name :", null)
-            @Html.TextBox("search", null, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
+            @Html.TextBox("search", ViewBag.CurrentFilter as string, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
         </div>
-    }
-</div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Course title", "AllTrainerCourse", new { sort = ViewBag.CourseTitle })
-        </th>
-        <th>
-            Trainers
-        </th>
-    </tr>
+    </div>
 
-    @foreach (var item in Model.GroupBy(x => x.Course))
-    {
+    string currentSort = ViewBag.CurrentSort;
+    @Html.TextBox("sort", currentSort, new { type = "hidden", @class = "form-control" })
+
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Key.Title)
-            </td>
-            <td>
-                <ol>
-                    @foreach (var trainerCourse in item)
-                    {
-                        <li>@trainerCourse.Trainer.FirstName @trainerCourse.Trainer.LastName</li>
-                    }
-                </ol>
-            </td>
+            <th>
+                @Html.ActionLink("Course title", "AllTrainerCourse", new { sort = ViewBag.CourseTitle, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th>
+                Trainers
+            </th>
         </tr>
-    }
+        @foreach (var trainerCourse in Model)
+        {
+            foreach (var course in trainerCourse.GroupBy(x => x.Course))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => course.Key.Title)
+                    </td>
+                    <td>
+                        <ol>
+                            @foreach (var trainerCourseOfcourse in course)
+                            {
+                                <li>
+                                    <img src="@trainerCourseOfcourse.Trainer.PhotoUrl" width="20" height="20" alt="Alternate Text" />
+                                    @trainerCourseOfcourse.Trainer.FirstName @trainerCourseOfcourse.Trainer.LastName
+                                </li>
+                            }
+                        </ol>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
 
-</table>
+    <div class="float-left">
+        @{ string cps = Convert.ToString(ViewBag.CurrentPageSize); }
+        Items per page: @Html.DropDownList("pageSize", cps)
+        @Html.PagedListPager(Model, page => Url.Action("AllTrainerCourse", new { page, sort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize }))
+
+        @{string currentfilter = ViewBag.CurrentFilter;}
+        @Html.TextBox("currentFilter", currentfilter, new { type = "hidden", @class = "form-control" })
+    </div>
+}
+
+<script src="~/Content/MyJs/GeneralJs.js"></script>
