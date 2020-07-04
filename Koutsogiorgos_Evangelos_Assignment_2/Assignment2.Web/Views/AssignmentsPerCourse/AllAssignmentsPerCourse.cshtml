@@ -21,35 +21,35 @@
     string currentSort = ViewBag.CurrentSort;
     @Html.TextBox("sort", currentSort, new { type = "hidden", @class = "form-control" })
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Course title", "AllAssignmentsPerCourse", new { sort = ViewBag.CourseTitle, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize })
-        </th>
-        <th>
-            Assignmets
-        </th>
-    </tr>
-    @foreach (var group in Model)
-    {
-        foreach (var course in group)
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Course title", "AllAssignmentsPerCourse", new { sort = ViewBag.CourseTitle, currentFilter = ViewBag.CurrentFilter, pageSize = ViewBag.CurrentPageSize })
+            </th>
+            <th>
+                Assignmets
+            </th>
+        </tr>
+        @foreach (var group in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(x => course.Title)
-                </td>
-                <td>
-                    <ol>
-                        @foreach (var assignment in course.Assignments)
-                        {
-                            <li>@assignment.Title</li>
-                        }
-                    </ol>
-                </td>
-            </tr>
+            foreach (var course in group)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(x => course.Title)
+                    </td>
+                    <td>
+                        <ol>
+                            @foreach (var assignment in course.Assignments)
+                            {
+                                <li>@assignment.Title</li>
+                            }
+                        </ol>
+                    </td>
+                </tr>
+            }
         }
-    }
-</table>
+    </table>
 
     <div class="float-left">
         @{ string cps = Convert.ToString(ViewBag.CurrentPageSize); }
