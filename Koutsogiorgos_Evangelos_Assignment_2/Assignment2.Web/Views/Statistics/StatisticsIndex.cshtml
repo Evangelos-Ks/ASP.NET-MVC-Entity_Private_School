@@ -1,0 +1,21 @@
+﻿@model Assignment2.Web.Models.StatisticsViewModel
+
+@{
+    ViewBag.Title = "StatisticsIndex";
+}
+
+
+
+<h2>Statistics</h2>
+
+<h3>Population of Courses, Assignments, Trainers and Students </h3>
+
+@{
+    var myChart = new Chart(width: 600, height: 400)
+        .AddTitle("Population of Courses, Assignments, Trainers and Students")
+        .AddSeries(
+            name: "Population",
+            xValue: new[] { "Courses", "Assignments", "Trainers", "Students" },
+            yValues: new[] { Model.CoursesCount, Model.AssignmentsCount, Model.TrainersCount, Model.StudentsCount })
+        .Write();
+}

@@ -139,6 +139,7 @@
     <Compile Include="Controllers\AssignmentsPerCourseController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\StudentPerCourseController.cs" />
     <Compile Include="Controllers\StudentsPerCoursePerAssignmentController.cs" />
@@ -147,7 +148,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\StaticsViewModel.cs" />
+    <Compile Include="Models\StatisticsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +326,8 @@
     <Content Include="Views\TrainersPerCourse\AllTrainerCourse.cshtml" />
     <Content Include="Views\AssignmentsPerCourse\AllAssignmentsPerCourse.cshtml" />
     <Content Include="Views\StudentsPerCoursePerAssignment\AllStudentsPerCoursePerAssignment.cshtml" />
+    <Content Include="Views\Statistics\StatisticsIndex.cshtml" />
+    <Content Include="Views\Statistics\PopulationOfCATS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
