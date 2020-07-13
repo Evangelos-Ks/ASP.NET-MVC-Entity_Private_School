@@ -1,21 +1,16 @@
-﻿@model Assignment2.Web.Models.StatisticsViewModel
-
+﻿
 @{
     ViewBag.Title = "StatisticsIndex";
 }
 
-
-
 <h2>Statistics</h2>
 
-<h3>Population of Courses, Assignments, Trainers and Students </h3>
+<div class="container-float">
+    <div class="chartImg">
+        <img src="@Url.Action("Chart1")" alt="Count Students, Assignments, Trainers and Courses" />
+    </div>
 
-@{
-    var myChart = new Chart(width: 600, height: 400)
-        .AddTitle("Population of Courses, Assignments, Trainers and Students")
-        .AddSeries(
-            name: "Population",
-            xValue: new[] { "Courses", "Assignments", "Trainers", "Students" },
-            yValues: new[] { Model.CoursesCount, Model.AssignmentsCount, Model.TrainersCount, Model.StudentsCount })
-        .Write();
-}
+    
+
+    
+</div>

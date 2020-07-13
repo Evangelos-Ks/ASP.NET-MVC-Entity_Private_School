@@ -1,41 +1,48 @@
 ﻿using Assignment2.Database;
 using Assignment2.Services;
-using Assignment2.Web.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace Assignment2.Web.Controllers
 {
     public class StatisticsController : Controller
     {
-        // GET: Statistics
-        public ActionResult StatisticsIndex()
+        public ActionResult StatisticsIndex() 
         {
-            StatisticsViewModel statisticsViewModel = new StatisticsViewModel();
-            
+            return View();
+        }
+
+        public ActionResult Chart1()
+        {
             StudentRepository studentRepository = new StudentRepository();
-            statisticsViewModel.StudentsCount = studentRepository.GetAll().Count();
+            int studentsCount = studentRepository.GetAll().Count();
             studentRepository.Dispose();
 
             AssignmentRepository assignmentRepository = new AssignmentRepository();
-            statisticsViewModel.AssignmentsCount = assignmentRepository.GetAll().Count();
+            int assignmentsCount = assignmentRepository.GetAll().Count();
             assignmentRepository.Dispose();
 
             TrainerRepository trainerRepository = new TrainerRepository();
-            statisticsViewModel.TrainersCount = trainerRepository.GetAll().Count();
+            int trainersCount = trainerRepository.GetAll().Count();
             trainerRepository.Dispose();
 
             CourseRepository courseRepository = new CourseRepository();
-            statisticsViewModel.CoursesCount = courseRepository.GetAll().Count();
+            int coursesCount = courseRepository.GetAll().Count();
             courseRepository.Dispose();
 
-            return View(statisticsViewModel);
+            var chart = new Chart(width: 500, height: 300)
+               .AddTitle("Count Students, Assignments, Trainers and Courses")
+               .AddSeries(chartType: "column",
+                  xValue: new[] { "Students", "Assignments", "Trainers", "Courses"},
+                  yValues: new[] { studentsCount, assignmentsCount, trainersCount, coursesCount })
+               .Write("png");
+
+            return null;
         }
-
     }
-
-
 }
