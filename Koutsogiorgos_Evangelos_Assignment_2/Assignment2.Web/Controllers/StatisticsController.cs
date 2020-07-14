@@ -76,5 +76,35 @@ namespace Assignment2.Web.Controllers
 
             return null;
         }
+
+        //=============================================== Trainers per course ==============================================
+        public ActionResult Chart3()
+        {
+            CourseRepository courseRepository = new CourseRepository();
+            var courses = courseRepository.GetAll().ToList();
+            int coursesCount = courses.Count();
+            courseRepository.Dispose();
+
+            TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+            var trainerCourses = trainerCourseRepository.GetAll().ToList();
+            trainerCourseRepository.Dispose();
+
+            string[] courseTitles = new string[coursesCount];
+            int[] numberOfTrainersPerCourse = new int[coursesCount];
+            for (int i = 0; i < coursesCount; i++)
+            {
+                courseTitles[i] = courses[i].Title;
+                numberOfTrainersPerCourse[i] = trainerCourses.FindAll(x => x.CourseId == courses[i].CourseId).Count();
+            }
+
+            var chart = new Chart(width: 500, height: 300)
+               .AddTitle("Trainers per course")
+               .AddSeries(chartType: "column",
+                  xValue: courseTitles,
+                  yValues: numberOfTrainersPerCourse)
+               .Write("png");
+
+            return null;
+        }
     }
 }
