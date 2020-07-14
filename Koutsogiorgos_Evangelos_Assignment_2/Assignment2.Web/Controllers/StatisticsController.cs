@@ -106,5 +106,35 @@ namespace Assignment2.Web.Controllers
 
             return null;
         }
+
+        //=============================================== Assignments per course ===========================================
+        public ActionResult Chart4()
+        {
+            CourseRepository courseRepository = new CourseRepository();
+            var courses = courseRepository.GetAll().ToList();
+            int coursesCount = courses.Count();
+            courseRepository.Dispose();
+
+            AssignmentRepository assignmentRepository = new AssignmentRepository();
+            var assignments = assignmentRepository.GetAll().ToList();
+            assignmentRepository.Dispose();
+
+            string[] courseTitles = new string[coursesCount];
+            int[] numberOfAssignmentsPerCourse = new int[coursesCount];
+            for (int i = 0; i < coursesCount; i++)
+            {
+                courseTitles[i] = courses[i].Title;
+                numberOfAssignmentsPerCourse[i] = assignments.FindAll(x => x.CourseId == courses[i].CourseId).Count();
+            }
+
+            var chart = new Chart(width: 500, height: 300)
+               .AddTitle("Assignments per course")
+               .AddSeries(chartType: "column",
+                  xValue: courseTitles,
+                  yValues: numberOfAssignmentsPerCourse)
+               .Write("png");
+
+            return null;
+        }
     }
 }
