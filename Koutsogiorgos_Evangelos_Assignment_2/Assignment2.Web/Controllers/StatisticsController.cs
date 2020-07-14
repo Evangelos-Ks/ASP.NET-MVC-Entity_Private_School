@@ -1,4 +1,5 @@
 ﻿using Assignment2.Database;
+using Assignment2.Entities;
 using Assignment2.Services;
 using Newtonsoft.Json;
 using System;
@@ -17,6 +18,7 @@ namespace Assignment2.Web.Controllers
             return View();
         }
 
+        //=============================================== Count Students, Assignments, Trainers and Courses ================
         public ActionResult Chart1()
         {
             StudentRepository studentRepository = new StudentRepository();
@@ -40,6 +42,36 @@ namespace Assignment2.Web.Controllers
                .AddSeries(chartType: "column",
                   xValue: new[] { "Students", "Assignments", "Trainers", "Courses"},
                   yValues: new[] { studentsCount, assignmentsCount, trainersCount, coursesCount })
+               .Write("png");
+
+            return null;
+        }
+
+        //=============================================== Students per course ==============================================
+        public ActionResult Chart2()
+        {
+            CourseRepository courseRepository = new CourseRepository();
+            var courses = courseRepository.GetAll().ToList();
+            int coursesCount = courses.Count();
+            courseRepository.Dispose();
+
+            StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+            var studentCourses = studentCourseRepository.GetAll().ToList();
+            studentCourseRepository.Dispose();
+
+            string[] courseTitles = new string[coursesCount];
+            int[] numberOfstudentsPerCourse = new int[coursesCount];
+            for (int i = 0; i < coursesCount; i++)
+            {
+                courseTitles[i] = courses[i].Title;
+                numberOfstudentsPerCourse[i] = studentCourses.FindAll(x => x.CourseId == courses[i].CourseId).Count();
+            }
+
+            var chart = new Chart(width: 500, height: 300)
+               .AddTitle("Students per course")
+               .AddSeries(chartType: "column",
+                  xValue: courseTitles,
+                  yValues: numberOfstudentsPerCourse)
                .Write("png");
 
             return null;
