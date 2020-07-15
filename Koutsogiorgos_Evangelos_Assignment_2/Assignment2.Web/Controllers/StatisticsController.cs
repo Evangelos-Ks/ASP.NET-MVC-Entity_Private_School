@@ -37,7 +37,7 @@ namespace Assignment2.Web.Controllers
             int coursesCount = courseRepository.GetAll().Count();
             courseRepository.Dispose();
 
-            var chart = new Chart(width: 500, height: 300)
+            var chart = new Chart(width: 550, height: 300)
                .AddTitle("Count Students, Assignments, Trainers and Courses")
                .AddSeries(chartType: "column",
                   xValue: new[] { "Students", "Assignments", "Trainers", "Courses"},
@@ -67,7 +67,7 @@ namespace Assignment2.Web.Controllers
                 numberOfstudentsPerCourse[i] = studentCourses.FindAll(x => x.CourseId == courses[i].CourseId).Count();
             }
 
-            var chart = new Chart(width: 500, height: 300)
+            var chart = new Chart(width: 550, height: 300)
                .AddTitle("Students per course")
                .AddSeries(chartType: "column",
                   xValue: courseTitles,
@@ -97,7 +97,7 @@ namespace Assignment2.Web.Controllers
                 numberOfTrainersPerCourse[i] = trainerCourses.FindAll(x => x.CourseId == courses[i].CourseId).Count();
             }
 
-            var chart = new Chart(width: 500, height: 300)
+            var chart = new Chart(width: 550, height: 300)
                .AddTitle("Trainers per course")
                .AddSeries(chartType: "column",
                   xValue: courseTitles,
@@ -127,7 +127,7 @@ namespace Assignment2.Web.Controllers
                 numberOfAssignmentsPerCourse[i] = assignments.FindAll(x => x.CourseId == courses[i].CourseId).Count();
             }
 
-            var chart = new Chart(width: 500, height: 300)
+            var chart = new Chart(width: 550, height: 300)
                .AddTitle("Assignments per course")
                .AddSeries(chartType: "column",
                   xValue: courseTitles,
