@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -132,6 +133,48 @@ namespace Assignment2.Web.Controllers
                .AddSeries(chartType: "column",
                   xValue: courseTitles,
                   yValues: numberOfAssignmentsPerCourse)
+               .Write("png");
+
+            return null;
+        }
+
+        //=============================================== Average mark of students per course ==============================
+        public ActionResult Chart5()
+        {
+            CourseRepository courseRepository = new CourseRepository();
+            var courses = courseRepository.GetAll().ToList();
+            int coursesCount = courses.Count();
+            courseRepository.Dispose();
+
+            AssignmentRepository assignmentRepository = new AssignmentRepository();
+            var assignments = assignmentRepository.GetAll().ToList();
+            assignmentRepository.Dispose();
+
+            StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+            var studentsPerAssignment = studentAssignmentRepository.GetAll().ToList();
+            studentAssignmentRepository.Dispose();
+
+            string[] courseTitles = new string[coursesCount];
+            int[] avgMarksPerCourse = new int[coursesCount];
+            for (int i = 0; i < coursesCount; i++)
+            {
+                courseTitles[i] = courses[i].Title;
+
+                List<int> assignmentsId = assignments.FindAll(x => x.CourseId == courses[i].CourseId).Select(y => y.AssignmentId).ToList();
+                double? avgMarkPerCourseCalculate = 0;
+                for (int j = 0; j < assignmentsId.Count(); j++)
+                {
+                    avgMarkPerCourseCalculate = avgMarkPerCourseCalculate + studentsPerAssignment.FindAll(a => a.AssignmentId == assignmentsId[j]).Average(b => b.TotalMark);
+                }
+
+                avgMarksPerCourse[i] = (int)Math.Round((double)avgMarkPerCourseCalculate / assignmentsId.Count(), MidpointRounding.AwayFromZero);
+            }
+
+            var chart = new Chart(width: 550, height: 300)
+               .AddTitle("Average mark of students per course")
+               .AddSeries(chartType: "column",
+                  xValue: courseTitles,
+                  yValues: avgMarksPerCourse)
                .Write("png");
 
             return null;

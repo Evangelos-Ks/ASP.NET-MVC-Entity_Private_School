@@ -18,6 +18,8 @@ namespace Assignment2.Entities
         public int? TotalMark { get; set; }
 
         //======================== Constractor =============================================================================
+        public StudentAssignment() { }
+
         public StudentAssignment(int? OralMark, int? WhritingMark)
         {
             this.OralMark = OralMark;
