@@ -27,7 +27,7 @@ namespace Assignment2.Entities
             {
                 if (!string.IsNullOrWhiteSpace(OralMark.ToString()) && !string.IsNullOrWhiteSpace(WhritingMark.ToString()))
                 {
-                    TotalMark = (int)Math.Round(((double)(OralMark + WhritingMark) / 2.0d));
+                    TotalMark = (int)Math.Round(((double)(OralMark + WhritingMark) / 2.0d), MidpointRounding.AwayFromZero);
                 }
                 else if (!string.IsNullOrWhiteSpace(WhritingMark.ToString()))
                 {
