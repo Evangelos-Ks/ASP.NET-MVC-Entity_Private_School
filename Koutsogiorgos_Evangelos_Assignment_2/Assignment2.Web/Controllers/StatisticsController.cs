@@ -14,7 +14,7 @@ namespace Assignment2.Web.Controllers
 {
     public class StatisticsController : Controller
     {
-        public ActionResult StatisticsIndex() 
+        public ActionResult StatisticsIndex()
         {
             return View();
         }
@@ -41,7 +41,7 @@ namespace Assignment2.Web.Controllers
             var chart = new Chart(width: 550, height: 300)
                .AddTitle("Count Students, Assignments, Trainers and Courses")
                .AddSeries(chartType: "column",
-                  xValue: new[] { "Students", "Assignments", "Trainers", "Courses"},
+                  xValue: new[] { "Students", "Assignments", "Trainers", "Courses" },
                   yValues: new[] { studentsCount, assignmentsCount, trainersCount, coursesCount })
                .Write("png");
 
@@ -178,6 +178,62 @@ namespace Assignment2.Web.Controllers
                .Write("png");
 
             return null;
+        }
+
+        //=============================================== Average mark of students per Assignment per Course ===============
+        public ActionResult Chart6()
+        {
+            CourseRepository courseRepository = new CourseRepository();
+            var courses = courseRepository.GetAll().ToList();
+            int coursesCount = courses.Count();
+            courseRepository.Dispose();
+
+            AssignmentRepository assignmentRepository = new AssignmentRepository();
+            var assignments = assignmentRepository.GetAll().ToList();
+            assignmentRepository.Dispose();
+
+            StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+            var studentsPerAssignment = studentAssignmentRepository.GetAll().ToList();
+            studentAssignmentRepository.Dispose();
+
+            for (int i = 0; i < coursesCount; i++)
+            {
+                List<Assignment> assignmentsFiltered = assignments.FindAll(x => x.CourseId == courses[i].CourseId).ToList();
+                int assignmentsFilteredCount = assignmentsFiltered.Count();
+                string[] assignmentTitles = new string[assignmentsFilteredCount];
+                int[] avgMarksPerAssignment = new int[assignmentsFilteredCount];
+                for (int j = 0; j < assignmentsFilteredCount; j++)
+                {
+                    assignmentTitles[j] = assignmentsFiltered[j].Title;
+                    avgMarksPerAssignment[j] = (int)Math.Round((double)studentsPerAssignment.FindAll(a => a.AssignmentId == assignmentsFiltered[j].AssignmentId).Average(b => b.TotalMark), MidpointRounding.AwayFromZero);
+                }
+
+                ChartBuild(assignmentTitles, avgMarksPerAssignment, courses[i].Title);
+
+                // Δες εδώ https://stackoverflow.com/questions/34946950/passing-chart-series-from-controller-to-razor-view
+
+
+                //var chart = new Chart(width: 550, height: 300)
+                //   .AddTitle("Average mark of students per assignment in " + courses[i].Title)
+                //   .AddSeries(chartType: "column",
+                //      xValue: assignmentTitles,
+                //      yValues: avgMarksPerAssignment)
+                //   .Write("png");
+            }
+
+            return null;
+        }
+
+        protected  void ChartBuild(string[] assignmentTitles, int[] avgMarksPerAssignment, string courseTitle)
+        {
+            var chart = new Chart(width: 550, height: 300)
+                   .AddTitle("Average mark of students per assignment in " + courseTitle)
+                   .AddSeries(chartType: "column",
+                      xValue: assignmentTitles,
+                      yValues: avgMarksPerAssignment)
+                   .Write("png");
+
+            
         }
     }
 }
