@@ -208,32 +208,22 @@ namespace Assignment2.Web.Controllers
                     avgMarksPerAssignment[j] = (int)Math.Round((double)studentsPerAssignment.FindAll(a => a.AssignmentId == assignmentsFiltered[j].AssignmentId).Average(b => b.TotalMark), MidpointRounding.AwayFromZero);
                 }
 
-                ChartBuild(assignmentTitles, avgMarksPerAssignment, courses[i].Title);
-
-                // Δες εδώ https://stackoverflow.com/questions/34946950/passing-chart-series-from-controller-to-razor-view
-
-
-                //var chart = new Chart(width: 550, height: 300)
-                //   .AddTitle("Average mark of students per assignment in " + courses[i].Title)
-                //   .AddSeries(chartType: "column",
-                //      xValue: assignmentTitles,
-                //      yValues: avgMarksPerAssignment)
-                //   .Write("png");
+                ChartBuild(assignmentTitles, avgMarksPerAssignment, "Average mark of students per assignment in" + " " + courses[i].Title);
             }
 
             return null;
         }
 
-        protected  void ChartBuild(string[] assignmentTitles, int[] avgMarksPerAssignment, string courseTitle)
+        protected Chart ChartBuild(string[] xValues, int[] yValues, string title)
         {
             var chart = new Chart(width: 550, height: 300)
-                   .AddTitle("Average mark of students per assignment in " + courseTitle)
-                   .AddSeries(chartType: "column",
-                      xValue: assignmentTitles,
-                      yValues: avgMarksPerAssignment)
-                   .Write("png");
+                  .AddTitle(title)
+                  .AddSeries(chartType: "column",
+                     xValue: xValues,
+                     yValues: yValues)
+                  .Write("png");
 
-            
+            return chart;
         }
     }
 }
