@@ -4,11 +4,14 @@ using Assignment2.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web.Razor.Generator;
+using System.Web.UI;
 
 namespace Assignment2.Web.Controllers
 {
@@ -196,6 +199,9 @@ namespace Assignment2.Web.Controllers
             var studentsPerAssignment = studentAssignmentRepository.GetAll().ToList();
             studentAssignmentRepository.Dispose();
 
+            //List<WebImage> charts = new List<WebImage>() { };
+            List<string[]> listOfAssignmentsPerCourse = new List<string[]>() { };
+            List<int[]> listOfavgMarksPerAssignment = new List<int[]>() { };
             for (int i = 0; i < coursesCount; i++)
             {
                 List<Assignment> assignmentsFiltered = assignments.FindAll(x => x.CourseId == courses[i].CourseId).ToList();
@@ -207,23 +213,30 @@ namespace Assignment2.Web.Controllers
                     assignmentTitles[j] = assignmentsFiltered[j].Title;
                     avgMarksPerAssignment[j] = (int)Math.Round((double)studentsPerAssignment.FindAll(a => a.AssignmentId == assignmentsFiltered[j].AssignmentId).Average(b => b.TotalMark), MidpointRounding.AwayFromZero);
                 }
-
-                ChartBuild(assignmentTitles, avgMarksPerAssignment, "Average mark of students per assignment in" + " " + courses[i].Title);
+                //charts.Add(ChartBuild(assignmentTitles, avgMarksPerAssignment, "Average mark of students per assignment in" + " " + courses[i].Title));
+                //ChartBuild(assignmentTitles, avgMarksPerAssignment, "Average mark of students per assignment in" + " " + courses[i].Title);
+                listOfAssignmentsPerCourse.Add(assignmentTitles);
+                listOfavgMarksPerAssignment.Add(avgMarksPerAssignment);
             }
+            ViewBag.assignmentTitles = listOfAssignmentsPerCourse;
+            ViewBag.assignmentAvgMarks = listOfavgMarksPerAssignment;
 
-            return null;
+            return View();
+
+            //return null;
+
         }
 
-        protected Chart ChartBuild(string[] xValues, int[] yValues, string title)
+        protected ActionResult ChartBuild(string[] xValues, int[] yValues, string title)
         {
-            var chart = new Chart(width: 550, height: 300)
+            new Chart(width: 550, height: 300)
                   .AddTitle(title)
                   .AddSeries(chartType: "column",
                      xValue: xValues,
                      yValues: yValues)
                   .Write("png");
-
-            return chart;
+            return null;
         }
+
     }
 }
