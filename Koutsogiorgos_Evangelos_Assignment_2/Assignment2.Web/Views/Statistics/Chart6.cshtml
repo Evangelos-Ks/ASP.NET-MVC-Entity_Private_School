@@ -1,17 +1,26 @@
 ﻿
 
-    <div class="container-float">
-        @for (int i = 0; i < ViewBag.assignmentTitles.Count; i++)
+<div class="container-float">
+    @{ List<Chart> charts = new List<Chart>() { };}
+    @for (int i = 0; i < ViewBag.assignmentTitles.Count; i++)
+    {
         {
-        <div class="chartImg">
-            @{ string[] x = new string[] { "a", "b", "c" }; int[] y = new int[] { 1, 2, 3 };}
-            @*<img src="@Url.Action("ChartBuild", new { xValues =  ViewBag.assignmentTitles[i], yValues = ViewBag.assignmentAvgMarks[i], title = "phys"})" alt="Average mark of students per course" />*@
-            <img src="@Url.Action("ChartBuild","Statistics", new { xValues = x , yValues = y, title = "phys"})" alt="Average mark of students per course" />
-            <img src="@Url.Action("Chart5")" alt="Average mark of students per course" />
-        </div>
+            charts.Add(new Chart(width: 550, height: 300)
+                  .AddTitle("test")
+                  .AddSeries(chartType: "column",
+                     xValue: ViewBag.assignmentTitles[i],
+                     yValues: ViewBag.assignmentAvgMarks[i]));
         }
+    }
 
-        @*@foreach (var assignment in ViewBag.assignmentTitles)
+    @foreach (var image in charts)
+    {
+        image.Write("png");
+    }
+
+
+
+    @*@foreach (var assignment in ViewBag.assignmentTitles)
         {
             chart.Write("png");
             <div class="chartImg">
@@ -19,4 +28,4 @@
             </div>
         }*@
 
-    </div>
+</div>
