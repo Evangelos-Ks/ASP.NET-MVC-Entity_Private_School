@@ -67,6 +67,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -139,6 +140,7 @@
     <Compile Include="Controllers\AssignmentsPerCourseController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\StudentPerCourseController.cs" />
     <Compile Include="Controllers\StudentsPerCoursePerAssignmentController.cs" />
@@ -324,6 +326,8 @@
     <Content Include="Views\TrainersPerCourse\AllTrainerCourse.cshtml" />
     <Content Include="Views\AssignmentsPerCourse\AllAssignmentsPerCourse.cshtml" />
     <Content Include="Views\StudentsPerCoursePerAssignment\AllStudentsPerCoursePerAssignment.cshtml" />
+    <Content Include="Views\Statistics\StatisticsIndex.cshtml" />
+    <Content Include="Views\Statistics\Chart6.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "StatisticsIndex";
+}
+
+<h2>Statistics</h2>
+
+<div class="container-float">
+    <br />
+    <div class="chartImg">
+        <img src="@Url.Action("Chart1")" alt="Count Students, Assignments, Trainers and Courses" />
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="chartImg">
+        <img src="@Url.Action("Chart2")" alt="Students per course" />
+        <img src="@Url.Action("Chart3")" alt="Trainers per course" />
+        <img src="@Url.Action("Chart4")" alt="Assignments per course" />
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="chartImg">
+        <img src="@Url.Action("Chart5")" alt="Average mark of students per course" />
+    </div>
+    @*<br />
+    <hr />
+    <br />
+    <div class="chartImg">
+        <img src="@Url.Action("Chart6")" alt="Average mark of students per Assignment per Course" />
+    </div>*@
+</div>

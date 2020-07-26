@@ -102,40 +102,40 @@
 
             #region Seed StudentAssignment
             //==================== Seeding StudentAssignment ===========================================
-            StudentAssignment sa1 = new StudentAssignment() { OralMark = 80, TotalMark = 90 };
-            StudentAssignment sa2 = new StudentAssignment() { OralMark = 82, TotalMark = 94 };
-            StudentAssignment sa3 = new StudentAssignment() { OralMark = 70, TotalMark = 82 };
-            StudentAssignment sa4 = new StudentAssignment() { OralMark = 83, TotalMark = 80 };
-            StudentAssignment sa5 = new StudentAssignment() { OralMark = 70, TotalMark = 79 };
-            StudentAssignment sa6 = new StudentAssignment() { OralMark = 75, TotalMark = 76 };
+            StudentAssignment sa1 = new StudentAssignment(80, 77);
+            StudentAssignment sa2 = new StudentAssignment(82, 76);
+            StudentAssignment sa3 = new StudentAssignment(70, 75);
+            StudentAssignment sa4 = new StudentAssignment(83, 86);
+            StudentAssignment sa5 = new StudentAssignment(70, 69);
+            StudentAssignment sa6 = new StudentAssignment(75, 72);
 
-            StudentAssignment sa7 = new StudentAssignment() { OralMark = 84, TotalMark = 87 };
-            StudentAssignment sa8 = new StudentAssignment() { OralMark = 82, TotalMark = 82 };
-            StudentAssignment sa9 = new StudentAssignment() { OralMark = 81, TotalMark = 92 };
-            StudentAssignment sa10 = new StudentAssignment() { OralMark = 65, TotalMark = 75 };
-            StudentAssignment sa11 = new StudentAssignment() { OralMark = 70, TotalMark = 73 };
-            StudentAssignment sa12 = new StudentAssignment() { OralMark = 69, TotalMark = 74 };
+            StudentAssignment sa7 = new StudentAssignment(84, 57);
+            StudentAssignment sa8 = new StudentAssignment(82, 96);
+            StudentAssignment sa9 = new StudentAssignment(81, 70);
+            StudentAssignment sa10 = new StudentAssignment(65,44);
+            StudentAssignment sa11 = new StudentAssignment(70,77);
+            StudentAssignment sa12 = new StudentAssignment(69, 87);
 
-            StudentAssignment sa13 = new StudentAssignment() { OralMark = 78, TotalMark = 81 };
-            StudentAssignment sa14 = new StudentAssignment() { OralMark = 70, TotalMark = 72 };
-            StudentAssignment sa15 = new StudentAssignment() { OralMark = 74, TotalMark = 81 };
-            StudentAssignment sa16 = new StudentAssignment() { OralMark = 81, TotalMark = 79 };
-            StudentAssignment sa17 = new StudentAssignment() { OralMark = 82, TotalMark = 85 };
-            StudentAssignment sa18 = new StudentAssignment() { OralMark = 89, TotalMark = 78 };
+            StudentAssignment sa13 = new StudentAssignment(78, 75);
+            StudentAssignment sa14 = new StudentAssignment(70, 89);
+            StudentAssignment sa15 = new StudentAssignment(74, 98);
+            StudentAssignment sa16 = new StudentAssignment(81, 42);
+            StudentAssignment sa17 = new StudentAssignment(82, 66);
+            StudentAssignment sa18 = new StudentAssignment(89, 72);
 
-            StudentAssignment sa19 = new StudentAssignment() { OralMark = 92, TotalMark = 93 };
-            StudentAssignment sa20 = new StudentAssignment() { OralMark = 90, TotalMark = 82 };
-            StudentAssignment sa21 = new StudentAssignment() { OralMark = 75, TotalMark = 70 };
-            StudentAssignment sa22 = new StudentAssignment() { OralMark = 93, TotalMark = 80 };
-            StudentAssignment sa23 = new StudentAssignment() { OralMark = 86, TotalMark = 79 };
-            StudentAssignment sa24 = new StudentAssignment() { OralMark = 88, TotalMark = 81 };
+            StudentAssignment sa19 = new StudentAssignment(92, 65);
+            StudentAssignment sa20 = new StudentAssignment(90, 98);
+            StudentAssignment sa21 = new StudentAssignment(75, 73);
+            StudentAssignment sa22 = new StudentAssignment(93, 55);
+            StudentAssignment sa23 = new StudentAssignment(86, 90);
+            StudentAssignment sa24 = new StudentAssignment(88, 71);
 
-            StudentAssignment sa25 = new StudentAssignment() { OralMark = 80, TotalMark = 91 };
-            StudentAssignment sa26 = new StudentAssignment() { OralMark = 70, TotalMark = 70 };
-            StudentAssignment sa27 = new StudentAssignment() { OralMark = 88, TotalMark = 81 };
-            StudentAssignment sa28 = new StudentAssignment() { OralMark = 89, TotalMark = 87 };
-            StudentAssignment sa29 = new StudentAssignment() { OralMark = 75, TotalMark = 71 };
-            StudentAssignment sa30 = new StudentAssignment() { OralMark = 73, TotalMark = 69 };
+            StudentAssignment sa25 = new StudentAssignment(80, 55);
+            StudentAssignment sa26 = new StudentAssignment(70, 99);
+            StudentAssignment sa27 = new StudentAssignment(88, 78);
+            StudentAssignment sa28 = new StudentAssignment(89, 49);
+            StudentAssignment sa29 = new StudentAssignment(75, 88);
+            StudentAssignment sa30 = new StudentAssignment(73, 77);
             #endregion
 
             #region Seed StudentCourse
