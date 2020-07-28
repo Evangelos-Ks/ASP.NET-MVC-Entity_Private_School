@@ -178,6 +178,7 @@ namespace Assignment2.Web.Controllers
                .AddSeries(chartType: "column",
                   xValue: courseTitles,
                   yValues: avgMarksPerCourse)
+               .SetYAxis(null, 0)
                .Write("png");
 
             return null;

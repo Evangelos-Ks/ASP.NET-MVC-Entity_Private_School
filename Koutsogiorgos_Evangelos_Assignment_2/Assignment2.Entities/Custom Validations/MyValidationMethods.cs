@@ -7,19 +7,28 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Assignment2.Entities.Custom_Validations
 {
-    public class MyValidationMethods : ValidationAttribute
+    public class GraterThanDate : ValidationAttribute
     {
-        //public static ValidationResult ValidateEndDateGreaterThanOtherStartDate(DateTime endDate, DateTime startDate, ValidationContext context)
-        //{
-        //    if (endDate > startDate)
-        //    {
-        //        return ValidationResult.Success;
-        //    }
-        //    else
-        //    {
-        //        return new ValidationResult("The end date can't be earlier than start date.");
-        //    }
+        public static ValidationResult ValidateEndDateGreaterThanStartDate(DateTime? endDate, ValidationContext context)
+        {
+            var startDateField = context.ObjectType.GetProperty("StartDate");
+            var startDateValue = startDateField.GetValue(context.ObjectInstance);
 
-        //}
+            if (startDateValue != null && endDate != null)
+            {
+                if (endDate > (DateTime)startDateValue)
+                {
+                    return ValidationResult.Success;
+                }
+                else
+                {
+                    return new ValidationResult("The end date can't be earlier than start date.");
+                }
+            }
+            else
+            {
+                return ValidationResult.Success;
+            }
+        }
     }
 }
