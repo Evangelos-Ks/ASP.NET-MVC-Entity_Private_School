@@ -9,22 +9,14 @@ namespace Assignment2.Entities.Custom_Validations
 {
     public class GraterThanDate : ValidationAttribute
     {
-        //public DateTime? StartDate { get; set; }
-
-        //public GraterThanDate(DateTime? startDate)
-        //{
-        //    StartDate = startDate;
-        //}
-
-        public ValidationResult ValidateEndDateGreaterThanOtherStartDate(DateTime endDate, ValidationContext context)
+        public static ValidationResult ValidateEndDateGreaterThanStartDate(DateTime? endDate, ValidationContext context)
         {
-            var startDateField = typeof(DateTime).GetProperty("StartDate");
-            //https://forums.asp.net/t/2088132.aspx?ASP+Net+MVC+Conditional+Validation+End+date+must+be+greater+than+or+equal+to+start+date
-            //var propertyValue = context.ObjectType.GetProperty("StartDate");
-            if (StartDate != null)
-            {
+            var startDateField = context.ObjectType.GetProperty("StartDate");
+            var startDateValue = startDateField.GetValue(context.ObjectInstance);
 
-                if (endDate > StartDate)
+            if (startDateValue != null && endDate != null)
+            {
+                if (endDate > (DateTime)startDateValue)
                 {
                     return ValidationResult.Success;
                 }
@@ -37,8 +29,6 @@ namespace Assignment2.Entities.Custom_Validations
             {
                 return ValidationResult.Success;
             }
-
-
         }
     }
 }
