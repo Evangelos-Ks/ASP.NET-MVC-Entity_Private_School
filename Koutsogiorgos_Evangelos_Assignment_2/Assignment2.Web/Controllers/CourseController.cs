@@ -100,17 +100,18 @@ namespace Assignment2.Web.Controllers
         public ActionResult DetailsCourse(int? id)
         {
             CourseRepository courseRepository = new CourseRepository();
-
+            Course course = courseRepository.GetById(id);
+            courseRepository.Dispose();
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = courseRepository.GetById(id);
+
             if (course == null)
             {
                 return HttpNotFound();
             }
-            courseRepository.Dispose();
 
             return View(course);
 
