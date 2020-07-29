@@ -16,10 +16,10 @@ namespace Assignment2.Entities
         public string Stream { get; set; }
         public string Type { get; set; }
         [Display(Name = "Start date")]
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
         [Display(Name = "End date")]
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [CustomValidation(typeof(GraterThanDate), "ValidateEndDateGreaterThanStartDate")]
         public DateTime? EndDate { get; set; }
 
