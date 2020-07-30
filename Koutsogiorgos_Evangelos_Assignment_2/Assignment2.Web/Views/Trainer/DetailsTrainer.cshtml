@@ -11,6 +11,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.PhotoUrl)
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(x => Model.PhotoUrl)" width="80" alt="Photo of @Html.DisplayFor(x => Model.FirstName) @Html.DisplayFor(x => Model.LastName)" />
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
 
@@ -48,15 +56,6 @@
                 }
             </ul>
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhotoUrl)
-        </dt>
-
-        <dd>
-            <img src="@Html.DisplayFor(x => Model.PhotoUrl)" width="80" alt="Photo of @Html.DisplayFor(x => Model.FirstName) @Html.DisplayFor(x => Model.LastName)" />
-        </dd>
-
     </dl>
 </div>
 <p>
