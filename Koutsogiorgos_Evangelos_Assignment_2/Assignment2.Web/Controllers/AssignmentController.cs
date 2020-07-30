@@ -93,16 +93,17 @@ namespace Assignment2.Web.Controllers
         public ActionResult DetailsAssignment(int? id)
         {
             AssignmentRepository assignmentRepository = new AssignmentRepository();
+            Assignment assignment = assignmentRepository.GetById(id);
+            assignmentRepository.Dispose();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Assignment assignment = assignmentRepository.GetById(id);
             if (assignment == null)
             {
                 return HttpNotFound();
             }
-            assignmentRepository.Dispose();
 
             return View(assignment);
 

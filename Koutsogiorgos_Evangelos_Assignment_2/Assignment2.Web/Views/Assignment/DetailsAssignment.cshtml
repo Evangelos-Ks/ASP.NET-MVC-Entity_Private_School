@@ -42,6 +42,13 @@
             @Html.DisplayFor(model => model.SubDateTime)
         </dd>
 
+        <dt>
+            Number of students
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentAssignments.Count)
+        </dd>
     </dl>
 </div>
 <p>
