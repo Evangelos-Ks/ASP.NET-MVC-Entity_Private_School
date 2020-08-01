@@ -7,6 +7,7 @@ using System.Security.Policy;
 using PagedList;
 using System.Collections.Generic;
 using System;
+using Assignment2.Web.Models;
 
 namespace Assignment2.Web.Controllers
 {
@@ -102,7 +103,7 @@ namespace Assignment2.Web.Controllers
             CourseRepository courseRepository = new CourseRepository();
             Course course = courseRepository.GetById(id);
             courseRepository.Dispose();
-            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -157,7 +158,21 @@ namespace Assignment2.Web.Controllers
         // GET: TestCourse/Create
         public ActionResult CreateCourse()
         {
-            return View();
+            StudentRepository studentRepository = new StudentRepository();
+            var students = studentRepository.GetAll();
+            studentRepository.Dispose();
+
+            CurseViewModel curseViewModel = new CurseViewModel();
+            curseViewModel.Students = students.Select(x =>
+               new SelectListItem
+               {
+                   Value = x.StudentId.ToString(),
+                   Text = string.Format(x.FirstName + " " + x.LastName)
+               })
+                .OrderBy(s => s.Text)
+                .ToList();
+
+            return View(curseViewModel);
         }
 
         // POST: TestCourse/Create
