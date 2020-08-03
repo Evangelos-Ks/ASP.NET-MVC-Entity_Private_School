@@ -162,7 +162,7 @@ namespace Assignment2.Web.Controllers
             var students = studentRepository.GetAll();
             studentRepository.Dispose();
 
-            CurseViewModel curseViewModel = new CurseViewModel();
+            CourseViewModel curseViewModel = new CourseViewModel();
             curseViewModel.Students = students.Select(x =>
                new SelectListItem
                {
@@ -180,8 +180,18 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateCourse([Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate")] Course course)
+        public ActionResult CreateCourse([Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate,Students")] CourseViewModel courseViewModel)
         {
+            Course course = new Course()
+            {
+                CourseId = courseViewModel.CourseId,
+                Title = courseViewModel.Title,
+                Stream = courseViewModel.Stream,
+                Type = courseViewModel.Type,
+                StartDate = courseViewModel.StartDate,
+                EndDate = courseViewModel.EndDate
+            };
+
             if (ModelState.IsValid)
             {
                 CourseRepository courseRepository = new CourseRepository();
@@ -190,7 +200,7 @@ namespace Assignment2.Web.Controllers
                 return RedirectToAction("AllCourses");
             }
 
-            return View(course);
+            return View(courseViewModel);
         }
 
         // GET: TestCourse/Delete/5
