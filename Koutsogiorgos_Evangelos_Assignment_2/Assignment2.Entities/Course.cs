@@ -20,7 +20,7 @@ namespace Assignment2.Entities
         public DateTime? StartDate { get; set; }
         [Display(Name = "End date")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [CustomValidation(typeof(GraterThanDate), "ValidateEndDateGreaterThanStartDate")]
+        [CustomValidation(typeof(MyValidationMethods), "ValidateEndDateGreaterThanStartDate")]
         public DateTime? EndDate { get; set; }
 
         //======================== Navigation Properties ================================================

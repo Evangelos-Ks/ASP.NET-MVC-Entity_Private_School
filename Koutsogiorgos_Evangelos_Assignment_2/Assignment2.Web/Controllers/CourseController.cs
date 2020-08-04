@@ -178,7 +178,7 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateCourse([Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate,StudentsId,TrainersId")] CourseViewModel courseViewModel)
+        public ActionResult CreateCourse([Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate,TuitionFees,StudentsId,TrainersId")] CourseViewModel courseViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -204,7 +204,8 @@ namespace Assignment2.Web.Controllers
                         StudentCourse studentCourse = new StudentCourse()
                         {
                             CourseId = course.CourseId,
-                            StudentId = Convert.ToInt32(courseViewModel.StudentsId[i])
+                            StudentId = Convert.ToInt32(courseViewModel.StudentsId[i]),
+                            TuitionFees = courseViewModel.TuitionFees
                         };
                         studentCourseRepository.Insert(studentCourse);
 

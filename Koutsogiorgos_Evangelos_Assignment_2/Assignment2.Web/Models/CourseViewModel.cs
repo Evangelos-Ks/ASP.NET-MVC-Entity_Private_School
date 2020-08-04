@@ -20,8 +20,11 @@ namespace Assignment2.Web.Models
         public DateTime? StartDate { get; set; }
         [Display(Name = "End date")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [CustomValidation(typeof(GraterThanDate), "ValidateEndDateGreaterThanStartDate")]
+        [CustomValidation(typeof(MyValidationMethods), "ValidateEndDateGreaterThanStartDate")]
         public DateTime? EndDate { get; set; }
+        [Display(Name = "Fees")]
+        [Range(0, int.MaxValue, ErrorMessage = "The fees must be greater or equal to 0.")]
+        public int? TuitionFees { get; set; }
         public IEnumerable<SelectListItem> Students { get; set; }
         public List<string> StudentsId { get; set; }
         public IEnumerable<SelectListItem> Trainers { get; set; }

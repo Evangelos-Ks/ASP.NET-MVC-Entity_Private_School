@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Assignment2.Entities.Custom_Validations
 {
-    public class GraterThanDate : ValidationAttribute
+    public class MyValidationMethods : ValidationAttribute
     {
         public static ValidationResult ValidateEndDateGreaterThanStartDate(DateTime? endDate, ValidationContext context)
         {
