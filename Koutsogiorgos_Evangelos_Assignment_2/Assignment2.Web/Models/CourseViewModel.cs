@@ -23,6 +23,6 @@ namespace Assignment2.Web.Models
         [CustomValidation(typeof(GraterThanDate), "ValidateEndDateGreaterThanStartDate")]
         public DateTime? EndDate { get; set; }
         public IEnumerable<SelectListItem> Students { get; set; }
-        //public List<int?> StudentsId { get; set; }
+        public List<string> StudentsId { get; set; }
     }
 }

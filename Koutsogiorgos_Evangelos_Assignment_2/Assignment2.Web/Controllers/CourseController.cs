@@ -180,24 +180,57 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateCourse([Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate,Students")] CourseViewModel courseViewModel)
+        public ActionResult CreateCourse([Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate,StudentsId")] CourseViewModel courseViewModel)
         {
-            Course course = new Course()
-            {
-                CourseId = courseViewModel.CourseId,
-                Title = courseViewModel.Title,
-                Stream = courseViewModel.Stream,
-                Type = courseViewModel.Type,
-                StartDate = courseViewModel.StartDate,
-                EndDate = courseViewModel.EndDate
-            };
-
             if (ModelState.IsValid)
             {
+                Course course = new Course()
+                {
+                    CourseId = courseViewModel.CourseId,
+                    Title = courseViewModel.Title,
+                    Stream = courseViewModel.Stream,
+                    Type = courseViewModel.Type,
+                    StartDate = courseViewModel.StartDate,
+                    EndDate = courseViewModel.EndDate
+                };
+
                 CourseRepository courseRepository = new CourseRepository();
                 courseRepository.Insert(course);
                 courseRepository.Dispose();
+
+                if (courseViewModel.StudentsId != null)
+                {
+                    StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+                    for (int i = 0; i < courseViewModel.StudentsId.Count(); i++)
+                    {
+                        StudentCourse studentCourse = new StudentCourse()
+                        {
+                            CourseId = course.CourseId,
+                            StudentId = Convert.ToInt32(courseViewModel.StudentsId[i])
+                        };
+                        studentCourseRepository.Insert(studentCourse);
+
+                    }
+                    studentCourseRepository.Dispose();
+                }
+
                 return RedirectToAction("AllCourses");
+            }
+
+            if (courseViewModel.Students == null)
+            {
+                StudentRepository studentRepository = new StudentRepository();
+                var students = studentRepository.GetAll();
+                studentRepository.Dispose();
+
+                courseViewModel.Students = students.Select(s =>
+                new SelectListItem()
+                {
+                    Value = s.StudentId.ToString(),
+                    Text = string.Format(s.FirstName + " " + s.LastName)
+                })
+                .OrderBy(s => s.Text)
+                .ToList();
             }
 
             return View(courseViewModel);
@@ -226,11 +259,19 @@ namespace Assignment2.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CourseRepository courseRepository = new CourseRepository();
+            StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+            List<StudentCourse> studentscourses = studentCourseRepository.GetAll().Where(c => c.CourseId == id).ToList();
+            foreach (var studentCourse in studentscourses)
+            {
+                studentCourseRepository.Delete(studentCourse);
+            }
+            studentCourseRepository.Dispose();
 
+            CourseRepository courseRepository = new CourseRepository();
             Course course = courseRepository.GetById(id);
             courseRepository.Delete(course);
             courseRepository.Dispose();
+
             return RedirectToAction("AllCourses");
         }
     }
