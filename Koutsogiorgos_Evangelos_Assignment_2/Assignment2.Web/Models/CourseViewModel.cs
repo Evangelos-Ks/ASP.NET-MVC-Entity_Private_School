@@ -24,5 +24,7 @@ namespace Assignment2.Web.Models
         public DateTime? EndDate { get; set; }
         public IEnumerable<SelectListItem> Students { get; set; }
         public List<string> StudentsId { get; set; }
+        public IEnumerable<SelectListItem> Trainers { get; set; }
+        public List<string> TrainersId { get; set; }
     }
 }

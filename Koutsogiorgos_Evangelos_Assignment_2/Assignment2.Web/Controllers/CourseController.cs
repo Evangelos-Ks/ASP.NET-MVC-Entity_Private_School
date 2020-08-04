@@ -162,17 +162,15 @@ namespace Assignment2.Web.Controllers
             var students = studentRepository.GetAll();
             studentRepository.Dispose();
 
-            CourseViewModel curseViewModel = new CourseViewModel();
-            curseViewModel.Students = students.Select(x =>
-               new SelectListItem
-               {
-                   Value = x.StudentId.ToString(),
-                   Text = string.Format(x.FirstName + " " + x.LastName)
-               })
-                .OrderBy(s => s.Text)
-                .ToList();
+            TrainerRepository trainerRepository = new TrainerRepository();
+            var trainers = trainerRepository.GetAll();
+            trainerRepository.Dispose();
 
-            return View(curseViewModel);
+            CourseViewModel courseViewModel = new CourseViewModel();
+            courseViewModel.Students = CreateSelectListOfStudents(students);
+            courseViewModel.Trainers = CreateSelectListOfTrainers(trainers);
+
+            return View(courseViewModel);
         }
 
         // POST: TestCourse/Create
@@ -180,7 +178,7 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateCourse([Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate,StudentsId")] CourseViewModel courseViewModel)
+        public ActionResult CreateCourse([Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate,StudentsId,TrainersId")] CourseViewModel courseViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -214,6 +212,21 @@ namespace Assignment2.Web.Controllers
                     studentCourseRepository.Dispose();
                 }
 
+                if (courseViewModel.TrainersId != null)
+                {
+                    TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+                    for (int i = 0; i < courseViewModel.TrainersId.Count; i++)
+                    {
+                        TrainerCourse trainerCourse = new TrainerCourse()
+                        {
+                            CourseId = course.CourseId,
+                            TrainerId = Convert.ToInt32(courseViewModel.TrainersId[i])
+                        };
+                        trainerCourseRepository.Insert(trainerCourse);
+                    }
+                    trainerCourseRepository.Dispose();
+                }
+
                 return RedirectToAction("AllCourses");
             }
 
@@ -223,14 +236,16 @@ namespace Assignment2.Web.Controllers
                 var students = studentRepository.GetAll();
                 studentRepository.Dispose();
 
-                courseViewModel.Students = students.Select(s =>
-                new SelectListItem()
-                {
-                    Value = s.StudentId.ToString(),
-                    Text = string.Format(s.FirstName + " " + s.LastName)
-                })
-                .OrderBy(s => s.Text)
-                .ToList();
+                courseViewModel.Students = CreateSelectListOfStudents(students);
+            }
+
+            if (courseViewModel.Trainers == null)
+            {
+                TrainerRepository trainerCourseRepository = new TrainerRepository();
+                var trainers = trainerCourseRepository.GetAll();
+                trainerCourseRepository.Dispose();
+
+                courseViewModel.Trainers = CreateSelectListOfTrainers(trainers);
             }
 
             return View(courseViewModel);
@@ -267,12 +282,48 @@ namespace Assignment2.Web.Controllers
             }
             studentCourseRepository.Dispose();
 
+            TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+            List<TrainerCourse> trainerscourses = trainerCourseRepository.GetAll().Where(c => c.CourseId == id).ToList();
+            foreach (var trainercourse in trainerscourses)
+            {
+                trainerCourseRepository.Delete(trainercourse);
+            }
+            trainerCourseRepository.Dispose();
+
             CourseRepository courseRepository = new CourseRepository();
             Course course = courseRepository.GetById(id);
             courseRepository.Delete(course);
             courseRepository.Dispose();
 
             return RedirectToAction("AllCourses");
+        }
+
+        protected IEnumerable<SelectListItem> CreateSelectListOfStudents(IEnumerable<Student> students)
+        {
+            var selectlist = students.Select(s =>
+                                new SelectListItem()
+                                {
+                                    Value = s.StudentId.ToString(),
+                                    Text = string.Format(s.FirstName + " " + s.LastName)
+                                })
+                                 .OrderBy(s => s.Text)
+                                 .ToList();
+
+            return selectlist;
+        }
+
+        protected IEnumerable<SelectListItem> CreateSelectListOfTrainers(IEnumerable<Trainer> trainers)
+        {
+            var selectlist = trainers.Select(t =>
+                                new SelectListItem()
+                                {
+                                    Value = t.TrainerId.ToString(),
+                                    Text = string.Format(t.FirstName + " " + t.LastName)
+                                })
+                                 .OrderBy(t => t.Text)
+                                 .ToList();
+
+            return selectlist;
         }
     }
 }
