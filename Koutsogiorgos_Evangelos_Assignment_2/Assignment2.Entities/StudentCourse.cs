@@ -13,7 +13,7 @@ namespace Assignment2.Entities
         [Display(Name = "Course title")]
         [Required]
         public int CourseId { get; set; }
-        public int TuitionFees { get; set; }
+        public int? TuitionFees { get; set; }
 
         //======================== Navigation Properties ================================================
         public virtual Student Student { get; set; }

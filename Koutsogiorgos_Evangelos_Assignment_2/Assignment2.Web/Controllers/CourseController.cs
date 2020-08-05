@@ -7,6 +7,8 @@ using System.Security.Policy;
 using PagedList;
 using System.Collections.Generic;
 using System;
+using Assignment2.Web.Models;
+using System.Net.Sockets;
 
 namespace Assignment2.Web.Controllers
 {
@@ -102,7 +104,7 @@ namespace Assignment2.Web.Controllers
             CourseRepository courseRepository = new CourseRepository();
             Course course = courseRepository.GetById(id);
             courseRepository.Dispose();
-            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -134,7 +136,58 @@ namespace Assignment2.Web.Controllers
                 return HttpNotFound();
             }
 
-            return View(course);
+            StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+            var studentsCourses = studentCourseRepository.GetAll().Where(c => c.CourseId == id);
+            studentCourseRepository.Dispose();
+            IEnumerable<int> selectedStudentsId = studentsCourses.Select(sc => sc.StudentId);
+
+            TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+            var trainersCourses = trainerCourseRepository.GetAll().Where(tc => tc.CourseId == id);
+            trainerCourseRepository.Dispose();
+            IEnumerable<int> selectedTrainersId = trainersCourses.Select(tc => tc.TrainerId);
+
+            StudentRepository studentRepository = new StudentRepository();
+            List<Student> allStudents = studentRepository.GetAll().ToList();
+            studentRepository.Dispose();
+
+            TrainerRepository trainerRepository = new TrainerRepository();
+            List<Trainer> allTrainers = trainerRepository.GetAll().ToList();
+            trainerRepository.Dispose();
+
+            //find all students which are included in this course and remove them from the list allStudents
+            List<Student> existingStudents = new List<Student>();
+            foreach (var studentId in selectedStudentsId)
+            {
+                Student selectedStudent = allStudents.First(s => s.StudentId == studentId);
+                existingStudents.Add(selectedStudent);
+                allStudents.Remove(selectedStudent);
+            }
+
+            //find all trainers which are included in this course and remove them from the list allTrainers
+            List<Trainer> existingTrainers = new List<Trainer>();
+            foreach (var trainerId in selectedTrainersId)
+            {
+                Trainer selectedTrainer = allTrainers.First(t => t.TrainerId == trainerId);
+                existingTrainers.Add(selectedTrainer);
+                allTrainers.Remove(selectedTrainer);
+            }
+
+            CourseViewModel courseViewModel = new CourseViewModel()
+            {
+                CourseId = (int)id,
+                Stream = course.Stream,
+                Type = course.Type,
+                Title = course.Title,
+                StartDate = course.StartDate,
+                EndDate = course.EndDate,
+                TuitionFees = course.CourseFees,
+                StudentsForAddition = CreateSelectListOfStudents(allStudents),
+                TrainersForAddition = CreateSelectListOfTrainers(allTrainers),
+                StudentsForSubtraction = CreateSelectListOfStudents(existingStudents),
+                TrainersForSubtraction = CreateSelectListOfTrainers(existingTrainers)
+            };
+
+            return View(courseViewModel);
         }
 
         // POST: TestCourse/Edit/5
@@ -142,22 +195,150 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditCourse([Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate")] Course course)
+        public ActionResult EditCourse(
+            [Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate,TuitionFees,TrainersForSubtractionId,TrainersForAdditionId,StudentsForSubtractionId,StudentsForAdditionId")]
+        CourseViewModel courseViewModel)
         {
             if (ModelState.IsValid)
             {
+                if (courseViewModel.TrainersForSubtractionId != null)
+                {
+                    TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+                    var trainersCourses = trainerCourseRepository.GetAll().Where(tc => tc.CourseId == courseViewModel.CourseId);
+                    foreach (var id in courseViewModel.TrainersForSubtractionId)
+                    {
+                        TrainerCourse trainerCourse = trainersCourses.FirstOrDefault(tc => tc.TrainerId == Convert.ToInt32(id));
+                        trainerCourseRepository.Delete(trainerCourse);
+                    }
+                    trainerCourseRepository.Dispose();
+                }
+
+                if (courseViewModel.TrainersForAdditionId != null)
+                {
+                    TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+                    foreach (var id in courseViewModel.TrainersForAdditionId)
+                    {
+                        TrainerCourse trainerCourse = new TrainerCourse()
+                        {
+                            CourseId = courseViewModel.CourseId,
+                            TrainerId = Convert.ToInt32(id)
+                        };
+                        trainerCourseRepository.Insert(trainerCourse);
+                    }
+                    trainerCourseRepository.Dispose();
+                }
+
+                if (courseViewModel.StudentsForSubtractionId != null)
+                {
+                    StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+                    var studentsCourses = studentCourseRepository.GetAll().Where(sc => sc.CourseId == courseViewModel.CourseId);
+                    foreach (var id in courseViewModel.StudentsForSubtractionId)
+                    {
+                        StudentCourse studentCourse = studentsCourses.FirstOrDefault(sc => sc.StudentId == Convert.ToInt32(id));
+                        studentCourseRepository.Delete(studentCourse);
+                    }
+                    studentCourseRepository.Dispose();
+                }
+
+                if (courseViewModel.StudentsForAdditionId != null)
+                {
+                    StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+                    foreach (var id in courseViewModel.StudentsForAdditionId)
+                    {
+                        StudentCourse studentCourse = new StudentCourse()
+                        {
+                            CourseId = courseViewModel.CourseId,
+                            StudentId = Convert.ToInt32(id),
+                            TuitionFees = courseViewModel.TuitionFees
+                        };
+                        studentCourseRepository.Insert(studentCourse);
+                    }
+                    studentCourseRepository.Dispose();
+                }
+
                 CourseRepository courseRepository = new CourseRepository();
+                Course course = courseRepository.GetById(courseViewModel.CourseId);
+                course.CourseFees = courseViewModel.TuitionFees;
+                course.Stream = courseViewModel.Stream;
+                course.Title = courseViewModel.Title;
+                course.StartDate = courseViewModel.StartDate;
+                course.EndDate = courseViewModel.EndDate;
+                course.Type = courseViewModel.Type;
                 courseRepository.Update(course);
                 courseRepository.Dispose();
+
+                StudentCourseRepository studentCourseRepository3 = new StudentCourseRepository();
+                var studentsCourses3 = studentCourseRepository3.GetAll().Where(sc => sc.CourseId == courseViewModel.CourseId);
+                foreach (var studentCourse in studentsCourses3)
+                {
+                    studentCourse.TuitionFees = courseViewModel.TuitionFees;
+                    studentCourseRepository3.Update(studentCourse);
+                }
+                studentCourseRepository3.Dispose();
+
                 return RedirectToAction("AllCourses");
             }
-            return View(course);
+
+            StudentCourseRepository studentCourseRepository2 = new StudentCourseRepository();
+            var studentsCourses2 = studentCourseRepository2.GetAll().Where(c => c.CourseId == courseViewModel.CourseId);
+            studentCourseRepository2.Dispose();
+            IEnumerable<int> selectedStudentsId = studentsCourses2.Select(sc => sc.StudentId);
+
+            TrainerCourseRepository trainerCourseRepository2 = new TrainerCourseRepository();
+            var trainersCourses2 = trainerCourseRepository2.GetAll().Where(tc => tc.CourseId == courseViewModel.CourseId);
+            trainerCourseRepository2.Dispose();
+            IEnumerable<int> selectedTrainersId = trainersCourses2.Select(tc => tc.TrainerId);
+
+            StudentRepository studentRepository2 = new StudentRepository();
+            List<Student> allStudents = studentRepository2.GetAll().ToList();
+            studentRepository2.Dispose();
+
+            TrainerRepository trainerRepository2 = new TrainerRepository();
+            List<Trainer> allTrainers = trainerRepository2.GetAll().ToList();
+            trainerRepository2.Dispose();
+
+            //find all students which are included in this course and remove them from the list allStudents
+            List<Student> existingStudents = new List<Student>();
+            foreach (var studentId in selectedStudentsId)
+            {
+                Student selectedStudent = allStudents.First(s => s.StudentId == studentId);
+                existingStudents.Add(selectedStudent);
+                allStudents.Remove(selectedStudent);
+            }
+
+            //find all trainers which are included in this course and remove them from the list allTrainers
+            List<Trainer> existingTrainers = new List<Trainer>();
+            foreach (var trainerId in selectedTrainersId)
+            {
+                Trainer selectedTrainer = allTrainers.First(t => t.TrainerId == trainerId);
+                existingTrainers.Add(selectedTrainer);
+                allTrainers.Remove(selectedTrainer);
+            }
+
+            courseViewModel.StudentsForAddition = CreateSelectListOfStudents(allStudents);
+            courseViewModel.TrainersForAddition = CreateSelectListOfTrainers(allTrainers);
+            courseViewModel.StudentsForSubtraction = CreateSelectListOfStudents(existingStudents);
+            courseViewModel.TrainersForSubtraction = CreateSelectListOfTrainers(existingTrainers);
+
+            return View(courseViewModel);
         }
 
         // GET: TestCourse/Create
         public ActionResult CreateCourse()
         {
-            return View();
+            StudentRepository studentRepository = new StudentRepository();
+            var students = studentRepository.GetAll();
+            studentRepository.Dispose();
+
+            TrainerRepository trainerRepository = new TrainerRepository();
+            var trainers = trainerRepository.GetAll();
+            trainerRepository.Dispose();
+
+            CourseViewModel courseViewModel = new CourseViewModel();
+            courseViewModel.Students = CreateSelectListOfStudents(students);
+            courseViewModel.Trainers = CreateSelectListOfTrainers(trainers);
+
+            return View(courseViewModel);
         }
 
         // POST: TestCourse/Create
@@ -165,17 +346,79 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateCourse([Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate")] Course course)
+        public ActionResult CreateCourse([Bind(Include = "CourseId,Title,Stream,Type,StartDate,EndDate,TuitionFees,StudentsId,TrainersId")] CourseViewModel courseViewModel)
         {
             if (ModelState.IsValid)
             {
+                Course course = new Course()
+                {
+                    CourseId = courseViewModel.CourseId,
+                    Title = courseViewModel.Title,
+                    Stream = courseViewModel.Stream,
+                    Type = courseViewModel.Type,
+                    StartDate = courseViewModel.StartDate,
+                    EndDate = courseViewModel.EndDate,
+                    CourseFees = courseViewModel.TuitionFees
+                };
+
                 CourseRepository courseRepository = new CourseRepository();
                 courseRepository.Insert(course);
                 courseRepository.Dispose();
+
+                if (courseViewModel.StudentsId != null)
+                {
+                    StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+                    for (int i = 0; i < courseViewModel.StudentsId.Count(); i++)
+                    {
+                        StudentCourse studentCourse = new StudentCourse()
+                        {
+                            CourseId = course.CourseId,
+                            StudentId = Convert.ToInt32(courseViewModel.StudentsId[i]),
+                            TuitionFees = courseViewModel.TuitionFees
+                        };
+                        studentCourseRepository.Insert(studentCourse);
+
+                    }
+                    studentCourseRepository.Dispose();
+                }
+
+                if (courseViewModel.TrainersId != null)
+                {
+                    TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+                    for (int i = 0; i < courseViewModel.TrainersId.Count; i++)
+                    {
+                        TrainerCourse trainerCourse = new TrainerCourse()
+                        {
+                            CourseId = course.CourseId,
+                            TrainerId = Convert.ToInt32(courseViewModel.TrainersId[i])
+                        };
+                        trainerCourseRepository.Insert(trainerCourse);
+                    }
+                    trainerCourseRepository.Dispose();
+                }
+
                 return RedirectToAction("AllCourses");
             }
 
-            return View(course);
+            if (courseViewModel.Students == null)
+            {
+                StudentRepository studentRepository = new StudentRepository();
+                var students = studentRepository.GetAll();
+                studentRepository.Dispose();
+
+                courseViewModel.Students = CreateSelectListOfStudents(students);
+            }
+
+            if (courseViewModel.Trainers == null)
+            {
+                TrainerRepository trainerCourseRepository = new TrainerRepository();
+                var trainers = trainerCourseRepository.GetAll();
+                trainerCourseRepository.Dispose();
+
+                courseViewModel.Trainers = CreateSelectListOfTrainers(trainers);
+            }
+
+            return View(courseViewModel);
         }
 
         // GET: TestCourse/Delete/5
@@ -201,12 +444,56 @@ namespace Assignment2.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CourseRepository courseRepository = new CourseRepository();
+            StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+            List<StudentCourse> studentscourses = studentCourseRepository.GetAll().Where(c => c.CourseId == id).ToList();
+            foreach (var studentCourse in studentscourses)
+            {
+                studentCourseRepository.Delete(studentCourse);
+            }
+            studentCourseRepository.Dispose();
 
+            TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+            List<TrainerCourse> trainerscourses = trainerCourseRepository.GetAll().Where(c => c.CourseId == id).ToList();
+            foreach (var trainercourse in trainerscourses)
+            {
+                trainerCourseRepository.Delete(trainercourse);
+            }
+            trainerCourseRepository.Dispose();
+
+            CourseRepository courseRepository = new CourseRepository();
             Course course = courseRepository.GetById(id);
             courseRepository.Delete(course);
             courseRepository.Dispose();
+
             return RedirectToAction("AllCourses");
+        }
+
+        protected IEnumerable<SelectListItem> CreateSelectListOfStudents(IEnumerable<Student> students)
+        {
+            var selectlist = students.Select(s =>
+                                new SelectListItem()
+                                {
+                                    Value = s.StudentId.ToString(),
+                                    Text = string.Format(s.FirstName + " " + s.LastName)
+                                })
+                                 .OrderBy(s => s.Text)
+                                 .ToList();
+
+            return selectlist;
+        }
+
+        protected IEnumerable<SelectListItem> CreateSelectListOfTrainers(IEnumerable<Trainer> trainers)
+        {
+            var selectlist = trainers.Select(t =>
+                                new SelectListItem()
+                                {
+                                    Value = t.TrainerId.ToString(),
+                                    Text = string.Format(t.FirstName + " " + t.LastName)
+                                })
+                                 .OrderBy(t => t.Text)
+                                 .ToList();
+
+            return selectlist;
         }
     }
 }
