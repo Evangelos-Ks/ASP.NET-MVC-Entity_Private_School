@@ -22,6 +22,8 @@ namespace Assignment2.Entities
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [CustomValidation(typeof(MyValidationMethods), "ValidateEndDateGreaterThanStartDate")]
         public DateTime? EndDate { get; set; }
+        [Display(Name = "Course fees")]
+        public int? CourseFees { get; set; }
 
         //======================== Navigation Properties ================================================
         public virtual ICollection<Assignment> Assignments { get; set; }

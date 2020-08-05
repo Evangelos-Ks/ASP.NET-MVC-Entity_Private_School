@@ -1,4 +1,4 @@
-﻿@model Assignment2.Entities.Course
+﻿@model Assignment2.Web.Models.CourseViewModel
 
 @{
     ViewBag.Title = "Edit Course";
@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Course</h4>
         <hr />
@@ -54,6 +54,46 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TuitionFees, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TuitionFees, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TuitionFees, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TrainersForSubtraction, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(model => model.TrainersForSubtractionId, Model.TrainersForSubtraction, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TrainersForSubtractionId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TrainersForAddition, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(model => model.TrainersForAdditionId, Model.TrainersForAddition, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TrainersForAdditionId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudentsForSubtraction, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(model => model.StudentsForSubtractionId, Model.StudentsForSubtraction, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StudentsForSubtractionId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudentsForAddition, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(model => model.StudentsForAdditionId, Model.StudentsForAddition, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StudentsForAdditionId, "", new { @class = "text-danger" })
             </div>
         </div>
 

@@ -29,5 +29,17 @@ namespace Assignment2.Web.Models
         public List<string> StudentsId { get; set; }
         public IEnumerable<SelectListItem> Trainers { get; set; }
         public List<string> TrainersId { get; set; }
+        [Display(Name = "Add students")]
+        public IEnumerable<SelectListItem> StudentsForAddition { get; set; }
+        public List<string> StudentsForAdditionId { get; set; }
+        [Display(Name = "Add trainers")]
+        public IEnumerable<SelectListItem> TrainersForAddition { get; set; }
+        public List<string> TrainersForAdditionId { get; set; }
+        [Display(Name = "Remove students")]
+        public IEnumerable<SelectListItem> StudentsForSubtraction { get; set; }
+        public List<string> StudentsForSubtractionId { get; set; }
+        [Display(Name = "Remove trainers")]
+        public IEnumerable<SelectListItem> TrainersForSubtraction { get; set; }
+        public List<string> TrainersForSubtractionId { get; set; }
     }
 }
