@@ -17,13 +17,17 @@ namespace Assignment2.Services
         //============================ Get All =========================================
         public IEnumerable<Course> GetAll()
         {
-            return db.Courses.Include(x => x.Assignments).Include(y => y.StudentCourses.Select(k => k.Student)).ToList();
+            return db.Courses.Include(x => x.Assignments)
+                .Include(y => y.StudentCourses.Select(k => k.Student)).ToList();
         }
 
         //============================ Get GetById =========================================
         public Course GetById(int? id)
         {
-            return db.Courses.Find(id);
+            return db.Courses.Include(x => x.Assignments)
+                .Include(y => y.StudentCourses.Select(k => k.Student))
+                .Include(t => t.TrainerCourses)
+                .FirstOrDefault(z => z.CourseId == id);
         }
 
         //============================ Insert =========================================

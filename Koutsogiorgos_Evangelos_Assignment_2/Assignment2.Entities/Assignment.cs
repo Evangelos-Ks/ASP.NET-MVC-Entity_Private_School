@@ -15,7 +15,7 @@ namespace Assignment2.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         [Display(Name = "Submission date")]
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? SubDateTime { get; set; }
 
         //======================== Navigation Properties ================================================
