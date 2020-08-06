@@ -64,38 +64,38 @@
 
             #region Seed Students
             //==================================== Seeding Students ========================================================
-            Student s1 = new Student() { FirstName = "Maria", LastName = "Fafouti", DateOfBirth = new DateTime(1993, 2, 12), PhotoUrl = "../../Content/Students_Image/girl4.png" };
-            Student s2 = new Student() { FirstName = "Evangelos", LastName = "Koutsogiorgos", DateOfBirth = new DateTime(1987, 12, 10), PhotoUrl = "../../Content/Students_Image/boy1.png" };
+            Student s1 = new Student() { FirstName = "Maria", LastName = "Fafouti", DateOfBirth = new DateTime(1993, 2, 12), PhotoUrl = "../../Content/Students_Image/girl4.png", Discount = 50 };
+            Student s2 = new Student() { FirstName = "Evangelos", LastName = "Koutsogiorgos", DateOfBirth = new DateTime(1987, 12, 10), PhotoUrl = "../../Content/Students_Image/boy1.png", Discount = 50 };
             Student s3 = new Student() { FirstName = "Panagiotis", LastName = "Koutsogiorgos", DateOfBirth = new DateTime(1991, 2, 22), PhotoUrl = "../../Content/Students_Image/boy3.png" };
-            Student s4 = new Student() { FirstName = "Ioannis", LastName = "Angelopoulos", DateOfBirth = new DateTime(1985, 6, 1), PhotoUrl = "../../Content/Students_Image/boy2.png" };
+            Student s4 = new Student() { FirstName = "Ioannis", LastName = "Angelopoulos", DateOfBirth = new DateTime(1985, 6, 1), PhotoUrl = "../../Content/Students_Image/boy2.png", Discount = 50 };
             Student s5 = new Student() { FirstName = "Sophia", LastName = "Georgiou", DateOfBirth = new DateTime(1993, 3, 30), PhotoUrl = "../../Content/Students_Image/girl3.png" };
             Student s6 = new Student() { FirstName = "Eleni", LastName = "Parisi", DateOfBirth = new DateTime(1989, 8, 20), PhotoUrl = "../../Content/Students_Image/girl4.png" };
 
             Student s7 = new Student() { FirstName = "Athanasios", LastName = "Sdralias", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/boy1.png" };
             Student s8 = new Student() { FirstName = "Nikolaos", LastName = "Karageorgos", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/boy4.png" };
-            Student s9 = new Student() { FirstName = "Margarita", LastName = "Fafouti", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/girl1.png" };
+            Student s9 = new Student() { FirstName = "Margarita", LastName = "Fafouti", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/girl1.png", Discount = 150 };
             Student s10 = new Student() { FirstName = "Panagiotis", LastName = "Sdralias", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/boy3.png" };
-            Student s11 = new Student() { FirstName = "Anna", LastName = "Koutsogiorgou", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/girl2.png" };
+            Student s11 = new Student() { FirstName = "Anna", LastName = "Koutsogiorgou", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/girl2.png", Discount = 50 };
             Student s12 = new Student() { FirstName = "Eirini", LastName = "Ntafou", DateOfBirth = new DateTime(1986, 9, 11), PhotoUrl = "../../Content/Students_Image/girl1.png" };
 
             Student s13 = new Student() { FirstName = "Maria", LastName = "Dimitriou", DateOfBirth = new DateTime(1991, 2, 1), PhotoUrl = "../../Content/Students_Image/girl3.png" };
             Student s14 = new Student() { FirstName = "Dimitrios", LastName = "Perikleous", DateOfBirth = new DateTime(1990, 12, 11), PhotoUrl = "../../Content/Students_Image/boy4.png" };
-            Student s15 = new Student() { FirstName = "Grigoris", LastName = "Arnaoutoglou", DateOfBirth = new DateTime(1990, 6, 13), PhotoUrl = "../../Content/Students_Image/boy1.png" };
+            Student s15 = new Student() { FirstName = "Grigoris", LastName = "Arnaoutoglou", DateOfBirth = new DateTime(1990, 6, 13), PhotoUrl = "../../Content/Students_Image/boy1.png", Discount = 100 };
             Student s16 = new Student() { FirstName = "Dimitrios", LastName = "Gogos", DateOfBirth = new DateTime(1992, 11, 11), PhotoUrl = "../../Content/Students_Image/boy3.png" };
-            Student s17 = new Student() { FirstName = "Sotiris", LastName = "Apostolidis", DateOfBirth = new DateTime(1984, 3, 9), PhotoUrl = "../../Content/Students_Image/boy1.png" };
+            Student s17 = new Student() { FirstName = "Sotiris", LastName = "Apostolidis", DateOfBirth = new DateTime(1984, 3, 9), PhotoUrl = "../../Content/Students_Image/boy1.png", Discount = 55 };
             Student s18 = new Student() { FirstName = "Markos", LastName = "Seferlis", DateOfBirth = new DateTime(1983, 2, 24), PhotoUrl = "../../Content/Students_Image/boy2.png" };
 
             Student s19 = new Student() { FirstName = "Vasiliki", LastName = "Kaminioti", DateOfBirth = new DateTime(1987, 6, 7), PhotoUrl = "../../Content/Students_Image/girl2.png" };
             Student s20 = new Student() { FirstName = "Kleopatra", LastName = "Kotsovolou", DateOfBirth = new DateTime(1991, 10, 17), PhotoUrl = "../../Content/Students_Image/girl1.png" };
             Student s21 = new Student() { FirstName = "Rayan", LastName = "Kelly", DateOfBirth = new DateTime(1987, 7, 27), PhotoUrl = "../../Content/Students_Image/boy3.png" };
             Student s22 = new Student() { FirstName = "Panagiotis", LastName = "Zaxaris", DateOfBirth = new DateTime(1986, 12, 21), PhotoUrl = "../../Content/Students_Image/boy4.png" };
-            Student s23 = new Student() { FirstName = "Olga", LastName = "Kiritsopoulou", DateOfBirth = new DateTime(1986, 4, 24), PhotoUrl = "../../Content/Students_Image/girl1.png" };
+            Student s23 = new Student() { FirstName = "Olga", LastName = "Kiritsopoulou", DateOfBirth = new DateTime(1986, 4, 24), PhotoUrl = "../../Content/Students_Image/girl1.png", Discount = 20 };
             Student s24 = new Student() { FirstName = "Xenofontas", LastName = "Vlaxogiannis", DateOfBirth = new DateTime(1990, 8, 18), PhotoUrl = "../../Content/Students_Image/boy4.png" };
 
-            Student s25 = new Student() { FirstName = "Hector", LastName = "Gatsos", DateOfBirth = new DateTime(1987, 9, 29), PhotoUrl = "../../Content/Students_Image/boy3.png" };
+            Student s25 = new Student() { FirstName = "Hector", LastName = "Gatsos", DateOfBirth = new DateTime(1987, 9, 29), PhotoUrl = "../../Content/Students_Image/boy3.png", Discount = 50 };
             Student s26 = new Student() { FirstName = "Dimitra", LastName = "Alexiou", DateOfBirth = new DateTime(1987, 8, 16), PhotoUrl = "../../Content/Students_Image/girl3.png" };
             Student s27 = new Student() { FirstName = "Olga", LastName = "Karageorgiou", DateOfBirth = new DateTime(1992, 6, 3), PhotoUrl = "../../Content/Students_Image/girl4.png" };
-            Student s28 = new Student() { FirstName = "Evangelos", LastName = "Mixail", DateOfBirth = new DateTime(1985, 6, 6), PhotoUrl = "../../Content/Students_Image/boy3.png" };
+            Student s28 = new Student() { FirstName = "Evangelos", LastName = "Mixail", DateOfBirth = new DateTime(1985, 6, 6), PhotoUrl = "../../Content/Students_Image/boy3.png", Discount = 50 };
             Student s29 = new Student() { FirstName = "Angeliki", LastName = "Karvouniari", DateOfBirth = new DateTime(1989, 5, 22), PhotoUrl = "../../Content/Students_Image/girl1.png" };
             Student s30 = new Student() { FirstName = "Stephanos", LastName = "Adamos", DateOfBirth = new DateTime(1986, 1, 20), PhotoUrl = "../../Content/Students_Image/boy2.png" };
             #endregion
