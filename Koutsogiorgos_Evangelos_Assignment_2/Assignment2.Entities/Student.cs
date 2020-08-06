@@ -22,7 +22,7 @@ namespace Assignment2.Entities
         [Display(Name = "Student photo")]
         public string PhotoUrl { get; set; }
         [Range(0, int.MaxValue, ErrorMessage = "Only positive values are acceptable")]
-        public int Discount { get; set; }
+        public int Discount { get; set; } = 0;
 
         //======================== Navigation Properties ================================================
         public virtual ICollection<StudentAssignment> StudentAssignments { get; set; }

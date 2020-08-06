@@ -140,40 +140,40 @@
 
             #region Seed StudentCourse
             //==================== Seeding StudentCourse ===========================================
-            StudentCourse sc1 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc2 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc3 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc4 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc5 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc6 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc1 = new StudentCourse() { TuitionFees = c1.CourseFees - s1.Discount };
+            StudentCourse sc2 = new StudentCourse() { TuitionFees = c1.CourseFees - s2.Discount };
+            StudentCourse sc3 = new StudentCourse() { TuitionFees = c1.CourseFees - s3.Discount };
+            StudentCourse sc4 = new StudentCourse() { TuitionFees = c1.CourseFees - s4.Discount };
+            StudentCourse sc5 = new StudentCourse() { TuitionFees = c1.CourseFees - s5.Discount };
+            StudentCourse sc6 = new StudentCourse() { TuitionFees = c1.CourseFees - s6.Discount };
 
-            StudentCourse sc7 = new StudentCourse() {  TuitionFees = 500 };
-            StudentCourse sc8 = new StudentCourse() {  TuitionFees = 500 };
-            StudentCourse sc9 = new StudentCourse() {  TuitionFees = 500 };
-            StudentCourse sc10 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc11 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc12 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc7 = new StudentCourse() {  TuitionFees = c2.CourseFees - s7.Discount };
+            StudentCourse sc8 = new StudentCourse() {  TuitionFees = c2.CourseFees - s8.Discount };
+            StudentCourse sc9 = new StudentCourse() {  TuitionFees = c2.CourseFees - s9.Discount };
+            StudentCourse sc10 = new StudentCourse() { TuitionFees = c2.CourseFees - s10.Discount };
+            StudentCourse sc11 = new StudentCourse() { TuitionFees = c2.CourseFees - s11.Discount };
+            StudentCourse sc12 = new StudentCourse() { TuitionFees = c2.CourseFees - s12.Discount };
 
-            StudentCourse sc13 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc14 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc15 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc16 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc17 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc18 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc13 = new StudentCourse() { TuitionFees = c3.CourseFees - s13.Discount };
+            StudentCourse sc14 = new StudentCourse() { TuitionFees = c3.CourseFees - s14.Discount };
+            StudentCourse sc15 = new StudentCourse() { TuitionFees = c3.CourseFees - s15.Discount };
+            StudentCourse sc16 = new StudentCourse() { TuitionFees = c3.CourseFees - s16.Discount };
+            StudentCourse sc17 = new StudentCourse() { TuitionFees = c3.CourseFees - s17.Discount };
+            StudentCourse sc18 = new StudentCourse() { TuitionFees = c3.CourseFees - s18.Discount };
 
-            StudentCourse sc19 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc20 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc21 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc22 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc23 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc24 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc19 = new StudentCourse() { TuitionFees = c4.CourseFees - s19.Discount };
+            StudentCourse sc20 = new StudentCourse() { TuitionFees = c4.CourseFees - s20.Discount };
+            StudentCourse sc21 = new StudentCourse() { TuitionFees = c4.CourseFees - s21.Discount };
+            StudentCourse sc22 = new StudentCourse() { TuitionFees = c4.CourseFees - s22.Discount };
+            StudentCourse sc23 = new StudentCourse() { TuitionFees = c4.CourseFees - s23.Discount };
+            StudentCourse sc24 = new StudentCourse() { TuitionFees = c4.CourseFees - s24.Discount };
 
-            StudentCourse sc25 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc26 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc27 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc28 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc29 = new StudentCourse() { TuitionFees = 500 };
-            StudentCourse sc30 = new StudentCourse() { TuitionFees = 500 };
+            StudentCourse sc25 = new StudentCourse() { TuitionFees = c5.CourseFees - s25.Discount };
+            StudentCourse sc26 = new StudentCourse() { TuitionFees = c5.CourseFees - s26.Discount };
+            StudentCourse sc27 = new StudentCourse() { TuitionFees = c5.CourseFees - s27.Discount };
+            StudentCourse sc28 = new StudentCourse() { TuitionFees = c5.CourseFees - s28.Discount };
+            StudentCourse sc29 = new StudentCourse() { TuitionFees = c5.CourseFees - s29.Discount };
+            StudentCourse sc30 = new StudentCourse() { TuitionFees = c5.CourseFees - s30.Discount };
             #endregion
 
             #region Seed TrainerCourse
@@ -307,13 +307,10 @@
             t10.TrainerCourses = new List<TrainerCourse>() { tc10 };
             #endregion
 
-            
-
-
             //=================== Insert data to the database ==============================================================
             context.Courses.AddOrUpdate(x => x.Title, c1, c2, c3, c4, c5);
             context.Trainers.AddOrUpdate(x => new { x.FirstName, x.LastName }, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
-            context.Students.AddOrUpdate(x => new { x.FirstName, x.LastName }, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30);
+            context.Students.AddOrUpdate(x => new { x.FirstName, x.LastName, x.DateOfBirth }, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30);
 
 
             context.SaveChanges();
