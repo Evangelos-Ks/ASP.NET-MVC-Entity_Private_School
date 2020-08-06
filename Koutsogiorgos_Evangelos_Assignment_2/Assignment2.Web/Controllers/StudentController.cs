@@ -5,6 +5,7 @@ using Assignment2.Services;
 using Assignment2.Entities;
 using System.Collections.Generic;
 using PagedList;
+using Assignment2.Web.Models;
 
 namespace Assignment2.Web.Controllers
 {
@@ -141,7 +142,16 @@ namespace Assignment2.Web.Controllers
         // GET: TestStudent/Create
         public ActionResult CreateStudent()
         {
-            return View();
+            CourseRepository courseRepository = new CourseRepository();
+            IEnumerable<Course> courses = courseRepository.GetAll();
+            courseRepository.Dispose();
+
+            StudentViewModel courseViewModel = new StudentViewModel()
+            {
+                AllCourses = CreateSelectListOfCourses(courses)
+            };
+
+            return View(courseViewModel);
         }
 
         // POST: TestStudent/Create
@@ -149,17 +159,55 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateStudent([Bind(Include = "StudentId,FirstName,LastName,DateOfBirth,PhotoUrl")] Student student)
+        public ActionResult CreateStudent([Bind(Include = "StudentId,FirstName,LastName,DateOfBirth,PhotoUrl,Discount,AllCoursesId")] StudentViewModel studentViewModel)
         {
             if (ModelState.IsValid)
             {
+                //Create and insert a new student
+                Student student = new Student()
+                {
+                    StudentId = studentViewModel.StudentId,
+                    FirstName = studentViewModel.FirstName,
+                    LastName = studentViewModel.LastName,
+                    DateOfBirth = studentViewModel.DateOfBirth,
+                    Discount = studentViewModel.Discount,
+                    PhotoUrl = studentViewModel.PhotoUrl
+                };
+
                 StudentRepository studentRepository = new StudentRepository();
                 studentRepository.Insert(student);
                 studentRepository.Dispose();
+
+                //Create and Insert studentCourses
+                if (studentViewModel.AllCoursesId != null)
+                {
+                    StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+                    foreach (var courseId in studentViewModel.AllCoursesId)
+                    {
+                        StudentCourse studentCourse = new StudentCourse()
+                        {
+                            CourseId = courseId,
+                            StudentId = student.StudentId
+                        };
+                        studentCourseRepository.Insert(studentCourse);
+                    }
+                    studentCourseRepository.Dispose();
+                }
+
                 return RedirectToAction("AllStudents");
             }
 
-            return View(student);
+            //Populate Selectlist of courses
+            CourseRepository courseRepository = new CourseRepository();
+            IEnumerable<Course> courses = courseRepository.GetAll();
+            courseRepository.Dispose();
+
+            StudentViewModel courseViewModel = new StudentViewModel()
+            {
+                AllCourses = CreateSelectListOfCourses(courses)
+            };
+
+            return View(studentViewModel);
         }
 
         // GET: TestStudent/Delete/5
@@ -185,12 +233,36 @@ namespace Assignment2.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            StudentRepository studentRepository = new StudentRepository();
 
+            //Delete studentCourse
+            StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+            List<StudentCourse> studentCourses = studentCourseRepository.GetAll().Where(sc => sc.StudentId == id).ToList();
+            foreach (var studentCourse in studentCourses)
+            {
+                studentCourseRepository.Delete(studentCourse);
+            }
+            studentCourseRepository.Dispose();
+
+            //Delete student
+            StudentRepository studentRepository = new StudentRepository();
             Student student = studentRepository.GetById(id);
             studentRepository.Delete(student);
             studentRepository.Dispose();
+
             return RedirectToAction("AllStudents");
         }
+
+        //============================================== Protected Methods =================================================
+        protected IEnumerable<SelectListItem> CreateSelectListOfCourses(IEnumerable<Course> Courses)
+        {
+            var selectList = Courses.Select(c => new SelectListItem
+                                                {
+                                                    Value = c.CourseId.ToString(),
+                                                    Text = c.Title
+                                                })
+                                                .OrderBy(o => o.Text);
+            return selectList;
+        }
+
     }
 }
