@@ -249,7 +249,6 @@ namespace Assignment2.Web.Controllers
                         {
                             CourseId = courseViewModel.CourseId,
                             StudentId = Convert.ToInt32(id),
-                            TuitionFees = courseViewModel.TuitionFees
                         };
                         studentCourseRepository.Insert(studentCourse);
                     }
@@ -266,15 +265,6 @@ namespace Assignment2.Web.Controllers
                 course.Type = courseViewModel.Type;
                 courseRepository.Update(course);
                 courseRepository.Dispose();
-
-                StudentCourseRepository studentCourseRepository3 = new StudentCourseRepository();
-                var studentsCourses3 = studentCourseRepository3.GetAll().Where(sc => sc.CourseId == courseViewModel.CourseId);
-                foreach (var studentCourse in studentsCourses3)
-                {
-                    studentCourse.TuitionFees = courseViewModel.TuitionFees;
-                    studentCourseRepository3.Update(studentCourse);
-                }
-                studentCourseRepository3.Dispose();
 
                 return RedirectToAction("AllCourses");
             }
@@ -373,8 +363,7 @@ namespace Assignment2.Web.Controllers
                         StudentCourse studentCourse = new StudentCourse()
                         {
                             CourseId = course.CourseId,
-                            StudentId = Convert.ToInt32(courseViewModel.StudentsId[i]),
-                            TuitionFees = courseViewModel.TuitionFees
+                            StudentId = Convert.ToInt32(courseViewModel.StudentsId[i])
                         };
                         studentCourseRepository.Insert(studentCourse);
 
@@ -468,6 +457,7 @@ namespace Assignment2.Web.Controllers
             return RedirectToAction("AllCourses");
         }
 
+        //============================================== Protected Methods =================================================
         protected IEnumerable<SelectListItem> CreateSelectListOfStudents(IEnumerable<Student> students)
         {
             var selectlist = students.Select(s =>

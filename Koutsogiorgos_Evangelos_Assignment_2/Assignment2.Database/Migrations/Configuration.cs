@@ -140,40 +140,40 @@
 
             #region Seed StudentCourse
             //==================== Seeding StudentCourse ===========================================
-            StudentCourse sc1 = new StudentCourse() { TuitionFees = c1.CourseFees - s1.Discount };
-            StudentCourse sc2 = new StudentCourse() { TuitionFees = c1.CourseFees - s2.Discount };
-            StudentCourse sc3 = new StudentCourse() { TuitionFees = c1.CourseFees - s3.Discount };
-            StudentCourse sc4 = new StudentCourse() { TuitionFees = c1.CourseFees - s4.Discount };
-            StudentCourse sc5 = new StudentCourse() { TuitionFees = c1.CourseFees - s5.Discount };
-            StudentCourse sc6 = new StudentCourse() { TuitionFees = c1.CourseFees - s6.Discount };
+            StudentCourse sc1 = new StudentCourse() { };
+            StudentCourse sc2 = new StudentCourse() { };
+            StudentCourse sc3 = new StudentCourse() { };
+            StudentCourse sc4 = new StudentCourse() { };
+            StudentCourse sc5 = new StudentCourse() { };
+            StudentCourse sc6 = new StudentCourse() { };
 
-            StudentCourse sc7 = new StudentCourse() {  TuitionFees = c2.CourseFees - s7.Discount };
-            StudentCourse sc8 = new StudentCourse() {  TuitionFees = c2.CourseFees - s8.Discount };
-            StudentCourse sc9 = new StudentCourse() {  TuitionFees = c2.CourseFees - s9.Discount };
-            StudentCourse sc10 = new StudentCourse() { TuitionFees = c2.CourseFees - s10.Discount };
-            StudentCourse sc11 = new StudentCourse() { TuitionFees = c2.CourseFees - s11.Discount };
-            StudentCourse sc12 = new StudentCourse() { TuitionFees = c2.CourseFees - s12.Discount };
+            StudentCourse sc7 = new StudentCourse() { };
+            StudentCourse sc8 = new StudentCourse() { };
+            StudentCourse sc9 = new StudentCourse() { };
+            StudentCourse sc10 = new StudentCourse() { };
+            StudentCourse sc11 = new StudentCourse() { };
+            StudentCourse sc12 = new StudentCourse() { };
 
-            StudentCourse sc13 = new StudentCourse() { TuitionFees = c3.CourseFees - s13.Discount };
-            StudentCourse sc14 = new StudentCourse() { TuitionFees = c3.CourseFees - s14.Discount };
-            StudentCourse sc15 = new StudentCourse() { TuitionFees = c3.CourseFees - s15.Discount };
-            StudentCourse sc16 = new StudentCourse() { TuitionFees = c3.CourseFees - s16.Discount };
-            StudentCourse sc17 = new StudentCourse() { TuitionFees = c3.CourseFees - s17.Discount };
-            StudentCourse sc18 = new StudentCourse() { TuitionFees = c3.CourseFees - s18.Discount };
+            StudentCourse sc13 = new StudentCourse() { };
+            StudentCourse sc14 = new StudentCourse() { };
+            StudentCourse sc15 = new StudentCourse() { };
+            StudentCourse sc16 = new StudentCourse() { };
+            StudentCourse sc17 = new StudentCourse() { };
+            StudentCourse sc18 = new StudentCourse() { };
 
-            StudentCourse sc19 = new StudentCourse() { TuitionFees = c4.CourseFees - s19.Discount };
-            StudentCourse sc20 = new StudentCourse() { TuitionFees = c4.CourseFees - s20.Discount };
-            StudentCourse sc21 = new StudentCourse() { TuitionFees = c4.CourseFees - s21.Discount };
-            StudentCourse sc22 = new StudentCourse() { TuitionFees = c4.CourseFees - s22.Discount };
-            StudentCourse sc23 = new StudentCourse() { TuitionFees = c4.CourseFees - s23.Discount };
-            StudentCourse sc24 = new StudentCourse() { TuitionFees = c4.CourseFees - s24.Discount };
+            StudentCourse sc19 = new StudentCourse() { };
+            StudentCourse sc20 = new StudentCourse() { };
+            StudentCourse sc21 = new StudentCourse() { };
+            StudentCourse sc22 = new StudentCourse() { };
+            StudentCourse sc23 = new StudentCourse() { };
+            StudentCourse sc24 = new StudentCourse() { };
 
-            StudentCourse sc25 = new StudentCourse() { TuitionFees = c5.CourseFees - s25.Discount };
-            StudentCourse sc26 = new StudentCourse() { TuitionFees = c5.CourseFees - s26.Discount };
-            StudentCourse sc27 = new StudentCourse() { TuitionFees = c5.CourseFees - s27.Discount };
-            StudentCourse sc28 = new StudentCourse() { TuitionFees = c5.CourseFees - s28.Discount };
-            StudentCourse sc29 = new StudentCourse() { TuitionFees = c5.CourseFees - s29.Discount };
-            StudentCourse sc30 = new StudentCourse() { TuitionFees = c5.CourseFees - s30.Discount };
+            StudentCourse sc25 = new StudentCourse() { };
+            StudentCourse sc26 = new StudentCourse() { };
+            StudentCourse sc27 = new StudentCourse() { };
+            StudentCourse sc28 = new StudentCourse() { };
+            StudentCourse sc29 = new StudentCourse() { };
+            StudentCourse sc30 = new StudentCourse() { };
             #endregion
 
             #region Seed TrainerCourse
