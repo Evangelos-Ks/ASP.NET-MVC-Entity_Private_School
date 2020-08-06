@@ -149,13 +149,14 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateStudent([Bind(Include = "StudentId,FirstName,LastName,DateOfBirth,PhotoUrl")] Student student)
+        public ActionResult CreateStudent([Bind(Include = "StudentId,FirstName,LastName,DateOfBirth,PhotoUrl,Discount")] Student student)
         {
             if (ModelState.IsValid)
             {
                 StudentRepository studentRepository = new StudentRepository();
                 studentRepository.Insert(student);
                 studentRepository.Dispose();
+
                 return RedirectToAction("AllStudents");
             }
 
