@@ -6,6 +6,8 @@ using Assignment2.Entities;
 using System.Collections.Generic;
 using PagedList;
 using Assignment2.Web.Models;
+using System.IO;
+using System;
 
 namespace Assignment2.Web.Controllers
 {
@@ -159,10 +161,21 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateStudent([Bind(Include = "StudentId,FirstName,LastName,DateOfBirth,PhotoUrl,Discount,AllCoursesId")] StudentViewModel studentViewModel)
+        public ActionResult CreateStudent([Bind(Include = "StudentId,FirstName,LastName,DateOfBirth,PhotoUrl,Discount,AllCoursesId,ImageFile")] StudentViewModel studentViewModel)
         {
             if (ModelState.IsValid)
             {
+                //Save upload file
+                if (studentViewModel.ImageFile != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(studentViewModel.ImageFile.FileName);
+                    string extention = Path.GetExtension(studentViewModel.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yyyymmddmm") + extention;
+                    studentViewModel.PhotoUrl = "../../Content/Students_Image/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/Students_Image/"), fileName);
+                    studentViewModel.ImageFile.SaveAs(fileName);
+                }
+
                 //Create and insert a new student
                 Student student = new Student()
                 {

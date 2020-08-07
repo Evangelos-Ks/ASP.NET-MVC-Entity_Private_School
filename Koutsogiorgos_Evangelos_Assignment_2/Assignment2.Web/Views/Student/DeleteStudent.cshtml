@@ -12,6 +12,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.PhotoUrl)
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.PhotoUrl)" width="80" alt="Photo of @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)" />
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
 
@@ -35,22 +43,15 @@
             @Html.DisplayFor(model => model.DateOfBirth)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PhotoUrl)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhotoUrl)
-        </dd>
-
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" /> 
-            @Html.ActionLink("Back to List", "AllStudents", null, new {@Class = "btn btn-info"})
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            @Html.ActionLink("Back to List", "AllStudents", null, new { @Class = "btn btn-info" })
         </div>
     }
 </div>

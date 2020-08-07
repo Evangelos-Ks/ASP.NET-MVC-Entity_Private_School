@@ -22,12 +22,13 @@ namespace Assignment2.Web.Models
         [Display(Name = "Date of birth")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfBirth { get; set; }
-        [Display(Name = "Student photo")]
         public string PhotoUrl { get; set; }
         [Range(0, int.MaxValue, ErrorMessage = "Only positive values are acceptable")]
         public int Discount { get; set; } = 0;
         [Display(Name ="Courses")]
         public IEnumerable<SelectListItem> AllCourses { get; set; }
         public List<int> AllCoursesId { get; set; }
+        [Display(Name = "Student photo")]
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 }
