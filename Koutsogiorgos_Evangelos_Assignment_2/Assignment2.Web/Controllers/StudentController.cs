@@ -121,7 +121,18 @@ namespace Assignment2.Web.Controllers
                 return HttpNotFound();
             }
 
-            return View(student);
+            //Create studentViewModel
+            StudentViewModel studentViewModel = new StudentViewModel()
+            {
+                StudentId = student.StudentId,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                DateOfBirth = student.DateOfBirth,
+                Discount = student.Discount,
+                PhotoUrl = student.PhotoUrl
+            };
+
+            return View(studentViewModel);
         }
 
         // POST: TestStudent/Edit/5
@@ -129,16 +140,39 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditStudent([Bind(Include = "StudentId,FirstName,LastName,DateOfBirth,PhotoUrl")] Student student)
+        public ActionResult EditStudent([Bind(Include = "StudentId,FirstName,LastName,DateOfBirth,ImageFile")] StudentViewModel studentViewModel)
         {
             if (ModelState.IsValid)
             {
+                //Save upload file
+                if (studentViewModel.ImageFile != null)
+                {
+                    string extention = Path.GetExtension(studentViewModel.ImageFile.FileName);
+                    string fileName = studentViewModel.FirstName + studentViewModel.LastName + DateTime.Now.ToString("yyyyMMddmmss") + extention;
+                    studentViewModel.PhotoUrl = "../../Content/Students_Image/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/Students_Image/"), fileName);
+                    studentViewModel.ImageFile.SaveAs(fileName);
+                }
+
+                //Update student
+                Student student = new Student()
+                {
+                    StudentId = studentViewModel.StudentId,
+                    FirstName = studentViewModel.FirstName,
+                    LastName = studentViewModel.LastName,
+                    DateOfBirth = studentViewModel.DateOfBirth,
+                    Discount = studentViewModel.Discount,
+                    PhotoUrl = studentViewModel.PhotoUrl
+                };
+
                 StudentRepository studentRepository = new StudentRepository();
                 studentRepository.Update(student);
                 studentRepository.Dispose();
+
                 return RedirectToAction("AllStudents");
             }
-            return View(student);
+
+            return View(studentViewModel);
         }
 
         // GET: TestStudent/Create
@@ -168,9 +202,8 @@ namespace Assignment2.Web.Controllers
                 //Save upload file
                 if (studentViewModel.ImageFile != null)
                 {
-                    string fileName = Path.GetFileNameWithoutExtension(studentViewModel.ImageFile.FileName);
                     string extention = Path.GetExtension(studentViewModel.ImageFile.FileName);
-                    fileName = fileName + DateTime.Now.ToString("yyyymmddmm") + extention;
+                    string fileName = studentViewModel.FirstName + studentViewModel.LastName + DateTime.Now.ToString("yyyyMMddmmss") + extention;
                     studentViewModel.PhotoUrl = "../../Content/Students_Image/" + fileName;
                     fileName = Path.Combine(Server.MapPath("~/Content/Students_Image/"), fileName);
                     studentViewModel.ImageFile.SaveAs(fileName);
@@ -269,10 +302,10 @@ namespace Assignment2.Web.Controllers
         protected IEnumerable<SelectListItem> CreateSelectListOfCourses(IEnumerable<Course> Courses)
         {
             var selectList = Courses.Select(c => new SelectListItem
-                                                {
-                                                    Value = c.CourseId.ToString(),
-                                                    Text = c.Title
-                                                })
+            {
+                Value = c.CourseId.ToString(),
+                Text = c.Title
+            })
                                                 .OrderBy(o => o.Text);
             return selectList;
         }

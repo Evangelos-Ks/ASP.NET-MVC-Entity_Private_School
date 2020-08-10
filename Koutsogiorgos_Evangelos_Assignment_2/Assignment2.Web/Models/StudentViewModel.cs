@@ -30,5 +30,11 @@ namespace Assignment2.Web.Models
         public List<int> AllCoursesId { get; set; }
         [Display(Name = "Student photo")]
         public HttpPostedFileBase ImageFile { get; set; }
+         [Display(Name = "Remove Courses")]
+        public IEnumerable<SelectListItem> ExistingCourses { get; set; }
+        public List<string> ExistingCoursesId { get; set; }
+        [Display(Name = "Add Courses")]
+        public IEnumerable<SelectListItem> CoursesForAddition { get; set; }
+        public List<string> CoursesForAdditionId { get; set; }
     }
 }
