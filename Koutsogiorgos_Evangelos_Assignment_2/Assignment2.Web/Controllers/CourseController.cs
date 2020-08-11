@@ -433,6 +433,7 @@ namespace Assignment2.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //Delete studentCourses
             StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
             List<StudentCourse> studentscourses = studentCourseRepository.GetAll().Where(c => c.CourseId == id).ToList();
             foreach (var studentCourse in studentscourses)
@@ -441,6 +442,7 @@ namespace Assignment2.Web.Controllers
             }
             studentCourseRepository.Dispose();
 
+            //Delete trainerscourses
             TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
             List<TrainerCourse> trainerscourses = trainerCourseRepository.GetAll().Where(c => c.CourseId == id).ToList();
             foreach (var trainercourse in trainerscourses)
@@ -448,6 +450,26 @@ namespace Assignment2.Web.Controllers
                 trainerCourseRepository.Delete(trainercourse);
             }
             trainerCourseRepository.Dispose();
+
+            //Delete studentAssignments
+            StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+            List<StudentAssignment> studentAssignments = studentAssignmentRepository.GetAll()
+                                                        .Where(sa => sa.Assignment.CourseId == id).ToList();
+            foreach (StudentAssignment studentAssignment in studentAssignments)
+            {
+                studentAssignmentRepository.Delete(studentAssignment);
+            }
+            studentAssignmentRepository.Dispose();
+
+            //Delete Assignments
+            AssignmentRepository assignmentRepository = new AssignmentRepository();
+            List<Assignment> assignments = assignmentRepository.GetAll().Where(a => a.CourseId == id).ToList();
+            foreach (Assignment assignment in assignments)
+            {
+                assignmentRepository.Delete(assignment);
+            }
+            assignmentRepository.Dispose();
+
 
             CourseRepository courseRepository = new CourseRepository();
             Course course = courseRepository.GetById(id);
