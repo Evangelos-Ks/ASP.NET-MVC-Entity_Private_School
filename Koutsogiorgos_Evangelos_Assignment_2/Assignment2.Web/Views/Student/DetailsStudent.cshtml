@@ -1,4 +1,4 @@
-﻿@model Assignment2.Entities.Student
+﻿@model Assignment2.Web.Models.StudentViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -42,29 +42,27 @@
             @Html.DisplayFor(model => model.DateOfBirth)
         </dd>
 
-        @*<dt>
-            Fees
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
         </dt>
 
         <dd>
-            @{
-                int? totalFees = 0;
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
 
-                foreach (var item in Model.StudentCourses)
-                {
-                    totalFees += item.TuitionFees;
-                }
-            }
+        <dt>
+            @Html.DisplayNameFor(model => model.Fees)
+        </dt>
 
-            @totalFees
-        </dd>*@
+        <dd>
+            @Html.DisplayFor(model => model.Fees)
+        </dd>
         <dd>
             <table class="table">
-                @foreach (var item in Model.StudentCourses)
-                {
+                <thead>
                     <tr>
                         <th>
-                            Course
+                            Courses
                         </th>
                         <th>
                             Assignments
@@ -73,38 +71,44 @@
                             Marks
                         </th>
                     </tr>
-                    <tr>
-                        <td>
-                            @item.Course.Title
-                        </td>
-                        <td>
-                            <ol>
-                                @foreach (var sa in Model.StudentAssignments)
-                                {
-                                    <li>
-                                        @sa.Assignment.Title
-                                    </li>
-                                }
-                            </ol>
-                        </td>
-                        <td>
-                            <ul>
-                                @foreach (var sa in Model.StudentAssignments)
-                                {
-                                    <li>
-                                        Oral mark : @sa.OralMark
-                                    </li>
-                                    <li>
-                                        Whriting mark : @sa.WhritingMark
-                                    </li>
-                                    <li>
-                                        Total mark : @sa.TotalMark
-                                    </li>
-                                }
-                            </ul>
-                        </td>
-                    </tr>
-                }
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.StudentAssignmentsPerCourse)
+                    {
+                        <tr>
+                            <td>
+                                @item.Key.Title
+                            </td>
+                            <td>
+                                <ul>
+                                    @foreach (var assignmentStudent in item.Value)
+                                    {
+                                        <li>
+                                            @assignmentStudent.Assignment.Title
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    @foreach (var assignmentStudent in item.Value)
+                                    {
+                                        <li>
+                                            Oral mark : @assignmentStudent.OralMark
+                                        </li>
+                                        <li>
+                                            Whriting mark : @assignmentStudent.WhritingMark
+                                        </li>
+                                        <li>
+                                            Total mark : @assignmentStudent.TotalMark
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
             </table>
 
             @*@foreach (var item in Model.StudentCourses)

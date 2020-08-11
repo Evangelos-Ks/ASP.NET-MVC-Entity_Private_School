@@ -21,7 +21,6 @@ namespace Assignment2.Desktop
                 foreach (var studentCourse in course.StudentCourses)
                 {
                     Console.WriteLine("\t\t" + studentCourse.Student.FirstName);
-                    Console.WriteLine("\t\t\t" + studentCourse.TuitionFees);
                 }
             }
             courseRepository.Dispose();
