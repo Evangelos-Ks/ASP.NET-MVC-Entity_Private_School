@@ -87,8 +87,8 @@ namespace Assignment2.Web.Controllers
         // GET: TestStudent/Details/5
         public ActionResult DetailsStudent(int? id)
         {
+            //Get Student
             StudentRepository studentRepository = new StudentRepository();
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -98,10 +98,51 @@ namespace Assignment2.Web.Controllers
             {
                 return HttpNotFound();
             }
-
             studentRepository.Dispose();
 
-            return View(student);
+            //Get student's courses
+            StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+            IEnumerable<Course> existingCourses = studentCourseRepository.GetAll().Where(sc => sc.StudentId == id)
+                                          .Select(sc => sc.Course);
+            studentCourseRepository.Dispose();
+
+            //Get student's assignments
+            StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+            List<Assignment> existingAssignments = studentAssignmentRepository.GetAll().Where(sa => sa.StudentId == id)
+                                                  .Select(sa => sa.Assignment).ToList();
+            studentAssignmentRepository.Dispose();
+
+            //Find fees after the discount
+            int? totalFees = 0;
+            foreach (Course course in existingCourses)
+            {
+                totalFees += course.CourseFees;
+            }
+            totalFees -= student.Discount;
+
+            //Create assignments per course
+            Dictionary<Course, List<Assignment>> assignmentsPerCourse = new Dictionary<Course, List<Assignment>>();
+            foreach (Course course in existingCourses)
+            {
+                List<Assignment> assignments = existingAssignments.FindAll(a => a.CourseId == course.CourseId);
+                assignmentsPerCourse.Add(course, assignments);
+            }
+
+            //Create StudentViewModel
+            StudentViewModel studentViewModel = new StudentViewModel()
+            {
+                StudentId = student.StudentId,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                DateOfBirth = student.DateOfBirth,
+                Discount = student.Discount,
+                PhotoUrl = student.PhotoUrl,
+                ExistingCourses = CreateSelectListOfCourses(existingCourses),
+                Fees = totalFees,
+                AssignmentsPerCourse = assignmentsPerCourse
+            };
+
+            return View(studentViewModel);
 
         }
 
@@ -363,10 +404,9 @@ namespace Assignment2.Web.Controllers
             {
                 Value = c.CourseId.ToString(),
                 Text = c.Title
-            })
-                                                .OrderBy(o => o.Text);
+            }).OrderBy(o => o.Text);
+
             return selectList;
         }
-
     }
 }

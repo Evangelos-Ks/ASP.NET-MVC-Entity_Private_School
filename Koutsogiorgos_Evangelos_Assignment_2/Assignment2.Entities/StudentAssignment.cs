@@ -45,5 +45,8 @@ namespace Assignment2.Entities
         //======================== Navigation Properties ===================================================================
         public virtual Student Student { get; set; }
         public virtual Assignment Assignment { get; set; }
+
+        //======================== Methods =================================================================================
+
     }
 }
