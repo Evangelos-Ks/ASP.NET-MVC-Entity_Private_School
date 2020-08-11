@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -37,10 +36,12 @@ namespace Assignment2.Web.Models
         [Display(Name = "Add Courses")]
         public IEnumerable<SelectListItem> CoursesForAddition { get; set; }
         public List<string> CoursesForAdditionId { get; set; }
-        public Dictionary<Course, List<Assignment>> AssignmentsPerCourse { get; set; }
+        public Dictionary<Course, List<StudentAssignment>> StudentAssignmentsPerCourse { get; set; }
         [Display(Name = "Total fees after the discount")]
         public int? Fees { get; set; }
-
+        public int OralMark { get; set; }
+        public int WhritingMark { get; set; }
+        public int TotalMark { get; set; }
 
     }
 }

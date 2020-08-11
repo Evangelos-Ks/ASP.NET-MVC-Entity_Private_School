@@ -59,66 +59,79 @@
         </dd>
         <dd>
             <table class="table">
-               <thead>
-                   <tr>
-                       <th>
-                           Courses
-                       </th>
-                       <th>
-                           Assignments
-                       </th>
-                       <th>
-                           Marks
-                       </th>
-                   </tr>
-               </thead>
-                <tbody>
-                    @foreach (var item in Model.AssignmentsPerCourse)
-                    {
+                <thead>
                     <tr>
-                        <td>
-                            @item.Key.Title
-                        </td>
-                        <td>
-                            <ul>
-                                @foreach (var assignment in item.Value)
-                                {
-                                    <li>
-                                        @assignment.Title
-                                    </li>
-                                }
-                            </ul>
-                        </td>
-                        <td>
-
-                        </td>
+                        <th>
+                            Courses
+                        </th>
+                        <th>
+                            Assignments
+                        </th>
+                        <th>
+                            Marks
+                        </th>
                     </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.StudentAssignmentsPerCourse)
+                    {
+                        <tr>
+                            <td>
+                                @item.Key.Title
+                            </td>
+                            <td>
+                                <ul>
+                                    @foreach (var assignmentStudent in item.Value)
+                                    {
+                                        <li>
+                                            @assignmentStudent.Assignment.Title
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    @foreach (var assignmentStudent in item.Value)
+                                    {
+                                        <li>
+                                            Oral mark : @assignmentStudent.OralMark
+                                        </li>
+                                        <li>
+                                            Whriting mark : @assignmentStudent.WhritingMark
+                                        </li>
+                                        <li>
+                                            Total mark : @assignmentStudent.TotalMark
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+                        </tr>
                     }
-                    
+
                 </tbody>
             </table>
 
             @*@foreach (var item in Model.StudentCourses)
-            {
-                <ol>
-                    <li>
-                        @item.Course.Title
-                        <ul style="list-style-type: none">
-                            <li>
-                                Assignments
-                                <ul>
-                                    @foreach (var sa in Model.StudentAssignments)
-                                    {
-                                        <li>
-                                            @sa.Assignment.Title
-                                        </li>
-                                    }
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ol>
-            }*@
+                {
+                    <ol>
+                        <li>
+                            @item.Course.Title
+                            <ul style="list-style-type: none">
+                                <li>
+                                    Assignments
+                                    <ul>
+                                        @foreach (var sa in Model.StudentAssignments)
+                                        {
+                                            <li>
+                                                @sa.Assignment.Title
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                }*@
         </dd>
 
     </dl>

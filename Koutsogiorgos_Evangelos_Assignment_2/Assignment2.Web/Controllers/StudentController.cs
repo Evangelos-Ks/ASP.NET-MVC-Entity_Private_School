@@ -8,7 +8,6 @@ using PagedList;
 using Assignment2.Web.Models;
 using System.IO;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Assignment2.Web.Controllers
 {
@@ -106,10 +105,11 @@ namespace Assignment2.Web.Controllers
                                           .Select(sc => sc.Course);
             studentCourseRepository.Dispose();
 
-            //Get student's assignments
+            //Get student's assignments and marks
             StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
-            List<Assignment> existingAssignments = studentAssignmentRepository.GetAll().Where(sa => sa.StudentId == id)
-                                                  .Select(sa => sa.Assignment).ToList();
+            //List<Assignment> existingAssignments = studentAssignmentRepository.GetAll().Where(sa => sa.StudentId == id)
+            //                                      .Select(sa => sa.Assignment).ToList();
+            List<StudentAssignment> studentAssignmentsFiltered = studentAssignmentRepository.GetAll().Where(sa => sa.StudentId == id).ToList();
             studentAssignmentRepository.Dispose();
 
             //Find fees after the discount
@@ -120,12 +120,12 @@ namespace Assignment2.Web.Controllers
             }
             totalFees -= student.Discount;
 
-            //Create assignments per course
-            Dictionary<Course, List<Assignment>> assignmentsPerCourse = new Dictionary<Course, List<Assignment>>();
+            //Create dictionary of course and assignments
+            Dictionary<Course, List<StudentAssignment>> studentAssignmentsPerCourse = new Dictionary<Course, List<StudentAssignment>>();
             foreach (Course course in existingCourses)
             {
-                List<Assignment> assignments = existingAssignments.FindAll(a => a.CourseId == course.CourseId);
-                assignmentsPerCourse.Add(course, assignments);
+                List<StudentAssignment> studentsAssignments = studentAssignmentsFiltered.FindAll(a => a.Assignment.CourseId == course.CourseId);
+                studentAssignmentsPerCourse.Add(course, studentsAssignments);
             }
 
             //Create StudentViewModel
@@ -139,11 +139,10 @@ namespace Assignment2.Web.Controllers
                 PhotoUrl = student.PhotoUrl,
                 ExistingCourses = CreateSelectListOfCourses(existingCourses),
                 Fees = totalFees,
-                AssignmentsPerCourse = assignmentsPerCourse
+                StudentAssignmentsPerCourse = studentAssignmentsPerCourse,
             };
 
             return View(studentViewModel);
-
         }
 
         // GET: TestStudent/Edit/5
