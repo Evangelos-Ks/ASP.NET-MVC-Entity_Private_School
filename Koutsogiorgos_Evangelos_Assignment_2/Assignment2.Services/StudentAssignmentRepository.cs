@@ -15,7 +15,7 @@ namespace Assignment2.Services
         //============================ Get All =========================================
         public IEnumerable<StudentAssignment> GetAll()
         {
-            return db.StudentsAssignments.ToList();
+            return db.StudentsAssignments.Include(sa => sa.Assignment).ToList();
         }
 
         //============================ Get GetById =========================================

@@ -24,26 +24,34 @@ namespace Assignment2.Entities
         {
             this.OralMark = OralMark;
             this.WhritingMark = WhritingMark;
-
-            if (!string.IsNullOrWhiteSpace(OralMark.ToString()) || !string.IsNullOrWhiteSpace(WhritingMark.ToString()))
-            {
-                if (!string.IsNullOrWhiteSpace(OralMark.ToString()) && !string.IsNullOrWhiteSpace(WhritingMark.ToString()))
-                {
-                    TotalMark = (int)Math.Round(((double)(OralMark + WhritingMark) / 2.0d), MidpointRounding.AwayFromZero);
-                }
-                else if (!string.IsNullOrWhiteSpace(WhritingMark.ToString()))
-                {
-                    TotalMark = WhritingMark;
-                }
-                else if (!string.IsNullOrWhiteSpace(OralMark.ToString()))
-                {
-                    TotalMark = OralMark;
-                }
-            }
+            TotalMark = CalculateTotalMark(OralMark, WhritingMark);
         }
 
         //======================== Navigation Properties ===================================================================
         public virtual Student Student { get; set; }
         public virtual Assignment Assignment { get; set; }
+
+        //======================== Methods =================================================================================
+        public int? CalculateTotalMark(int? oralMark, int? whritingMark)
+        {
+            if (!string.IsNullOrWhiteSpace(oralMark.ToString()) || !string.IsNullOrWhiteSpace(whritingMark.ToString()))
+            {
+                if (!string.IsNullOrWhiteSpace(oralMark.ToString()) && !string.IsNullOrWhiteSpace(whritingMark.ToString()))
+                {
+                   return (int)Math.Round(((double)(oralMark + whritingMark) / 2.0d), MidpointRounding.AwayFromZero);
+                }
+                else if (!string.IsNullOrWhiteSpace(whritingMark.ToString()))
+                {
+                    return whritingMark;
+                }
+                else if (!string.IsNullOrWhiteSpace(oralMark.ToString()))
+                {
+                    return oralMark;
+                }
+            }
+            
+            return null;
+        }
+
     }
 }

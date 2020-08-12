@@ -3,12 +3,10 @@ using System.Web.Mvc;
 using Assignment2.Services;
 using Assignment2.Entities;
 using System.Net;
-using System.Security.Policy;
 using PagedList;
 using System.Collections.Generic;
 using System;
 using Assignment2.Web.Models;
-using System.Net.Sockets;
 
 namespace Assignment2.Web.Controllers
 {
@@ -249,7 +247,6 @@ namespace Assignment2.Web.Controllers
                         {
                             CourseId = courseViewModel.CourseId,
                             StudentId = Convert.ToInt32(id),
-                            TuitionFees = courseViewModel.TuitionFees
                         };
                         studentCourseRepository.Insert(studentCourse);
                     }
@@ -266,15 +263,6 @@ namespace Assignment2.Web.Controllers
                 course.Type = courseViewModel.Type;
                 courseRepository.Update(course);
                 courseRepository.Dispose();
-
-                StudentCourseRepository studentCourseRepository3 = new StudentCourseRepository();
-                var studentsCourses3 = studentCourseRepository3.GetAll().Where(sc => sc.CourseId == courseViewModel.CourseId);
-                foreach (var studentCourse in studentsCourses3)
-                {
-                    studentCourse.TuitionFees = courseViewModel.TuitionFees;
-                    studentCourseRepository3.Update(studentCourse);
-                }
-                studentCourseRepository3.Dispose();
 
                 return RedirectToAction("AllCourses");
             }
@@ -373,8 +361,7 @@ namespace Assignment2.Web.Controllers
                         StudentCourse studentCourse = new StudentCourse()
                         {
                             CourseId = course.CourseId,
-                            StudentId = Convert.ToInt32(courseViewModel.StudentsId[i]),
-                            TuitionFees = courseViewModel.TuitionFees
+                            StudentId = Convert.ToInt32(courseViewModel.StudentsId[i])
                         };
                         studentCourseRepository.Insert(studentCourse);
 
@@ -444,6 +431,7 @@ namespace Assignment2.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //Delete studentCourses
             StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
             List<StudentCourse> studentscourses = studentCourseRepository.GetAll().Where(c => c.CourseId == id).ToList();
             foreach (var studentCourse in studentscourses)
@@ -452,6 +440,7 @@ namespace Assignment2.Web.Controllers
             }
             studentCourseRepository.Dispose();
 
+            //Delete trainerscourses
             TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
             List<TrainerCourse> trainerscourses = trainerCourseRepository.GetAll().Where(c => c.CourseId == id).ToList();
             foreach (var trainercourse in trainerscourses)
@@ -459,6 +448,26 @@ namespace Assignment2.Web.Controllers
                 trainerCourseRepository.Delete(trainercourse);
             }
             trainerCourseRepository.Dispose();
+
+            //Delete studentAssignments
+            StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+            List<StudentAssignment> studentAssignments = studentAssignmentRepository.GetAll()
+                                                        .Where(sa => sa.Assignment.CourseId == id).ToList();
+            foreach (StudentAssignment studentAssignment in studentAssignments)
+            {
+                studentAssignmentRepository.Delete(studentAssignment);
+            }
+            studentAssignmentRepository.Dispose();
+
+            //Delete Assignments
+            AssignmentRepository assignmentRepository = new AssignmentRepository();
+            List<Assignment> assignments = assignmentRepository.GetAll().Where(a => a.CourseId == id).ToList();
+            foreach (Assignment assignment in assignments)
+            {
+                assignmentRepository.Delete(assignment);
+            }
+            assignmentRepository.Dispose();
+
 
             CourseRepository courseRepository = new CourseRepository();
             Course course = courseRepository.GetById(id);
@@ -468,6 +477,7 @@ namespace Assignment2.Web.Controllers
             return RedirectToAction("AllCourses");
         }
 
+        //============================================== Protected Methods =================================================
         protected IEnumerable<SelectListItem> CreateSelectListOfStudents(IEnumerable<Student> students)
         {
             var selectlist = students.Select(s =>

@@ -21,6 +21,8 @@ namespace Assignment2.Entities
         public DateTime? DateOfBirth { get; set; }
         [Display(Name = "Student photo")]
         public string PhotoUrl { get; set; }
+        [Range(0, int.MaxValue, ErrorMessage = "Only positive values are acceptable")]
+        public int Discount { get; set; } = 0;
 
         //======================== Navigation Properties ================================================
         public virtual ICollection<StudentAssignment> StudentAssignments { get; set; }
