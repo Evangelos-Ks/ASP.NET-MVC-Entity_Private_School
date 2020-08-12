@@ -6,6 +6,9 @@ using Assignment2.Entities;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using PagedList;
+using Assignment2.Web.Models;
+using System.IO;
+using System;
 
 namespace Assignment2.Web.Controllers
 {
@@ -150,24 +153,43 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,PhotoUrl")] Trainer trainer)
+        public ActionResult CreateTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,PhotoUrl,ImageFile")] TrainerViewModel trainerViewModel)
         {
             if (ModelState.IsValid)
             {
+                //Save upload file
+                if (trainerViewModel.ImageFile != null)
+                {
+                    string extention = Path.GetExtension(trainerViewModel.ImageFile.FileName);
+                    string fileName = trainerViewModel.FirstName + trainerViewModel.LastName + DateTime.Now.ToString("yyyyMMddmmss") + extention;
+                    trainerViewModel.PhotoUrl = "../../Content/Trainers_Images/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/Trainers_Images/"), fileName);
+                    trainerViewModel.ImageFile.SaveAs(fileName);
+                }
+
+                //Create Trainer
+                Trainer trainer = new Trainer()
+                {
+                    TrainerId = trainerViewModel.TrainerId,
+                    FirstName = trainerViewModel.FirstName,
+                    LastName = trainerViewModel.LastName,
+                    Subject = trainerViewModel.Subject,
+                    PhotoUrl = trainerViewModel.PhotoUrl
+                };
+
                 TrainerRepository trainerRepository = new TrainerRepository();
                 trainerRepository.Insert(trainer);
                 trainerRepository.Dispose();
                 return RedirectToAction("AllTrainers");
             }
 
-            return View(trainer);
+            return View(trainerViewModel);
         }
 
         // GET: TestTrainer/Delete/5
         public ActionResult DeleteTrainer(int? id)
         {
             TrainerRepository trainerRepository = new TrainerRepository();
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -187,7 +209,6 @@ namespace Assignment2.Web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             TrainerRepository trainerRepository = new TrainerRepository();
-
             Trainer trainer = trainerRepository.GetById(id);
             trainerRepository.Delete(trainer);
             trainerRepository.Dispose();
