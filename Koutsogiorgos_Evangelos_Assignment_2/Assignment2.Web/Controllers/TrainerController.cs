@@ -145,7 +145,18 @@ namespace Assignment2.Web.Controllers
         // GET: TestTrainer/Create
         public ActionResult CreateTrainer()
         {
-            return View();
+            //Get all courses
+            CourseRepository courseRepository = new CourseRepository();
+            IEnumerable<Course> allCourses = courseRepository.GetAll();
+            courseRepository.Dispose();
+
+            //Create TrainerViewModel
+            TrainerViewModel trainerViewModel = new TrainerViewModel()
+            {
+                AllCourses = CreateSelectListOfCourses(allCourses)
+            };
+
+            return View(trainerViewModel);
         }
 
         // POST: TestTrainer/Create
@@ -153,7 +164,7 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,PhotoUrl,ImageFile")] TrainerViewModel trainerViewModel)
+        public ActionResult CreateTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,ImageFile,AllCoursesId")] TrainerViewModel trainerViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -177,9 +188,27 @@ namespace Assignment2.Web.Controllers
                     PhotoUrl = trainerViewModel.PhotoUrl
                 };
 
+                //Add trainer
                 TrainerRepository trainerRepository = new TrainerRepository();
                 trainerRepository.Insert(trainer);
                 trainerRepository.Dispose();
+
+                //Create and add trainerCourse
+                if (trainerViewModel.AllCoursesId != null)
+                {
+                    TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+                    foreach (int courseId in trainerViewModel.AllCoursesId)
+                    {
+                        TrainerCourse trainerCourse = new TrainerCourse()
+                        {
+                            CourseId = courseId,
+                            TrainerId = trainer.TrainerId
+                        };
+                        trainerCourseRepository.Insert(trainerCourse);
+                    }
+                    trainerCourseRepository.Dispose();
+                }
+
                 return RedirectToAction("AllTrainers");
             }
 
@@ -208,12 +237,38 @@ namespace Assignment2.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //Delete TrainerCourses
+            TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+            IEnumerable<TrainerCourse> trainerCourses = trainerCourseRepository.GetAll().Where(tc => tc.TrainerId == id);
+            foreach (TrainerCourse trainerCourse in trainerCourses)
+            {
+                trainerCourseRepository.Delete(trainerCourse);
+            }
+            trainerCourseRepository.Dispose();
+
+            //Delete trainer
             TrainerRepository trainerRepository = new TrainerRepository();
             Trainer trainer = trainerRepository.GetById(id);
             trainerRepository.Delete(trainer);
             trainerRepository.Dispose();
+
             return RedirectToAction("AllTrainers");
         }
+
+        //============================================== Protected Methods =================================================
+        protected IEnumerable<SelectListItem> CreateSelectListOfCourses(IEnumerable<Course> courses)
+        {
+            IEnumerable<SelectListItem> selectListOfCourses = courses.Select(c =>
+                                                               new SelectListItem
+                                                               {
+                                                                   Value = c.CourseId.ToString(),
+                                                                   Text = c.Title
+                                                               }).OrderBy(c => c.Text);
+
+            return selectListOfCourses;
+        }
+
     }
+
 
 }

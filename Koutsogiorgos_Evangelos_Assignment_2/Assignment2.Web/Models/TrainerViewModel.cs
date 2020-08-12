@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Assignment2.Web.Models
 {
@@ -23,5 +24,8 @@ namespace Assignment2.Web.Models
         public string PhotoUrl { get; set; }
         [Display(Name = "Trainer photo")]
         public HttpPostedFileBase ImageFile { get; set; }
+        [Display(Name = "Courses")]
+        public IEnumerable<SelectListItem> AllCourses { get; set; }
+        public List<int> AllCoursesId { get; set; }
     }
 }
