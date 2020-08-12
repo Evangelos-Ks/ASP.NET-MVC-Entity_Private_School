@@ -107,8 +107,6 @@ namespace Assignment2.Web.Controllers
 
             //Get student's assignments and marks
             StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
-            //List<Assignment> existingAssignments = studentAssignmentRepository.GetAll().Where(sa => sa.StudentId == id)
-            //                                      .Select(sa => sa.Assignment).ToList();
             List<StudentAssignment> studentAssignmentsFiltered = studentAssignmentRepository.GetAll().Where(sa => sa.StudentId == id).ToList();
             studentAssignmentRepository.Dispose();
 
@@ -119,6 +117,7 @@ namespace Assignment2.Web.Controllers
                 totalFees += course.CourseFees;
             }
             totalFees -= student.Discount;
+            totalFees = totalFees >= 0 ? totalFees : 0;
 
             //Create dictionary of course and assignments
             Dictionary<Course, List<StudentAssignment>> studentAssignmentsPerCourse = new Dictionary<Course, List<StudentAssignment>>();

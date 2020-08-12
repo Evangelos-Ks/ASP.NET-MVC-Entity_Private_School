@@ -3,12 +3,10 @@ using System.Web.Mvc;
 using Assignment2.Services;
 using Assignment2.Entities;
 using System.Net;
-using System.Security.Policy;
 using PagedList;
 using System.Collections.Generic;
 using System;
 using Assignment2.Web.Models;
-using System.Net.Sockets;
 
 namespace Assignment2.Web.Controllers
 {
