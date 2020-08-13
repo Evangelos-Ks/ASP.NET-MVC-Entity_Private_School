@@ -25,7 +25,9 @@ namespace Assignment2.Web.Models
         [Display(Name = "Trainer photo")]
         public HttpPostedFileBase ImageFile { get; set; }
         [Display(Name = "Courses")]
-        public IEnumerable<SelectListItem> AllCourses { get; set; }
-        public List<int> AllCoursesId { get; set; }
+        public IEnumerable<SelectListItem> Courses { get; set; }
+        public List<int> CoursesId { get; set; }
+        public IEnumerable<SelectListItem> ExistingCourses { get; set; }
+        public List<int> ExistingCoursesCoursesId { get; set; }
     }
 }
