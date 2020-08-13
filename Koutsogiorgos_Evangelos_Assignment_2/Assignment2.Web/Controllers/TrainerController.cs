@@ -122,7 +122,17 @@ namespace Assignment2.Web.Controllers
                 return HttpNotFound();
             }
 
-            return View(trainer);
+            //Create trainerViewModel
+            TrainerViewModel trainerViewModel = new TrainerViewModel()
+            {
+                TrainerId = trainer.TrainerId,
+                FirstName = trainer.FirstName,
+                LastName = trainer.LastName,
+                Subject = trainer.Subject,
+                PhotoUrl = trainer.PhotoUrl
+            };
+
+            return View(trainerViewModel);
         }
 
         // POST: TestTrainer/Edit/5
@@ -130,16 +140,37 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,PhotoUrl")] Trainer trainer)
+        public ActionResult EditTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,PhotoUrl,ImageFile")] TrainerViewModel trainerViewModel)
         {
             if (ModelState.IsValid)
             {
+                //Save upload file
+                if (trainerViewModel.ImageFile != null)
+                {
+                    string extention = Path.GetExtension(trainerViewModel.ImageFile.FileName);
+                    string fileName = trainerViewModel.FirstName + trainerViewModel.LastName + DateTime.Now.ToString("yyyyMMddmmss") + extention;
+                    trainerViewModel.PhotoUrl = "../../Content/Trainers_Images/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/Trainers_Images/"), fileName);
+                    trainerViewModel.ImageFile.SaveAs(fileName);
+                }
+
+                //Create trainer and update
+                Trainer trainer = new Trainer()
+                {
+                    TrainerId = trainerViewModel.TrainerId,
+                    FirstName = trainerViewModel.FirstName,
+                    LastName = trainerViewModel.LastName,
+                    PhotoUrl = trainerViewModel.PhotoUrl,
+                    Subject = trainerViewModel.Subject
+                };
+
                 TrainerRepository trainerRepository = new TrainerRepository();
                 trainerRepository.Update(trainer);
                 trainerRepository.Dispose();
+
                 return RedirectToAction("AllTrainers");
             }
-            return View(trainer);
+            return View(trainerViewModel);
         }
 
         // GET: TestTrainer/Create
