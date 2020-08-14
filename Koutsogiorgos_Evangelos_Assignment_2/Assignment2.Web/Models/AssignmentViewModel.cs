@@ -21,6 +21,6 @@ namespace Assignment2.Web.Models
         public DateTime? SubDateTime { get; set; }
         [Display(Name ="Courses")]
         public IEnumerable<SelectListItem> Courses { get; set; }
-        public List<int> CoursesId { get; set; }
+        public int? CourseId { get; set; }
     }
 }

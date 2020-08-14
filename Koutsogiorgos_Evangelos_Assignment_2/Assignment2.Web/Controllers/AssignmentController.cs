@@ -79,7 +79,7 @@ namespace Assignment2.Web.Controllers
                     assignments = assignments.OrderByDescending(x => x.SubDateTime);
                     break;
                 default:
-                    assignments = assignments.OrderBy(x => x.Course.Title);
+                    assignments = assignments.OrderBy(x => x.Title);
                     break;
             }
 
@@ -159,15 +159,14 @@ namespace Assignment2.Web.Controllers
         {
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
-            ViewBag.CourseId = new SelectList(courses, "CourseId", "Title");
             courseRepository.Dispose();
 
             AssignmentViewModel assignmentViewModel = new AssignmentViewModel()
             {
-
+                Courses = Methods.CreateSelectListOfCourses(courses)
             };
 
-            return View();
+            return View(assignmentViewModel);
         }
 
         // POST: TestAssignment/Create
@@ -182,15 +181,27 @@ namespace Assignment2.Web.Controllers
                 AssignmentRepository assignmentRepository = new AssignmentRepository();
                 assignmentRepository.Insert(assignment);
                 assignmentRepository.Dispose();
+
                 return RedirectToAction("AllAssignments");
             }
 
+            //Get all courses
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
-            ViewBag.CourseId = new SelectList(courses, "CourseId", "Title", assignment.CourseId);
             courseRepository.Dispose();
 
-            return View(assignment);
+            //Create assignmentViewModel
+            AssignmentViewModel assignmentViewModel = new AssignmentViewModel()
+            {
+                AssignmentId = assignment.AssignmentId,
+                Title = assignment.Title,
+                Description = assignment.Description,
+                SubDateTime = assignment.SubDateTime,
+                Courses = Methods.CreateSelectListOfCourses(courses),
+                CourseId = assignment.CourseId
+            };
+
+            return View(assignmentViewModel);
         }
 
         // GET: TestAssignment/Delete/5
@@ -216,11 +227,22 @@ namespace Assignment2.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AssignmentRepository assignmentRepository = new AssignmentRepository();
+            //Delete studentAssignments
+            StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+            IEnumerable<StudentAssignment> studentAssignments = studentAssignmentRepository.GetAll()
+                                                                .Where(sa => sa.AssignmentId == id);
+            foreach (StudentAssignment studentAssignment in studentAssignments)
+            {
+                studentAssignmentRepository.Delete(studentAssignment);
+            }
+            studentAssignmentRepository.Dispose();
 
+            //Delete assignment
+            AssignmentRepository assignmentRepository = new AssignmentRepository();
             Assignment assignment = assignmentRepository.GetById(id);
             assignmentRepository.Delete(assignment);
             assignmentRepository.Dispose();
+
             return RedirectToAction("AllAssignments");
         }
     }
