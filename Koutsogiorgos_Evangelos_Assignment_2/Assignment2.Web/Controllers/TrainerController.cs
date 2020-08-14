@@ -6,6 +6,9 @@ using Assignment2.Entities;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using PagedList;
+using Assignment2.Web.Models;
+using System.IO;
+using System;
 
 namespace Assignment2.Web.Controllers
 {
@@ -119,7 +122,40 @@ namespace Assignment2.Web.Controllers
                 return HttpNotFound();
             }
 
-            return View(trainer);
+            //Get all Courses
+            CourseRepository courseRepository = new CourseRepository();
+            List<Course> courses = courseRepository.GetAll().ToList();
+            courseRepository.Dispose();
+
+            //Get CourseId where trainerId is the id of the trainer that we want to edit
+            TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+            IEnumerable<int> coursesId = trainerCourseRepository.GetAll()
+                                                        .Where(tc => tc.TrainerId == id)
+                                                        .Select(tc => tc.CourseId);
+            trainerCourseRepository.Dispose();
+
+            //Create a list with courses which have assigned to the trainer
+            List<Course> existingCourses = new List<Course>();
+            foreach (int courseId in coursesId)
+            {
+                Course course = courses.FirstOrDefault(c => c.CourseId == courseId);
+                existingCourses.Add(course);
+                courses.Remove(course);
+            }
+
+            //Create trainerViewModel
+            TrainerViewModel trainerViewModel = new TrainerViewModel()
+            {
+                TrainerId = trainer.TrainerId,
+                FirstName = trainer.FirstName,
+                LastName = trainer.LastName,
+                Subject = trainer.Subject,
+                PhotoUrl = trainer.PhotoUrl,
+                ExistingCourses = CreateSelectListOfCourses(existingCourses),
+                Courses = CreateSelectListOfCourses(courses)
+            };
+
+            return View(trainerViewModel);
         }
 
         // POST: TestTrainer/Edit/5
@@ -127,22 +163,86 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,PhotoUrl")] Trainer trainer)
+        public ActionResult EditTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,PhotoUrl,ImageFile,ExistingCoursesCoursesId,CoursesId")] TrainerViewModel trainerViewModel)
         {
             if (ModelState.IsValid)
             {
+                //Save upload file
+                if (trainerViewModel.ImageFile != null)
+                {
+                    string extention = Path.GetExtension(trainerViewModel.ImageFile.FileName);
+                    string fileName = trainerViewModel.FirstName + trainerViewModel.LastName + DateTime.Now.ToString("yyyyMMddmmss") + extention;
+                    trainerViewModel.PhotoUrl = "../../Content/Trainers_Images/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/Trainers_Images/"), fileName);
+                    trainerViewModel.ImageFile.SaveAs(fileName);
+                }
+
+                //Update trainerCourse
+                if (trainerViewModel.CoursesId != null || trainerViewModel.ExistingCoursesCoursesId != null)
+                {
+                    TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+                    //Delete trainerCourse
+                    if (trainerViewModel.ExistingCoursesCoursesId != null)
+                    {
+                        List<TrainerCourse> trainerCourses = trainerCourseRepository.GetAll()
+                                                            .Where(tc => tc.TrainerId == trainerViewModel.TrainerId).ToList();
+                        foreach (int id in trainerViewModel.ExistingCoursesCoursesId)
+                        {
+                            TrainerCourse trainerCourse = trainerCourses.FirstOrDefault(tc => tc.CourseId == id);
+                            trainerCourseRepository.Delete(trainerCourse);
+                        }
+                    }
+                    if (trainerViewModel.CoursesId != null)
+                    {
+                        //Insert trainerCourse
+                        foreach (int id in trainerViewModel.CoursesId)
+                        {
+                            TrainerCourse trainerCourse = new TrainerCourse()
+                            {
+                                TrainerId = trainerViewModel.TrainerId,
+                                CourseId = id
+                            };
+                            trainerCourseRepository.Insert(trainerCourse);
+                        }
+                    }
+
+                    trainerCourseRepository.Dispose();
+                }
+
+                //Create trainer and update
+                Trainer trainer = new Trainer()
+                {
+                    TrainerId = trainerViewModel.TrainerId,
+                    FirstName = trainerViewModel.FirstName,
+                    LastName = trainerViewModel.LastName,
+                    PhotoUrl = trainerViewModel.PhotoUrl,
+                    Subject = trainerViewModel.Subject
+                };
+
                 TrainerRepository trainerRepository = new TrainerRepository();
                 trainerRepository.Update(trainer);
                 trainerRepository.Dispose();
+
                 return RedirectToAction("AllTrainers");
             }
-            return View(trainer);
+            return View(trainerViewModel);
         }
 
         // GET: TestTrainer/Create
         public ActionResult CreateTrainer()
         {
-            return View();
+            //Get all courses
+            CourseRepository courseRepository = new CourseRepository();
+            IEnumerable<Course> allCourses = courseRepository.GetAll();
+            courseRepository.Dispose();
+
+            //Create TrainerViewModel
+            TrainerViewModel trainerViewModel = new TrainerViewModel()
+            {
+                Courses = CreateSelectListOfCourses(allCourses)
+            };
+
+            return View(trainerViewModel);
         }
 
         // POST: TestTrainer/Create
@@ -150,24 +250,61 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,PhotoUrl")] Trainer trainer)
+        public ActionResult CreateTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,ImageFile,CoursesId")] TrainerViewModel trainerViewModel)
         {
             if (ModelState.IsValid)
             {
+                //Save upload file
+                if (trainerViewModel.ImageFile != null)
+                {
+                    string extention = Path.GetExtension(trainerViewModel.ImageFile.FileName);
+                    string fileName = trainerViewModel.FirstName + trainerViewModel.LastName + DateTime.Now.ToString("yyyyMMddmmss") + extention;
+                    trainerViewModel.PhotoUrl = "../../Content/Trainers_Images/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/Trainers_Images/"), fileName);
+                    trainerViewModel.ImageFile.SaveAs(fileName);
+                }
+
+                //Create Trainer
+                Trainer trainer = new Trainer()
+                {
+                    TrainerId = trainerViewModel.TrainerId,
+                    FirstName = trainerViewModel.FirstName,
+                    LastName = trainerViewModel.LastName,
+                    Subject = trainerViewModel.Subject,
+                    PhotoUrl = trainerViewModel.PhotoUrl
+                };
+
+                //Add trainer
                 TrainerRepository trainerRepository = new TrainerRepository();
                 trainerRepository.Insert(trainer);
                 trainerRepository.Dispose();
+
+                //Create and add trainerCourse
+                if (trainerViewModel.CoursesId != null)
+                {
+                    TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+                    foreach (int courseId in trainerViewModel.CoursesId)
+                    {
+                        TrainerCourse trainerCourse = new TrainerCourse()
+                        {
+                            CourseId = courseId,
+                            TrainerId = trainer.TrainerId
+                        };
+                        trainerCourseRepository.Insert(trainerCourse);
+                    }
+                    trainerCourseRepository.Dispose();
+                }
+
                 return RedirectToAction("AllTrainers");
             }
 
-            return View(trainer);
+            return View(trainerViewModel);
         }
 
         // GET: TestTrainer/Delete/5
         public ActionResult DeleteTrainer(int? id)
         {
             TrainerRepository trainerRepository = new TrainerRepository();
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -186,13 +323,38 @@ namespace Assignment2.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TrainerRepository trainerRepository = new TrainerRepository();
+            //Delete TrainerCourses
+            TrainerCourseRepository trainerCourseRepository = new TrainerCourseRepository();
+            IEnumerable<TrainerCourse> trainerCourses = trainerCourseRepository.GetAll().Where(tc => tc.TrainerId == id);
+            foreach (TrainerCourse trainerCourse in trainerCourses)
+            {
+                trainerCourseRepository.Delete(trainerCourse);
+            }
+            trainerCourseRepository.Dispose();
 
+            //Delete trainer
+            TrainerRepository trainerRepository = new TrainerRepository();
             Trainer trainer = trainerRepository.GetById(id);
             trainerRepository.Delete(trainer);
             trainerRepository.Dispose();
+
             return RedirectToAction("AllTrainers");
         }
+
+        //============================================== Protected Methods =================================================
+        protected IEnumerable<SelectListItem> CreateSelectListOfCourses(IEnumerable<Course> courses)
+        {
+            IEnumerable<SelectListItem> selectListOfCourses = courses.Select(c =>
+                                                               new SelectListItem
+                                                               {
+                                                                   Value = c.CourseId.ToString(),
+                                                                   Text = c.Title
+                                                               }).OrderBy(c => c.Text);
+
+            return selectListOfCourses;
+        }
+
     }
+
 
 }

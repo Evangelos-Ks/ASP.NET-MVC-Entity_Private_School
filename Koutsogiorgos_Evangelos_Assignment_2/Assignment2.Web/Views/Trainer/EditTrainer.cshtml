@@ -1,4 +1,4 @@
-﻿@model Assignment2.Entities.Trainer
+﻿@model Assignment2.Web.Models.TrainerViewModel
 
 @{
     ViewBag.Title = "Edit Trainer";
@@ -7,10 +7,10 @@
 <h2>Edit Trainer</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditTrainer", "Trainer", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>@Model.FirstName @Model.LastName</h4>
         <hr />
@@ -42,12 +42,36 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PhotoUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PhotoUrl, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhotoUrl, "", new { @class = "text-danger" })
+                <input type="file" name="ImageFile" accept="image/*" class="btn btn-light" />
+                @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        @if (Model.ExistingCourses.Count() > 0)
+        {
+            <div class="form-group">
+                Remove courses
+                <div class="col-md-10">
+                    @Html.ListBoxFor(model => model.ExistingCoursesCoursesId, Model.ExistingCourses, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ExistingCoursesCoursesId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        @if (Model.Courses.Count() > 0)
+        {
+            <div class="form-group">
+                Add courses
+                <div class="col-md-10">
+                    @Html.ListBoxFor(model => model.CoursesId, Model.Courses, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CoursesId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <input type="text" name="PhotoUrl" value=@Model.PhotoUrl hidden />
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -58,7 +82,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "AllTrainers", null, new { @class = "btn btn-info"})
+    @Html.ActionLink("Back to List", "AllTrainers", null, new { @class = "btn btn-info" })
 </div>
 
 @section Scripts {
