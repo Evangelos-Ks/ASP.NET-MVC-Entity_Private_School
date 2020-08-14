@@ -160,6 +160,7 @@ namespace Assignment2.Web.Controllers
             var courses = courseRepository.GetAll();
             ViewBag.CourseId = new SelectList(courses, "CourseId", "Title");
             courseRepository.Dispose();
+
             return View();
         }
 

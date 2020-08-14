@@ -250,7 +250,7 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,ImageFile,AllCoursesId")] TrainerViewModel trainerViewModel)
+        public ActionResult CreateTrainer([Bind(Include = "TrainerId,FirstName,LastName,Subject,ImageFile,CoursesId")] TrainerViewModel trainerViewModel)
         {
             if (ModelState.IsValid)
             {
