@@ -6,6 +6,7 @@ using System.Net;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Collections.Generic;
 using PagedList;
+using Assignment2.Web.Models;
 
 namespace Assignment2.Web.Controllers
 {
@@ -160,6 +161,11 @@ namespace Assignment2.Web.Controllers
             var courses = courseRepository.GetAll();
             ViewBag.CourseId = new SelectList(courses, "CourseId", "Title");
             courseRepository.Dispose();
+
+            AssignmentViewModel assignmentViewModel = new AssignmentViewModel()
+            {
+
+            };
 
             return View();
         }
