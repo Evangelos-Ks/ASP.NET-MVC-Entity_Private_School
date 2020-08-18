@@ -157,10 +157,22 @@ namespace Assignment2.Web.Controllers
         // GET: TestAssignment/Create
         public ActionResult CreateAssignment()
         {
+            //Get courses
             CourseRepository courseRepository = new CourseRepository();
-            var courses = courseRepository.GetAll();
+            var courses = courseRepository.GetAll().OrderBy(c => c.CourseId);
             courseRepository.Dispose();
 
+            //Get students
+            StudentRepository studentRepository = new StudentRepository();
+            IEnumerable<Student> students = studentRepository.GetAll();
+            studentRepository.Dispose();
+
+            //Get studentCourses
+            StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+            IEnumerable<StudentCourse> studentCourses = studentCourseRepository.GetAll();
+            studentCourseRepository.Dispose();
+
+            //Create assignmentViewModel
             AssignmentViewModel assignmentViewModel = new AssignmentViewModel()
             {
                 Courses = Methods.CreateSelectListOfCourses(courses)
@@ -174,34 +186,53 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAssignment([Bind(Include = "AssignmentId,Title,Description,SubDateTime,CourseId")] Assignment assignment)
+        public ActionResult CreateAssignment([Bind(Include = "AssignmentId,Title,Description,SubDateTime,CourseId,FinalSubmit")] AssignmentViewModel assignmentVM)
         {
-            if (ModelState.IsValid)
+            if (assignmentVM.FinalSubmit == true)
             {
-                AssignmentRepository assignmentRepository = new AssignmentRepository();
-                assignmentRepository.Insert(assignment);
-                assignmentRepository.Dispose();
+                if (ModelState.IsValid)
+                {
+                    //Create assignment
+                    Assignment assignment = new Assignment()
+                    {
+                        AssignmentId = assignmentVM.AssignmentId,
+                        Description = assignmentVM.Description,
+                        SubDateTime = assignmentVM.SubDateTime,
+                        Title = assignmentVM.Title,
+                        CourseId = assignmentVM.CourseId
+                    };
 
-                return RedirectToAction("AllAssignments");
+                    //Insert assignment
+                    AssignmentRepository assignmentRepository = new AssignmentRepository();
+                    assignmentRepository.Insert(assignment);
+                    assignmentRepository.Dispose();
+
+                    return RedirectToAction("AllAssignments");
+                }
             }
+            
 
             //Get all courses
             CourseRepository courseRepository = new CourseRepository();
             var courses = courseRepository.GetAll();
             courseRepository.Dispose();
 
-            //Create assignmentViewModel
-            AssignmentViewModel assignmentViewModel = new AssignmentViewModel()
-            {
-                AssignmentId = assignment.AssignmentId,
-                Title = assignment.Title,
-                Description = assignment.Description,
-                SubDateTime = assignment.SubDateTime,
-                Courses = Methods.CreateSelectListOfCourses(courses),
-                CourseId = assignment.CourseId
-            };
+            //Create selectItems of courses
+            assignmentVM.Courses = Methods.CreateSelectListOfCourses(courses);
 
-            return View(assignmentViewModel);
+            if (assignmentVM.CourseId != null)
+            {
+                //Get students
+                StudentCourseRepository studentCourseRepository = new StudentCourseRepository();
+                List<Student> students = studentCourseRepository.GetAll().Where(sc => sc.CourseId == assignmentVM.CourseId)
+                                        .Select(sc => sc.Student).ToList();
+                studentCourseRepository.Dispose();
+
+                //Create selectItems of Students
+                assignmentVM.Students = Methods.CreateSelectListOfStudents(students);
+            }
+
+            return View(assignmentVM);
         }
 
         // GET: TestAssignment/Delete/5

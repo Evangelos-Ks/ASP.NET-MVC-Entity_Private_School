@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assignment2.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,5 +23,8 @@ namespace Assignment2.Web.Models
         [Display(Name ="Courses")]
         public IEnumerable<SelectListItem> Courses { get; set; }
         public int? CourseId { get; set; }
+        public IEnumerable<SelectListItem> Students { get; set; }
+        public List<int> StudentsId { get; set; }
+        public bool FinalSubmit { get; set; }
     }
 }
