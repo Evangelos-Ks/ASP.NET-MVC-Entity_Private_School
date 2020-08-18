@@ -20,9 +20,10 @@ namespace Assignment2.Web.Models
         [Display(Name = "Submission date")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? SubDateTime { get; set; }
-        [Display(Name ="Courses")]
+        [Display(Name ="Select course")]
         public IEnumerable<SelectListItem> Courses { get; set; }
         public int? CourseId { get; set; }
+        [Display(Name = "Select students")]
         public IEnumerable<SelectListItem> Students { get; set; }
         public List<int> StudentsId { get; set; }
         public bool FinalSubmit { get; set; }

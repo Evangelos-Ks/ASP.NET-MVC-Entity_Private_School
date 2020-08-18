@@ -186,7 +186,7 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAssignment([Bind(Include = "AssignmentId,Title,Description,SubDateTime,CourseId,FinalSubmit")] AssignmentViewModel assignmentVM)
+        public ActionResult CreateAssignment([Bind(Include = "AssignmentId,Title,Description,SubDateTime,CourseId,FinalSubmit,StudentsId")] AssignmentViewModel assignmentVM)
         {
             if (assignmentVM.FinalSubmit == true)
             {
@@ -207,10 +207,25 @@ namespace Assignment2.Web.Controllers
                     assignmentRepository.Insert(assignment);
                     assignmentRepository.Dispose();
 
+                    //Create studentAssignment and insert
+                    if (assignmentVM.StudentsId != null)
+                    {
+                        StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+                        foreach (int studentId in assignmentVM.StudentsId)
+                        {
+                            StudentAssignment studentAssignment = new StudentAssignment()
+                            {
+                                StudentId = studentId,
+                                AssignmentId = assignment.AssignmentId
+                            };
+                            studentAssignmentRepository.Insert(studentAssignment);
+                        }
+                        studentAssignmentRepository.Dispose();
+                    }
+
                     return RedirectToAction("AllAssignments");
                 }
             }
-            
 
             //Get all courses
             CourseRepository courseRepository = new CourseRepository();

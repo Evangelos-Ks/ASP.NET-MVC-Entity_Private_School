@@ -51,13 +51,13 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Students, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.StudentsId, Model.Students, "--Select--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ListBoxFor(model => model.StudentsId, Model.Students, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.StudentsId, "", new { @class = "text-danger" })
                 </div>
             </div>
         }
 
-        @Html.TextBox("FinalSubmit", true, new { type = "hidden", @class = "form-control" })
+        @Html.TextBox("FinalSubmit", true , new { type = "hidden", @class = "form-control" })
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -74,6 +74,7 @@
 <script>
     (function () {
         document.getElementById("CourseId").addEventListener("change", change);
+        document.getElementById("FinalSubmit").value = true;
     })();
 
     function change() {
