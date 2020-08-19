@@ -20,7 +20,7 @@ namespace Assignment2.Entities
 
         //======================== Navigation Properties ================================================
         [ForeignKey("Course")]
-        public int CourseId { get; set; }
+        public int? CourseId { get; set; }
         public virtual Course Course { get; set; }
         public virtual ICollection<StudentAssignment> StudentAssignments { get; set; }
     }

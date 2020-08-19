@@ -136,7 +136,7 @@ namespace Assignment2.Web.Controllers
                 DateOfBirth = student.DateOfBirth,
                 Discount = student.Discount,
                 PhotoUrl = student.PhotoUrl,
-                ExistingCourses = CreateSelectListOfCourses(existingCourses),
+                ExistingCourses = Methods.CreateSelectListOfCourses(existingCourses),
                 Fees = totalFees,
                 StudentAssignmentsPerCourse = studentAssignmentsPerCourse,
             };
@@ -188,8 +188,8 @@ namespace Assignment2.Web.Controllers
                 DateOfBirth = student.DateOfBirth,
                 Discount = student.Discount,
                 PhotoUrl = student.PhotoUrl,
-                CoursesForAddition = CreateSelectListOfCourses(allCourses),
-                ExistingCourses = CreateSelectListOfCourses(existingCourses)
+                CoursesForAddition = Methods.CreateSelectListOfCourses(allCourses),
+                ExistingCourses = Methods.CreateSelectListOfCourses(existingCourses)
             };
 
             return View(studentViewModel);
@@ -272,7 +272,7 @@ namespace Assignment2.Web.Controllers
 
             StudentViewModel courseViewModel = new StudentViewModel()
             {
-                AllCourses = CreateSelectListOfCourses(courses)
+                AllCourses = Methods.CreateSelectListOfCourses(courses)
             };
 
             return View(courseViewModel);
@@ -338,7 +338,7 @@ namespace Assignment2.Web.Controllers
 
             StudentViewModel courseViewModel = new StudentViewModel()
             {
-                AllCourses = CreateSelectListOfCourses(courses)
+                AllCourses = Methods.CreateSelectListOfCourses(courses)
             };
 
             return View(studentViewModel);
@@ -393,18 +393,6 @@ namespace Assignment2.Web.Controllers
             studentRepository.Dispose();
 
             return RedirectToAction("AllStudents");
-        }
-
-        //============================================== Protected Methods =================================================
-        protected IEnumerable<SelectListItem> CreateSelectListOfCourses(IEnumerable<Course> Courses)
-        {
-            var selectList = Courses.Select(c => new SelectListItem
-            {
-                Value = c.CourseId.ToString(),
-                Text = c.Title
-            }).OrderBy(o => o.Text);
-
-            return selectList;
-        }
+        }        
     }
 }

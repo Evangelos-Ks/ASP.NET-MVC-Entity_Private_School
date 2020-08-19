@@ -179,10 +179,10 @@ namespace Assignment2.Web.Controllers
                 StartDate = course.StartDate,
                 EndDate = course.EndDate,
                 TuitionFees = course.CourseFees,
-                StudentsForAddition = CreateSelectListOfStudents(allStudents),
-                TrainersForAddition = CreateSelectListOfTrainers(allTrainers),
-                StudentsForSubtraction = CreateSelectListOfStudents(existingStudents),
-                TrainersForSubtraction = CreateSelectListOfTrainers(existingTrainers)
+                StudentsForAddition = Methods.CreateSelectListOfStudents(allStudents),
+                TrainersForAddition = Methods.CreateSelectListOfTrainers(allTrainers),
+                StudentsForSubtraction = Methods.CreateSelectListOfStudents(existingStudents),
+                TrainersForSubtraction = Methods.CreateSelectListOfTrainers(existingTrainers)
             };
 
             return View(courseViewModel);
@@ -303,10 +303,10 @@ namespace Assignment2.Web.Controllers
                 allTrainers.Remove(selectedTrainer);
             }
 
-            courseViewModel.StudentsForAddition = CreateSelectListOfStudents(allStudents);
-            courseViewModel.TrainersForAddition = CreateSelectListOfTrainers(allTrainers);
-            courseViewModel.StudentsForSubtraction = CreateSelectListOfStudents(existingStudents);
-            courseViewModel.TrainersForSubtraction = CreateSelectListOfTrainers(existingTrainers);
+            courseViewModel.StudentsForAddition = Methods.CreateSelectListOfStudents(allStudents);
+            courseViewModel.TrainersForAddition = Methods.CreateSelectListOfTrainers(allTrainers);
+            courseViewModel.StudentsForSubtraction = Methods.CreateSelectListOfStudents(existingStudents);
+            courseViewModel.TrainersForSubtraction = Methods.CreateSelectListOfTrainers(existingTrainers);
 
             return View(courseViewModel);
         }
@@ -323,8 +323,8 @@ namespace Assignment2.Web.Controllers
             trainerRepository.Dispose();
 
             CourseViewModel courseViewModel = new CourseViewModel();
-            courseViewModel.Students = CreateSelectListOfStudents(students);
-            courseViewModel.Trainers = CreateSelectListOfTrainers(trainers);
+            courseViewModel.Students = Methods.CreateSelectListOfStudents(students);
+            courseViewModel.Trainers = Methods.CreateSelectListOfTrainers(trainers);
 
             return View(courseViewModel);
         }
@@ -393,7 +393,7 @@ namespace Assignment2.Web.Controllers
                 var students = studentRepository.GetAll();
                 studentRepository.Dispose();
 
-                courseViewModel.Students = CreateSelectListOfStudents(students);
+                courseViewModel.Students = Methods.CreateSelectListOfStudents(students);
             }
 
             if (courseViewModel.Trainers == null)
@@ -402,7 +402,7 @@ namespace Assignment2.Web.Controllers
                 var trainers = trainerCourseRepository.GetAll();
                 trainerCourseRepository.Dispose();
 
-                courseViewModel.Trainers = CreateSelectListOfTrainers(trainers);
+                courseViewModel.Trainers = Methods.CreateSelectListOfTrainers(trainers);
             }
 
             return View(courseViewModel);
@@ -475,35 +475,6 @@ namespace Assignment2.Web.Controllers
             courseRepository.Dispose();
 
             return RedirectToAction("AllCourses");
-        }
-
-        //============================================== Protected Methods =================================================
-        protected IEnumerable<SelectListItem> CreateSelectListOfStudents(IEnumerable<Student> students)
-        {
-            var selectlist = students.Select(s =>
-                                new SelectListItem()
-                                {
-                                    Value = s.StudentId.ToString(),
-                                    Text = string.Format(s.FirstName + " " + s.LastName)
-                                })
-                                 .OrderBy(s => s.Text)
-                                 .ToList();
-
-            return selectlist;
-        }
-
-        protected IEnumerable<SelectListItem> CreateSelectListOfTrainers(IEnumerable<Trainer> trainers)
-        {
-            var selectlist = trainers.Select(t =>
-                                new SelectListItem()
-                                {
-                                    Value = t.TrainerId.ToString(),
-                                    Text = string.Format(t.FirstName + " " + t.LastName)
-                                })
-                                 .OrderBy(t => t.Text)
-                                 .ToList();
-
-            return selectlist;
-        }
+        }        
     }
 }

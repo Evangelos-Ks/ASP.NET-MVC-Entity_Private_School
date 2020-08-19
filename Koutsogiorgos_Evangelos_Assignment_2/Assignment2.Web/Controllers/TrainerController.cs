@@ -151,8 +151,8 @@ namespace Assignment2.Web.Controllers
                 LastName = trainer.LastName,
                 Subject = trainer.Subject,
                 PhotoUrl = trainer.PhotoUrl,
-                ExistingCourses = CreateSelectListOfCourses(existingCourses),
-                Courses = CreateSelectListOfCourses(courses)
+                ExistingCourses = Methods.CreateSelectListOfCourses(existingCourses),
+                Courses = Methods.CreateSelectListOfCourses(courses)
             };
 
             return View(trainerViewModel);
@@ -239,7 +239,7 @@ namespace Assignment2.Web.Controllers
             //Create TrainerViewModel
             TrainerViewModel trainerViewModel = new TrainerViewModel()
             {
-                Courses = CreateSelectListOfCourses(allCourses)
+                Courses = Methods.CreateSelectListOfCourses(allCourses)
             };
 
             return View(trainerViewModel);
@@ -340,21 +340,5 @@ namespace Assignment2.Web.Controllers
 
             return RedirectToAction("AllTrainers");
         }
-
-        //============================================== Protected Methods =================================================
-        protected IEnumerable<SelectListItem> CreateSelectListOfCourses(IEnumerable<Course> courses)
-        {
-            IEnumerable<SelectListItem> selectListOfCourses = courses.Select(c =>
-                                                               new SelectListItem
-                                                               {
-                                                                   Value = c.CourseId.ToString(),
-                                                                   Text = c.Title
-                                                               }).OrderBy(c => c.Text);
-
-            return selectListOfCourses;
-        }
-
     }
-
-
 }
