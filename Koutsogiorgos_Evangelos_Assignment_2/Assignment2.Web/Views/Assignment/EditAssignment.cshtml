@@ -1,4 +1,4 @@
-﻿@model Assignment2.Entities.Assignment
+﻿@model Assignment2.Web.Models.AssignmentViewModel
 
 @{
     ViewBag.Title = "Edit Assignment";
@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Assignment</h4>
         <hr />
@@ -41,13 +41,29 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseId, "CourseId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CourseId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+        @if (Model.ExistingStudents.Count() > 0)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ExistingStudents, "Remove students", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ListBoxFor(model => model.ExistingStudentsId, Model.ExistingStudents, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ExistingStudentsId, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
+        }
+
+        @if (Model.Students.Count() > 0)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Students, "Add students", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ListBoxFor(model => model.StudentsId, Model.Students, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StudentsId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <input type="text" name="CourseId" value=@Model.CourseId hidden />
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

@@ -7,6 +7,8 @@ using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Collections.Generic;
 using PagedList;
 using Assignment2.Web.Models;
+using Microsoft.Win32.SafeHandles;
+using System.ComponentModel.DataAnnotations;
 
 namespace Assignment2.Web.Controllers
 {
@@ -19,7 +21,7 @@ namespace Assignment2.Web.Controllers
             var assignments = assignmentRepository.GetAll();
             assignmentRepository.Dispose();
 
-            //============================================== Paging ========================================================
+            //Paging
             if (!string.IsNullOrWhiteSpace(search) || search == "")
             {
                 page = 1;
@@ -42,14 +44,14 @@ namespace Assignment2.Web.Controllers
              new SelectListItem() { Value="50", Text= "50" }
             };
 
-            //============================================== searching =====================================================
+            //searching
             if (!string.IsNullOrEmpty(search))
             {
                 assignments = assignments.Where(x => x.Course.Title.ToUpper().Contains(search.ToUpper()) ||
                 x.Title.ToUpper().Contains(search.ToUpper()) || x.Description.ToUpper().Contains(search.ToUpper()));
             }
 
-            //============================================== sorting =======================================================
+            //sorting
             ViewBag.CourseTitle = string.IsNullOrEmpty(sort) ? "courseTitleDesc" : "";
             ViewBag.AssignmentTitle = sort == "assignmentTitleAsc" ? "assignmentTitleDesc" : "assignmentTitleAsc";
             ViewBag.Description = sort == "descriptionAsc" ? "descriptionDesc" : "descriptionAsc";
@@ -114,27 +116,55 @@ namespace Assignment2.Web.Controllers
         public ActionResult EditAssignment(int? id)
         {
             AssignmentRepository assignmentRepository = new AssignmentRepository();
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Assignment assignment = assignmentRepository.GetById(id);
-
-            CourseRepository courseRepository = new CourseRepository();
-            var courses = courseRepository.GetAll();
-            ViewBag.CourseId = new SelectList(courses, "CourseId", "Title", assignment.CourseId);
-
-
             assignmentRepository.Dispose();
-            courseRepository.Dispose();
 
             if (assignment == null)
             {
                 return HttpNotFound();
             }
 
-            return View(assignment);
+            //Find Existing students
+            StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+            List<Student> existingStudents = studentAssignmentRepository.GetAll()
+                                                    .Where(sa => sa.AssignmentId == id)
+                                                    .Select(sa => sa.Student).ToList();
+            studentAssignmentRepository.Dispose();
+
+            //Find not existing students which have assigned in the assignment's course
+            int? courseId = assignment.CourseId;
+            List<Student> studentsPerCourse = new List<Student>();
+            if (courseId != null)
+            {
+                CourseRepository courseRepository = new CourseRepository();
+                studentsPerCourse = courseRepository.GetById(courseId).StudentCourses
+                                                       .Select(sc => sc.Student).ToList();
+                courseRepository.Dispose();
+
+                foreach (Student student in existingStudents)
+                {
+                    Student findStudent = studentsPerCourse.Find(s => s.StudentId == student.StudentId);
+                    studentsPerCourse.Remove(findStudent);
+                }
+            }
+
+            //Create assignmentViewModel
+            AssignmentViewModel assignmentViewModel = new AssignmentViewModel()
+            {
+                AssignmentId = assignment.AssignmentId,
+                Description = assignment.Description,
+                SubDateTime = assignment.SubDateTime,
+                Title = assignment.Title,
+                CourseId = assignment.CourseId,
+                Students = Methods.CreateSelectListOfStudents(studentsPerCourse),
+                ExistingStudents = Methods.CreateSelectListOfStudents(existingStudents)
+            };
+
+            return View(assignmentViewModel);
         }
 
         // POST: TestAssignment/Edit/5
@@ -142,16 +172,83 @@ namespace Assignment2.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditAssignment([Bind(Include = "AssignmentId,Title,Description,SubDateTime,CourseId")] Assignment assignment)
+        public ActionResult EditAssignment([Bind(Include = "AssignmentId,Title,Description,SubDateTime,CourseId,ExistingStudentsId,StudentsId")] AssignmentViewModel assignmentViewModel)
         {
             if (ModelState.IsValid)
             {
+                //Create Assignment
+                Assignment assignment = new Assignment()
+                {
+                    AssignmentId = assignmentViewModel.AssignmentId,
+                    Title = assignmentViewModel.Title,
+                    Description = assignmentViewModel.Description,
+                    CourseId = assignmentViewModel.CourseId,
+                    SubDateTime = assignmentViewModel.SubDateTime
+                };
+
+                //Insert assignment
                 AssignmentRepository assignmentRepository = new AssignmentRepository();
                 assignmentRepository.Update(assignment);
                 assignmentRepository.Dispose();
+
+                //Update the realation student-assignment
+                StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+                //Remove students from assignments
+                if (assignmentViewModel.ExistingStudentsId != null)
+                {
+                    List<StudentAssignment> allStudentAssignments = studentAssignmentRepository.GetAll().ToList();
+                    foreach (int studentId in assignmentViewModel.ExistingStudentsId)
+                    {
+                        StudentAssignment studentAssignment = allStudentAssignments.Find(sa => sa.StudentId == studentId);
+                        studentAssignmentRepository.Delete(studentAssignment);
+                    }
+                }
+                //Add student into assignments
+                if (assignmentViewModel.StudentsId != null)
+                {
+                    foreach (int studentId in assignmentViewModel.StudentsId)
+                    {
+                        StudentAssignment studentAssignment = new StudentAssignment()
+                        {
+                            StudentId = studentId,
+                            AssignmentId = assignment.AssignmentId
+                        };
+                        studentAssignmentRepository.Insert(studentAssignment);
+                    }
+                }
+                studentAssignmentRepository.Dispose();
+
                 return RedirectToAction("AllAssignments");
             }
-            return View(assignment);
+
+            //Find Existing students
+            StudentAssignmentRepository studentAssignmentRepository2 = new StudentAssignmentRepository();
+            List<Student> existingStudents = studentAssignmentRepository2.GetAll()
+                                                    .Where(sa => sa.AssignmentId == assignmentViewModel.AssignmentId)
+                                                    .Select(sa => sa.Student).ToList();
+            studentAssignmentRepository2.Dispose();
+
+            //Find not existing students which have assigned in the assignment's course
+            int? courseId = assignmentViewModel.CourseId;
+            List<Student> studentsPerCourse = new List<Student>();
+            if (courseId != null)
+            {
+                CourseRepository courseRepository = new CourseRepository();
+                studentsPerCourse = courseRepository.GetById(courseId).StudentCourses
+                                                       .Select(sc => sc.Student).ToList();
+                courseRepository.Dispose();
+
+                foreach (Student student in existingStudents)
+                {
+                    studentsPerCourse.Remove(student);
+                }
+            }
+
+            //Create selectListItems
+            assignmentViewModel.Students = Methods.CreateSelectListOfStudents(studentsPerCourse);
+            assignmentViewModel.ExistingStudents = Methods.CreateSelectListOfStudents(existingStudents);
+
+            return View(assignmentViewModel);
         }
 
         // GET: TestAssignment/Create

@@ -27,5 +27,7 @@ namespace Assignment2.Web.Models
         public IEnumerable<SelectListItem> Students { get; set; }
         public List<int> StudentsId { get; set; }
         public bool FinalSubmit { get; set; }
+        public IEnumerable<SelectListItem> ExistingStudents { get; set; }
+        public List<int> ExistingStudentsId { get; set; }
     }
 }
