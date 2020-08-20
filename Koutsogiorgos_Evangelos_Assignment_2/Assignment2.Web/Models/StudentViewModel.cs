@@ -41,7 +41,7 @@ namespace Assignment2.Web.Models
         [Display(Name = "Total fees after the discount")]
         public int? Fees { get; set; }
         public int OralMark { get; set; }
-        public int WhritingMark { get; set; }
+        public int WritingMark { get; set; }
         public int TotalMark { get; set; }
 
     }

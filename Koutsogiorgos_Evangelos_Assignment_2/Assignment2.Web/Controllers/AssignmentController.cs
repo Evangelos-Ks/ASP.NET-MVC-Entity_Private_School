@@ -407,5 +407,14 @@ namespace Assignment2.Web.Controllers
 
             return View(studentAssignments);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Marks([Bind(Include = "StudentAssignmentId,OralMark,WritingMark")] StudentAssignment studentAssignment)
+        {
+            //I take only the first entity
+            //TODO Make it to accept all the entities
+            return RedirectToAction("AllAssignments");
+        }
     }
 }

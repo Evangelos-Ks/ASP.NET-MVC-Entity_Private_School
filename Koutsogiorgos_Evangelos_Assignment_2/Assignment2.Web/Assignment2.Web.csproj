@@ -152,6 +152,7 @@
     <Compile Include="Models\AssignmentViewModel.cs" />
     <Compile Include="Models\CourseViewModel.cs" />
     <Compile Include="Models\Methods.cs" />
+    <Compile Include="Models\StudentAssignmentViewModel.cs" />
     <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Models\TrainerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

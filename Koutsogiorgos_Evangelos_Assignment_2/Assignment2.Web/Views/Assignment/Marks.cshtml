@@ -5,9 +5,9 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Marks</h4>
+        <h2>Edit marks</h2>
         <hr />
-
+        <h4>Students</h4>
         <div class="form-group">
             <table class="table">
                 <tr>
@@ -21,7 +21,7 @@
                         Oral mark
                     </th>
                     <th>
-                        Whriting mark
+                        Writing mark
                     </th>
                 </tr>
                 @foreach (Assignment2.Entities.StudentAssignment studentAssignment in Model)
@@ -38,8 +38,12 @@
                             @Html.ValidationMessageFor(model => studentAssignment.OralMark, "", new { @class = "text-danger" })
                         </td>
                         <td>
-                            @Html.EditorFor(model => studentAssignment.WhritingMark, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => studentAssignment.WhritingMark, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => studentAssignment.WritingMark, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => studentAssignment.WritingMark, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td hidden>
+                            <input type="number" name="studentAssignment.StudentAssignmentId" value=@studentAssignment.StudentAssignmentId hidden />
                         </td>
                     </tr>
                 }
