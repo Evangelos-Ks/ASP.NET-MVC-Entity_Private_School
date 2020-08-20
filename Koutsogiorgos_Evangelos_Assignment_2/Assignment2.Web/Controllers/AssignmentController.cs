@@ -388,5 +388,24 @@ namespace Assignment2.Web.Controllers
 
             return RedirectToAction("AllAssignments");
         }
+
+        //Get:  TestAssignment/Marks/1
+        public ActionResult Marks(int? id)
+        {
+            StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            List<StudentAssignment> studentAssignments = studentAssignmentRepository.GetAll()
+                                                         .Where(sa => sa.AssignmentId == id).ToList();
+            studentAssignmentRepository.Dispose();
+            if (studentAssignments.Count == 0)
+            {
+                return HttpNotFound();
+            }
+
+            return View(studentAssignments);
+        }
     }
 }

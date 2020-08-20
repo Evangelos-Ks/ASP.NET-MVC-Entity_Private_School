@@ -4,7 +4,7 @@ using System.Linq;
 using Assignment2.Database;
 using Assignment2.Entities;
 using System.Data.Entity;
-
+using Microsoft.Win32.SafeHandles;
 
 namespace Assignment2.Services
 {
@@ -15,7 +15,7 @@ namespace Assignment2.Services
         //============================ Get All =========================================
         public IEnumerable<StudentAssignment> GetAll()
         {
-            return db.StudentsAssignments.Include(sa => sa.Assignment).ToList();
+            return db.StudentsAssignments.Include(sa => sa.Assignment).Include(sa => sa.Student).ToList();
         }
 
         //============================ Get GetById =========================================

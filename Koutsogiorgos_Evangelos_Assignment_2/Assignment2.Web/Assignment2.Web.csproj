@@ -333,6 +333,7 @@
     <Content Include="Views\StudentsPerCoursePerAssignment\AllStudentsPerCoursePerAssignment.cshtml" />
     <Content Include="Views\Statistics\StatisticsIndex.cshtml" />
     <Content Include="Views\Statistics\Chart6.cshtml" />
+    <Content Include="Views\Assignment\Marks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

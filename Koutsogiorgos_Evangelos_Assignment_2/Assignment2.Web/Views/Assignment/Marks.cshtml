@@ -1,0 +1,59 @@
+﻿@model List<Assignment2.Entities.StudentAssignment>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Marks</h4>
+        <hr />
+
+        <div class="form-group">
+            <table class="table">
+                <tr>
+                    <th>
+                        First name
+                    </th>
+                    <th>
+                        Last name
+                    </th>
+                    <th>
+                        Oral mark
+                    </th>
+                    <th>
+                        Whriting mark
+                    </th>
+                </tr>
+                @foreach (Assignment2.Entities.StudentAssignment studentAssignment in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => studentAssignment.Student.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => studentAssignment.Student.LastName)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => studentAssignment.OralMark, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => studentAssignment.OralMark, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => studentAssignment.WhritingMark, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => studentAssignment.WhritingMark, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" /> @Html.ActionLink("Back to List", "AllAssignments", null, new { @class = "btn btn-info" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
