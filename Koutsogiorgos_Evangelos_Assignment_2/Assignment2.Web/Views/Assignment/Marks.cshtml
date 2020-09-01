@@ -1,4 +1,4 @@
-﻿@model List<Assignment2.Entities.StudentAssignment>
+﻿@model Assignment2.Web.Models.StudentAssignmentsViewModel
 
 @using (Html.BeginForm())
 {
@@ -24,26 +24,26 @@
                         Writing mark
                     </th>
                 </tr>
-                @foreach (Assignment2.Entities.StudentAssignment studentAssignment in Model)
+                @for (int j = 0; j < Model.StudentAssignments.Count(); j++)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(model => studentAssignment.Student.FirstName)
+                            @Html.DisplayFor(model => model.StudentAssignments[j].Student.FirstName)
                         </td>
                         <td>
-                            @Html.DisplayFor(model => studentAssignment.Student.LastName)
+                            @Html.DisplayFor(model => model.StudentAssignments[j].Student.LastName)
                         </td>
                         <td>
-                            @Html.EditorFor(model => studentAssignment.OralMark, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => studentAssignment.OralMark, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.StudentAssignments[j].OralMark, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StudentAssignments[j].OralMark, "", new { @class = "text-danger" })
                         </td>
                         <td>
-                            @Html.EditorFor(model => studentAssignment.WritingMark, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => studentAssignment.WritingMark, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.StudentAssignments[j].WritingMark, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StudentAssignments[j].WritingMark, "", new { @class = "text-danger" })
                         </td>
 
                         <td hidden>
-                            <input type="number" name="studentAssignment.StudentAssignmentId" value=@studentAssignment.StudentAssignmentId hidden />
+                            <input type="number" name="StudentAssignments[@j].StudentAssignmentId" value=@Model.StudentAssignments[j].StudentAssignmentId hidden />
                         </td>
                     </tr>
                 }
@@ -57,6 +57,10 @@
         </div>
     </div>
 }
+
+<script>
+
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

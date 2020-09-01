@@ -405,15 +405,19 @@ namespace Assignment2.Web.Controllers
                 return HttpNotFound();
             }
 
-            return View(studentAssignments);
+            StudentAssignmentsViewModel studentAssignmentsViewModel = new StudentAssignmentsViewModel()
+            {
+                StudentAssignments = studentAssignments
+            };
+
+            return View(studentAssignmentsViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Marks([Bind(Include = "StudentAssignmentId,OralMark,WritingMark")] StudentAssignment studentAssignment)
+        public ActionResult Marks(StudentAssignmentsViewModel studentAssignmentsViewModel)
         {
-            //I take only the first entity
-            //TODO Make it to accept all the entities
+            //I can take the inputs and I need only the logic
             return RedirectToAction("AllAssignments");
         }
     }
