@@ -4,7 +4,6 @@ using System.Linq;
 using Assignment2.Database;
 using Assignment2.Entities;
 using System.Data.Entity;
-using Microsoft.Win32.SafeHandles;
 
 namespace Assignment2.Services
 {
