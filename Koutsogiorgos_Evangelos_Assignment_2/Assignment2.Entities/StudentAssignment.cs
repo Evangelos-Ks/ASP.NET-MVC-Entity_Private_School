@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.ModelConfiguration.Configuration;
 
 namespace Assignment2.Entities
 {
@@ -13,7 +14,9 @@ namespace Assignment2.Entities
         [Display(Name = "Assignment")]
         [Required]
         public int AssignmentId { get; set; }
+        [Range(minimum:0, maximum:100, ErrorMessage = "The range of the mark is 0-100")]
         public int? OralMark { get; set; }
+        [Range(minimum: 0, maximum: 100, ErrorMessage = "The range of the mark is 0-100")]
         public int? WritingMark { get; set; }
         public int? TotalMark { get; set; }
 

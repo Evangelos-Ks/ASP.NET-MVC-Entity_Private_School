@@ -34,11 +34,11 @@
                             @Html.DisplayFor(model => model.StudentAssignments[j].Student.LastName)
                         </td>
                         <td>
-                            @Html.EditorFor(model => model.StudentAssignments[j].OralMark, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.StudentAssignments[j].OralMark, new { htmlAttributes = new { @class = "form-control"} })
                             @Html.ValidationMessageFor(model => model.StudentAssignments[j].OralMark, "", new { @class = "text-danger" })
                         </td>
                         <td>
-                            @Html.EditorFor(model => model.StudentAssignments[j].WritingMark, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.StudentAssignments[j].WritingMark, new { htmlAttributes = new { @class = "form-control"} })
                             @Html.ValidationMessageFor(model => model.StudentAssignments[j].WritingMark, "", new { @class = "text-danger" })
                         </td>
 
