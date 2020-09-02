@@ -417,7 +417,20 @@ namespace Assignment2.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Marks(StudentAssignmentsViewModel studentAssignmentsViewModel)
         {
-            //I can take the inputs and I need only the logic
+            StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+            foreach (StudentAssignment studentAssignment in studentAssignmentsViewModel.StudentAssignments)
+            {
+                if (studentAssignment.StudentAssignmentId != 0)
+                {
+                    StudentAssignment currentStudentAssignment = studentAssignmentRepository.GetById(studentAssignment.StudentAssignmentId);
+                    currentStudentAssignment.OralMark = studentAssignment.OralMark;
+                    currentStudentAssignment.WritingMark = studentAssignment.WritingMark;
+                    currentStudentAssignment.TotalMark = currentStudentAssignment.CalculateTotalMark(studentAssignment.OralMark, studentAssignment.WritingMark);
+                    studentAssignmentRepository.Update(currentStudentAssignment);
+                }
+            }
+            studentAssignmentRepository.Dispose();
+
             return RedirectToAction("AllAssignments");
         }
     }
