@@ -22,6 +22,7 @@ namespace Assignment2.Web.Models
         [Display(Name = "Date of birth")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfBirth { get; set; }
+        [Display(Name = "Student photo")]
         public string PhotoUrl { get; set; }
         [Range(0, int.MaxValue, ErrorMessage = "Only positive values are acceptable")]
         public int Discount { get; set; } = 0;
@@ -40,7 +41,7 @@ namespace Assignment2.Web.Models
         [Display(Name = "Total fees after the discount")]
         public int? Fees { get; set; }
         public int OralMark { get; set; }
-        public int WhritingMark { get; set; }
+        public int WritingMark { get; set; }
         public int TotalMark { get; set; }
 
     }

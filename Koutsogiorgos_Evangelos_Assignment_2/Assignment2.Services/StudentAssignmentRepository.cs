@@ -5,7 +5,6 @@ using Assignment2.Database;
 using Assignment2.Entities;
 using System.Data.Entity;
 
-
 namespace Assignment2.Services
 {
     public class StudentAssignmentRepository
@@ -15,7 +14,7 @@ namespace Assignment2.Services
         //============================ Get All =========================================
         public IEnumerable<StudentAssignment> GetAll()
         {
-            return db.StudentsAssignments.Include(sa => sa.Assignment).ToList();
+            return db.StudentsAssignments.Include(sa => sa.Assignment).Include(sa => sa.Student).ToList();
         }
 
         //============================ Get GetById =========================================

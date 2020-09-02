@@ -388,5 +388,50 @@ namespace Assignment2.Web.Controllers
 
             return RedirectToAction("AllAssignments");
         }
+
+        //Get:  TestAssignment/Marks/1
+        public ActionResult Marks(int? id)
+        {
+            StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            List<StudentAssignment> studentAssignments = studentAssignmentRepository.GetAll()
+                                                         .Where(sa => sa.AssignmentId == id).ToList();
+            studentAssignmentRepository.Dispose();
+            if (studentAssignments.Count == 0)
+            {
+                return HttpNotFound();
+            }
+
+            StudentAssignmentsViewModel studentAssignmentsViewModel = new StudentAssignmentsViewModel()
+            {
+                StudentAssignments = studentAssignments
+            };
+
+            return View(studentAssignmentsViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Marks(StudentAssignmentsViewModel studentAssignmentsViewModel)
+        {
+            StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
+            foreach (StudentAssignment studentAssignment in studentAssignmentsViewModel.StudentAssignments)
+            {
+                if (studentAssignment.StudentAssignmentId != 0)
+                {
+                    StudentAssignment currentStudentAssignment = studentAssignmentRepository.GetById(studentAssignment.StudentAssignmentId);
+                    currentStudentAssignment.OralMark = studentAssignment.OralMark;
+                    currentStudentAssignment.WritingMark = studentAssignment.WritingMark;
+                    currentStudentAssignment.TotalMark = currentStudentAssignment.CalculateTotalMark(studentAssignment.OralMark, studentAssignment.WritingMark);
+                    studentAssignmentRepository.Update(currentStudentAssignment);
+                }
+            }
+            studentAssignmentRepository.Dispose();
+
+            return RedirectToAction("AllAssignments");
+        }
     }
 }

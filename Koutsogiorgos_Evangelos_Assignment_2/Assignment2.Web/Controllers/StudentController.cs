@@ -138,7 +138,7 @@ namespace Assignment2.Web.Controllers
                 PhotoUrl = student.PhotoUrl,
                 ExistingCourses = Methods.CreateSelectListOfCourses(existingCourses),
                 Fees = totalFees,
-                StudentAssignmentsPerCourse = studentAssignmentsPerCourse,
+                StudentAssignmentsPerCourse = studentAssignmentsPerCourse
             };
 
             return View(studentViewModel);
