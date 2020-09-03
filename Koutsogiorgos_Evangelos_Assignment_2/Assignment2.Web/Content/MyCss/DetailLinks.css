@@ -1,0 +1,9 @@
+﻿.myLinks {
+    text-decoration: none;
+    color: darkblue;
+}
+
+    .myLinks:hover {
+        color: red;
+        text-decoration: none;
+    }

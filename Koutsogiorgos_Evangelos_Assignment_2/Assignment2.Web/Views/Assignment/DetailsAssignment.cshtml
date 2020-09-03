@@ -4,7 +4,7 @@
     ViewBag.Title = "Details Assignment";
 }
 
-    <h2>Assignment details</h2>
+<h2>Assignment details</h2>
 
 <div>
     <h4>@Html.DisplayFor(model => model.Title)</h4>
@@ -52,6 +52,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "EditAssignment", new { id = Model.AssignmentId }, new { @class = "btn btn-warning" }) 
+    @Html.ActionLink("Edit", "EditAssignment", new { id = Model.AssignmentId }, new { @class = "btn btn-warning" })
     @Html.ActionLink("Back to assignments", "AllAssignments", null, new { @class = "btn btn-info" })
 </p>

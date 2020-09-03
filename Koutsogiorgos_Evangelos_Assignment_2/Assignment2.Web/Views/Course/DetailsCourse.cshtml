@@ -4,6 +4,8 @@
     ViewBag.Title = "Details Course";
 }
 
+<link href="~/Content/MyCss/DetailLinks.css" rel="stylesheet" />
+
 <h2>Course details</h2>
 
 <div>
@@ -67,7 +69,7 @@
             <ol>
                 @foreach (var assignmet in Model.Assignments)
                 {
-                    <li>@Html.ActionLink(@assignmet.Title, "DetailsAssignment", "Assignment", new {id = assignmet.AssignmentId }, null)</li>
+                    <li>@Html.ActionLink(@assignmet.Title, "DetailsAssignment", "Assignment", new { id = assignmet.AssignmentId }, new { @class = "myLinks" })</li>
                 }
             </ol>
         </dd>
