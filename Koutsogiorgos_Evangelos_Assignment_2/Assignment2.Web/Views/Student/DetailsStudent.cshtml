@@ -4,6 +4,8 @@
     ViewBag.Title = "Details";
 }
 
+<link href="~/Content/MyCss/DetailLinks.css" rel="stylesheet" />
+
 <h2>Details</h2>
 
 <div>
@@ -95,19 +97,19 @@
                                     @if (i == 0)
                                     {
                                         <td rowspan="@item.Value.Count" class="border-right">
-                                            @item.Key.Title
+                                            @Html.ActionLink(@item.Key.Title, "DetailsCourse", "Course", new { id = item.Key.CourseId }, new { @class = "myLinks" })
                                         </td>
                                     }
                                     <td>
-                                        @item.Value[i].Assignment.Title
+                                        @Html.ActionLink(@item.Value[i].Assignment.Title, "DetailsAssignment", "Assignment", new { id = item.Value[i].AssignmentId }, new { @class = "myLinks" })
                                     </td>
                                     <td>
                                         <ul>
                                             <li>
-                                                Oral mark : @item.Value[i].OralMark
+                                                @Html.ActionLink("Oral mark: " + @item.Value[i].OralMark, "Marks", "Assignment", new { id = item.Value[i].AssignmentId, studentId = item.Value[i].StudentId }, new { @class = "myLinks" })
                                             </li>
                                             <li>
-                                                Writing mark : @item.Value[i].WritingMark
+                                                @Html.ActionLink("Writing mark: " + @item.Value[i].WritingMark, "Marks", "Assignment", new { id = item.Value[i].AssignmentId, studentId = item.Value[i].StudentId }, new { @class = "myLinks" })
                                             </li>
                                             <li>
                                                 Total mark : @item.Value[i].TotalMark
@@ -125,5 +127,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "EditStudent", new { id = Model.StudentId }, new { @class = "btn btn-warning" })
-    @Html.ActionLink("Back to List", "AllStudents", null, new { @class = "btn btn-info" })
+    @Html.ActionLink("Back to students", "AllStudents", null, new { @class = "btn btn-info" })
 </p>

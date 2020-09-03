@@ -4,7 +4,9 @@
     ViewBag.Title = "Details Assignment";
 }
 
-    <h2>Assignment details</h2>
+<link href="~/Content/MyCss/DetailLinks.css" rel="stylesheet" />
+
+<h2>Assignment details</h2>
 
 <div>
     <h4>@Html.DisplayFor(model => model.Title)</h4>
@@ -15,7 +17,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Course.Title)
+            @Html.ActionLink(Model.Course.Title, "DetailsCourse", "Course", new { id = Model.CourseId }, new { @class = "myLinks" })
         </dd>
 
         <dt>
@@ -52,6 +54,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "EditAssignment", new { id = Model.AssignmentId }, new { @class = "btn btn-warning" }) 
-    @Html.ActionLink("Back to List", "AllAssignments", null, new { @class = "btn btn-info" })
+    @Html.ActionLink("Edit", "EditAssignment", new { id = Model.AssignmentId }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to assignments", "AllAssignments", null, new { @class = "btn btn-info" })
 </p>

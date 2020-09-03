@@ -64,15 +64,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success" />
+                <input type="submit" value="Create" class="btn btn-success" /> @Html.ActionLink("Back to students", "AllStudents", null, new { @class = "btn btn-info" })
+
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "AllStudents", null, new { @class = "btn btn-info" })
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

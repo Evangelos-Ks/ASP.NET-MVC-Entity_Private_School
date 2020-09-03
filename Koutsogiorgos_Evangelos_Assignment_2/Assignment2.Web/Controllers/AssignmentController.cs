@@ -390,7 +390,7 @@ namespace Assignment2.Web.Controllers
         }
 
         //Get:  TestAssignment/Marks/1
-        public ActionResult Marks(int? id)
+        public ActionResult Marks(int? id, int? studentId)
         {
             StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
             if (id == null)
@@ -407,7 +407,7 @@ namespace Assignment2.Web.Controllers
 
             StudentAssignmentsViewModel studentAssignmentsViewModel = new StudentAssignmentsViewModel()
             {
-                StudentAssignments = studentAssignments
+                StudentAssignments = studentId == null ? studentAssignments : studentAssignments.Where(sa => sa.StudentId == studentId).ToList()
             };
 
             return View(studentAssignmentsViewModel);

@@ -4,6 +4,8 @@
     ViewBag.Title = "Details Course";
 }
 
+<link href="~/Content/MyCss/DetailLinks.css" rel="stylesheet" />
+
 <h2>Course details</h2>
 
 <div>
@@ -63,12 +65,11 @@
         <dt>
             Assignments
         </dt>
-
         <dd>
             <ol>
                 @foreach (var assignmet in Model.Assignments)
                 {
-                    <li>@Html.DisplayFor(x => assignmet.Title)</li>
+                    <li>@Html.ActionLink(@assignmet.Title, "DetailsAssignment", "Assignment", new { id = assignmet.AssignmentId }, new { @class = "myLinks" })</li>
                 }
             </ol>
         </dd>
@@ -92,5 +93,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "EditCourse", new { id = Model.CourseId }, new { @class = "btn btn-warning" })
-    @Html.ActionLink("Back to List", "AllCourses", null, new { @class = "btn btn-info" })
+    @Html.ActionLink("Back to courses", "AllCourses", null, new { @class = "btn btn-info" })
 </p>
