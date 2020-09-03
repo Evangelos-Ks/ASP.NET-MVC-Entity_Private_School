@@ -44,7 +44,7 @@
                             @foreach (var assignment in course.Assignments)
                             {
                                 <li>
-                                    @Html.ActionLink(assignment.Title, "DetailsStudent", "Student", new { id = assignment.AssignmentId }, new { @class = "myLinks" })
+                                    @Html.ActionLink(assignment.Title, "DetailsAssignment", "Assignment", new { id = assignment.AssignmentId }, new { @class = "myLinks" })
                                 </li>
                             }
                         </ol>

@@ -2,6 +2,7 @@
 @using PagedList.Mvc
 
 <link href="~/Content/PagedList.css" rel="stylesheet" />
+<link href="~/Content/MyCss/DetailLinks.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "AllStudentsPerCoursePerAssignment";
@@ -36,7 +37,7 @@
                     <td>
                         <b>Title</b>
                         <br />
-                        @Html.DisplayFor(x => course.Title)
+                        @Html.ActionLink(course.Title, "DetailsCourse", "Course", new { id = course.CourseId }, new { @class = "myLinks" })
                     </td>
                     <td>
                         @foreach (var assignment in course.Assignments)
@@ -44,7 +45,7 @@
                             <b> Assignment title</b>
                             <ul>
                                 <li>
-                                    @Html.DisplayFor(x => assignment.Title)
+                                    @Html.ActionLink(assignment.Title, "DetailsAssignment", "Assignment", new { id = assignment.AssignmentId }, new { @class = "myLinks" })
                                 </li>
                             </ul>
                             <b>Students</b>
@@ -53,7 +54,7 @@
                                 {
                                     <li>
                                         <img src="@studentCourse.Student.PhotoUrl" width="20" height="20" alt="Alternate Text" />
-                                        @studentCourse.Student.FirstName @studentCourse.Student.LastName
+                                        @Html.ActionLink(studentCourse.Student.FirstName + " " + studentCourse.Student.LastName, "DetailsStudent", "Student", new { id = studentCourse.Student.StudentId }, new { @class = "myLinks" })
                                     </li>
                                 }
                             </ol>
