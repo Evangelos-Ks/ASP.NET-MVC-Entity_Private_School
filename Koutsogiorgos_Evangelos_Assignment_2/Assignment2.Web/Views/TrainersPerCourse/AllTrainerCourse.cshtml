@@ -2,6 +2,7 @@
 @using PagedList.Mvc
 
 <link href="~/Content/PagedList.css" rel="stylesheet" />
+<link href="~/Content/MyCss/DetailLinks.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "AllTrainersCourses";
@@ -36,7 +37,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => course.Key.Title)
+                        @Html.ActionLink(course.Key.Title, "DetailsCourse", "Course", new { id = course.Key.CourseId }, new { @class = "myLinks" })
                     </td>
                     <td>
                         <ol>
@@ -44,7 +45,7 @@
                             {
                                 <li>
                                     <img src="@trainerCourseOfcourse.Trainer.PhotoUrl" width="20" height="20" alt="Alternate Text" />
-                                    @trainerCourseOfcourse.Trainer.FirstName @trainerCourseOfcourse.Trainer.LastName
+                                    @Html.ActionLink(trainerCourseOfcourse.Trainer.FirstName + " " + trainerCourseOfcourse.Trainer.LastName, "DetailsTrainer", "Trainer", new { id = trainerCourseOfcourse.Trainer.TrainerId }, new { @class = "myLinks" })
                                 </li>
                             }
                         </ol>
