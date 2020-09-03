@@ -7,6 +7,8 @@
     ViewBag.Title = "AllStudentCourses2";
 }
 
+<link href="~/Content/MyCss/DetailLinks.css" rel="stylesheet" />
+
 <h2>All students per course</h2>
 
 @using (Html.BeginForm("AllStudentCourses", "StudentPerCourse", FormMethod.Get, new { id = "form" }))
@@ -36,7 +38,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => course.Key.Title)
+                        @Html.ActionLink(course.Key.Title, "DetailsCourse", "Course", new { id = course.Key.CourseId }, new { @class = "myLinks" })
                     </td>
                     <td>
                         <ol>
@@ -44,7 +46,7 @@
                             {
                                 <li>
                                     <img src="@studentCourseOfCourse.Student.PhotoUrl" width="20" height="20" alt="Alternate Text" />
-                                    @studentCourseOfCourse.Student.FirstName @studentCourseOfCourse.Student.LastName
+                                    @Html.ActionLink(studentCourseOfCourse.Student.FirstName + " " + studentCourseOfCourse.Student.LastName, "DetailsStudent", "Student", new { id = studentCourseOfCourse.Student.StudentId }, new { @class = "myLinks" })
                                 </li>
                             }
                         </ol>
