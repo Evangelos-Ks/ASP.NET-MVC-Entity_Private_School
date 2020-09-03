@@ -4,6 +4,8 @@
     ViewBag.Title = "Details Trainer";
 }
 
+<link href="~/Content/MyCss/DetailLinks.css" rel="stylesheet" />
+
 <h2>Trainer details</h2>
 
 <div>
@@ -51,7 +53,7 @@
                 @{
                     foreach (var course in Model.TrainerCourses)
                     {
-                        <li>@course.Course.Title</li>
+                        <li>@Html.ActionLink(course.Course.Title, "DetailsCourse", "Course", new { id = course.CourseId }, new { @class = "myLinks" })</li>
                     }
                 }
             </ul>
@@ -60,5 +62,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "EditTrainer", new { id = Model.TrainerId }, new { @class = "btn btn-warning" })
-    @Html.ActionLink("Back to List", "AllTrainers", null, new { @class = "btn btn-info" })
+    @Html.ActionLink("Back to trainers", "AllTrainers", null, new { @class = "btn btn-info" })
 </p>

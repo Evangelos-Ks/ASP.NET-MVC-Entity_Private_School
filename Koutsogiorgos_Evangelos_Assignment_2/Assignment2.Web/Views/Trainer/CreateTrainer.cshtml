@@ -10,7 +10,7 @@
 @using (Html.BeginForm("CreateTrainer", "Trainer", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Insert new trainer</h4>
         <hr />
@@ -57,15 +57,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success" />
+                <input type="submit" value="Create" class="btn btn-success" /> @Html.ActionLink("Back to trainers", "AllTrainers", null, new { @class = "btn btn-info" })
+
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "AllTrainers", null, new { @class = "btn btn-info"})
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
