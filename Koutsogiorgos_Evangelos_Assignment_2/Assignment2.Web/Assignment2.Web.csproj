@@ -168,6 +168,7 @@
     <Content Include="Content\MyCss\DetailLinks.css" />
     <Content Include="Content\MyJs\GeneralJs.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\School_Images\favicon.PNG" />
     <Content Include="Content\Students_Image\boy1.png" />
     <Content Include="Content\Students_Image\boy2.png" />
     <Content Include="Content\Students_Image\boy3.png" />
