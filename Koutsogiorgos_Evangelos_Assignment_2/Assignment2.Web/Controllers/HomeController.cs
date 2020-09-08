@@ -23,5 +23,10 @@ namespace Assignment2.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult AboutAssignments()
+        {
+            return View();
+        }
     }
 }
