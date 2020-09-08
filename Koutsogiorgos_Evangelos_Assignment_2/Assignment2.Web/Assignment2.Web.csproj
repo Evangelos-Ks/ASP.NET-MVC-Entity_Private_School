@@ -339,6 +339,7 @@
     <Content Include="Views\Statistics\Chart6.cshtml" />
     <Content Include="Views\Assignment\Marks.cshtml" />
     <Content Include="Views\Home\AboutCourses.cshtml" />
+    <Content Include="Views\Home\AboutStudents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

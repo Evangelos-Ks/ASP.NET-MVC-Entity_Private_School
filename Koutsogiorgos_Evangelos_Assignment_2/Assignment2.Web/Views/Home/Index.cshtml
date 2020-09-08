@@ -4,7 +4,7 @@
 <link href="~/Content/MyCss/HomeIndex.css" rel="stylesheet" />
 
 <div>
-    <img src="~/Content/School_Images/1(2).jpg" title="Wellcome to Highgate private school" style="width:100%; height:250px" />
+    <img src="~/Content/School_Images/1(2).jpg" title="Wellcome to Highgate private school" style="width:100%; max-height:250px" />
     <center>
         <h1>
             Welcome to Highgate Private School
@@ -20,7 +20,7 @@
         @Html.ActionLink("Learn more about courses","AboutCourses", null, new {@class= "LearnMore btn btn-outline-info" })
     </div>
     <div class="col-md-4">
-        <a class="btn btn-outline-info LearnMore" href="#">Learn more about students</a>
+        @Html.ActionLink("Learn more about students", "AboutStudents", null, new { @class = "LearnMore btn btn-outline-info" })
     </div>
     <div class="col-md-4">
         <a class="btn btn-outline-info LearnMore" href="#">Learn more about trainers</a>
