@@ -17,13 +17,13 @@
 
 <div class="row text-center">
     <div class="col-md-4">
-        @Html.ActionLink("Learn more about courses","AboutCourses", null, new {@class= "LearnMore btn btn-outline-info" })
+        @Html.ActionLink("Learn more about courses", "AboutCourses", null, new { @class = "LearnMore btn btn-outline-info" })
     </div>
     <div class="col-md-4">
         @Html.ActionLink("Learn more about students", "AboutStudents", null, new { @class = "LearnMore btn btn-outline-info" })
     </div>
     <div class="col-md-4">
-        <a class="btn btn-outline-info LearnMore" href="#">Learn more about trainers</a>
+        @Html.ActionLink("Learn more about trainers", "AboutTrainers", null, new { @class = "LearnMore btn btn-outline-info" })
     </div>
 </div>
 <br />

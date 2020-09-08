@@ -16,7 +16,7 @@
             @Html.ActionLink("Insert new trainer", "CreateTrainer", null, new { @class = "btn btn-primary" })
         </div>
         <div class="float-right d-inline">
-            @Html.Label("search", "Find by first name or by last name :", null)
+            @Html.Label("search", "Find by first name, last name or subject :", null)
             @Html.TextBox("search", ViewBag.CurrentFilter as string, new { @class = "searchBar", @placeholder = "Search..." })<input type="submit" value="Search" class="btn-search" />
         </div>
     </div>

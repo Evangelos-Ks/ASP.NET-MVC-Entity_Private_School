@@ -52,7 +52,7 @@
         @if (Model.ExistingCourses.Count() > 0)
         {
             <div class="form-group">
-                Remove courses
+                @Html.LabelFor(model => model.ExistingCoursesCoursesId, "Remove courses", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.ListBoxFor(model => model.ExistingCoursesCoursesId, Model.ExistingCourses, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ExistingCoursesCoursesId, "", new { @class = "text-danger" })
@@ -63,7 +63,7 @@
         @if (Model.Courses.Count() > 0)
         {
             <div class="form-group">
-                Add courses
+                @Html.LabelFor(model => model.CoursesId, "Assign courses", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.ListBoxFor(model => model.CoursesId, Model.Courses, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.CoursesId, "", new { @class = "text-danger" })
