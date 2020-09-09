@@ -3,12 +3,9 @@ using System.Web.Mvc;
 using Assignment2.Services;
 using Assignment2.Entities;
 using System.Net;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Collections.Generic;
 using PagedList;
 using Assignment2.Web.Models;
-using Microsoft.Win32.SafeHandles;
-using System.ComponentModel.DataAnnotations;
 
 namespace Assignment2.Web.Controllers
 {

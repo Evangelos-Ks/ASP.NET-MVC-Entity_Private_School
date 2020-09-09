@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
 namespace Assignment2.Entities
 {
     public class StudentCourse

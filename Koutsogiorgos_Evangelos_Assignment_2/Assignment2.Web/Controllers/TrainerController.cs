@@ -3,7 +3,6 @@ using System.Net;
 using System.Web.Mvc;
 using Assignment2.Services;
 using Assignment2.Entities;
-using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using PagedList;
 using Assignment2.Web.Models;
