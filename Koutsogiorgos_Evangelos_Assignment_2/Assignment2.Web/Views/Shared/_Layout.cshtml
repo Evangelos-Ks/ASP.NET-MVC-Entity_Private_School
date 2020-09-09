@@ -4,20 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/School_Images/favicon.PNG" rel="shortcut icon" type="image/x-icon" />
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-
     <div class="container-fluid">
 
-        <nav>
-            @RenderPage("~/Views/Shared/Components/_NavigationBar.cshtml")
-        </nav>
+        @RenderPage("~/Views/Shared/Components/_NavigationBar.cshtml")
 
-        <div class="container-fluid body-content">
-            <br/>
+        <div class="container-fluid body-content p-0">
+            <br />
             @RenderBody()
         </div>
 
@@ -26,7 +24,7 @@
         </footer>
 
     </div>
-    
+
 
 
     @Scripts.Render("~/bundles/jquery")

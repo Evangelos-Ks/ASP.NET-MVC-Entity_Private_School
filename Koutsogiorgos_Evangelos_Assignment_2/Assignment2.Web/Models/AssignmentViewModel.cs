@@ -22,6 +22,7 @@ namespace Assignment2.Web.Models
         public DateTime? SubDateTime { get; set; }
         [Display(Name ="Select course")]
         public IEnumerable<SelectListItem> Courses { get; set; }
+        [Required(ErrorMessage = "Course is required")]
         public int? CourseId { get; set; }
         [Display(Name = "Select students")]
         public IEnumerable<SelectListItem> Students { get; set; }

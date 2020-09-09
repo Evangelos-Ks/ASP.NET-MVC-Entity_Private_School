@@ -1,38 +1,39 @@
-﻿
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">Logo</a>
-
-    <!-- Links -->
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="/Course/AllCourses">Courses</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/Student/AllStudents">Students</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/Trainer/AllTrainers">Trainers</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/Assignment/AllAssignments">Assignments</a>
-        </li>
-
-        <!-- Dropdown -->
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                Relations
-            </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="/StudentPerCourse/AllStudentCourses">Students per course</a>
-                <a class="dropdown-item" href="/TrainersPerCourse/AllTrainerCourse">Trainers per course</a>
-                <a class="dropdown-item" href="/AssignmentsPerCourse/AllAssignmentsPerCourse">Assignments per course</a>
-                <a class="dropdown-item" href="/StudentsPerCoursePerAssignment/AllStudentsPerCoursePerAssignment">Students per course per assignment</a>
-            </div>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="/Statistics/StatisticsIndex">Statistics</a>
-        </li>
-    </ul>
+﻿<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" >
+    <a class="navbar-brand" href="~/Home/Index"><img src="~/Content/School_Images/favicon.PNG" height="45" width="45" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <!-- Links -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Course/AllCourses">Courses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Student/AllStudents">Students</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Trainer/AllTrainers">Trainers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Assignment/AllAssignments">Assignments</a>
+            </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Relations
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/StudentPerCourse/AllStudentCourses">Students per course</a>
+                    <a class="dropdown-item" href="/TrainersPerCourse/AllTrainerCourse">Trainers per course</a>
+                    <a class="dropdown-item" href="/AssignmentsPerCourse/AllAssignmentsPerCourse">Assignments per course</a>
+                    <a class="dropdown-item" href="/StudentsPerCoursePerAssignment/AllStudentsPerCoursePerAssignment">Students per course per assignment</a>
+                </div>
+            </li>
+            <!-- Statistics -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Statistics/StatisticsIndex">Statistics</a>
+            </li>
+        </ul>
+    </div>
 </nav>

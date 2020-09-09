@@ -2,6 +2,7 @@
     padding-top: 50px;
     padding-bottom: 20px;
     background: none;
+    line-height: inherit;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -51,10 +52,3 @@ textarea {
 input[type=submit].btn-search:hover {
     background-color: #016bdc;
 }
-
-/*=============================================== Chart =================================================================*/
-
-/*.chartImg img {
-    margin-left: 0px;
-}
-*/

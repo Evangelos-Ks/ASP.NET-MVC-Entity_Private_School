@@ -9,17 +9,33 @@ namespace Assignment2.Web.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult AboutCourses()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult AboutStudents()
         {
-            ViewBag.Message = "Your contact page.";
+            return View();
+        }
 
+        public ActionResult AboutTrainers()
+        {
+            return View();
+        }
+
+        public ActionResult AboutAssignments()
+        {
+            return View();
+        }
+
+        public ActionResult AboutRelations()
+        {
+            return View();
+        }
+
+        public ActionResult AboutStatistics()
+        {
             return View();
         }
     }

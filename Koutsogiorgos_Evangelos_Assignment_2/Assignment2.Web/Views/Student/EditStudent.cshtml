@@ -71,7 +71,7 @@
         @if (Model.CoursesForAddition.Count() > 0)
         {
             <div class="form-group">
-                @Html.LabelFor(model => model.CoursesForAddition, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.CoursesForAddition, "Assign courses", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.ListBoxFor(model => model.CoursesForAdditionId, Model.CoursesForAddition, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.CoursesForAdditionId, "", new { @class = "text-danger" })
