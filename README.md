@@ -10,5 +10,4 @@ Generally the user could:
 
 •	Select the number of items per page
 
-There is data in seeding hence you could give it a try.
-
+There is data in seeding hence you could "update-database" and give it a try.
