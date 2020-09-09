@@ -28,5 +28,15 @@ namespace Assignment2.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult AboutRelations()
+        {
+            return View();
+        }
+
+        public ActionResult AboutStatistics()
+        {
+            return View();
+        }
     }
 }

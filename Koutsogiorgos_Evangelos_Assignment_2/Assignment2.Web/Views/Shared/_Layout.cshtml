@@ -11,11 +11,10 @@
 </head>
 <body>
     <div class="container-fluid">
-        <nav>
-            @RenderPage("~/Views/Shared/Components/_NavigationBar.cshtml")
-        </nav>
 
-        <div class="container-fluid body-content">
+        @RenderPage("~/Views/Shared/Components/_NavigationBar.cshtml")
+
+        <div class="container-fluid body-content p-0">
             <br />
             @RenderBody()
         </div>
