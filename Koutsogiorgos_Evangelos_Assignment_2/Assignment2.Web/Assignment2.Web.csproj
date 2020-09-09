@@ -336,7 +336,6 @@
     <Content Include="Views\AssignmentsPerCourse\AllAssignmentsPerCourse.cshtml" />
     <Content Include="Views\StudentsPerCoursePerAssignment\AllStudentsPerCoursePerAssignment.cshtml" />
     <Content Include="Views\Statistics\StatisticsIndex.cshtml" />
-    <Content Include="Views\Statistics\Chart6.cshtml" />
     <Content Include="Views\Assignment\Marks.cshtml" />
     <Content Include="Views\Home\AboutCourses.cshtml" />
     <Content Include="Views\Home\AboutStudents.cshtml" />

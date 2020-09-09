@@ -1,17 +1,9 @@
-﻿using Assignment2.Database;
-using Assignment2.Entities;
-using Assignment2.Services;
-using Newtonsoft.Json;
+﻿using Assignment2.Services;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
-using System.Web.Razor.Generator;
-using System.Web.UI;
 
 namespace Assignment2.Web.Controllers
 {
@@ -183,62 +175,5 @@ namespace Assignment2.Web.Controllers
 
             return null;
         }
-
-        ////=============================================== Average mark of students per Assignment per Course ===============
-        //public ActionResult Chart6()
-        //{
-        //    CourseRepository courseRepository = new CourseRepository();
-        //    var courses = courseRepository.GetAll().ToList();
-        //    int coursesCount = courses.Count();
-        //    courseRepository.Dispose();
-
-        //    AssignmentRepository assignmentRepository = new AssignmentRepository();
-        //    var assignments = assignmentRepository.GetAll().ToList();
-        //    assignmentRepository.Dispose();
-
-        //    StudentAssignmentRepository studentAssignmentRepository = new StudentAssignmentRepository();
-        //    var studentsPerAssignment = studentAssignmentRepository.GetAll().ToList();
-        //    studentAssignmentRepository.Dispose();
-
-        //    //List<WebImage> charts = new List<WebImage>() { };
-        //    List<string[]> listOfAssignmentsPerCourse = new List<string[]>() { };
-        //    List<int[]> listOfavgMarksPerAssignment = new List<int[]>() { };
-        //    for (int i = 0; i < coursesCount; i++)
-        //    {
-        //        List<Assignment> assignmentsFiltered = assignments.FindAll(x => x.CourseId == courses[i].CourseId).ToList();
-        //        int assignmentsFilteredCount = assignmentsFiltered.Count();
-        //        string[] assignmentTitles = new string[assignmentsFilteredCount];
-        //        int[] avgMarksPerAssignment = new int[assignmentsFilteredCount];
-        //        for (int j = 0; j < assignmentsFilteredCount; j++)
-        //        {
-        //            assignmentTitles[j] = assignmentsFiltered[j].Title;
-        //            avgMarksPerAssignment[j] = (int)Math.Round((double)studentsPerAssignment.FindAll(a => a.AssignmentId == assignmentsFiltered[j].AssignmentId).Average(b => b.TotalMark), MidpointRounding.AwayFromZero);
-        //        }
-        //        //charts.Add(ChartBuild(assignmentTitles, avgMarksPerAssignment, "Average mark of students per assignment in" + " " + courses[i].Title));
-        //        //ChartBuild(assignmentTitles, avgMarksPerAssignment, "Average mark of students per assignment in" + " " + courses[i].Title);
-        //        listOfAssignmentsPerCourse.Add(assignmentTitles);
-        //        listOfavgMarksPerAssignment.Add(avgMarksPerAssignment);
-        //    }
-        //    ViewBag.assignmentTitles = listOfAssignmentsPerCourse;
-        //    ViewBag.assignmentAvgMarks = listOfavgMarksPerAssignment;
-
-        //    //return Redirect("/Statistics/Chart6.cshtml");
-        //    return View();
-
-        //    //return null;
-
-        //}
-
-        //public ActionResult ChartBuild(string[] xValues, int[] yValues, string title)
-        //{
-        //    new Chart(width: 550, height: 300)
-        //          .AddTitle(title)
-        //          .AddSeries(chartType: "column",
-        //             xValue: xValues,
-        //             yValues: yValues)
-        //          .Write("png");
-        //    return null;
-        //}
-
     }
 }

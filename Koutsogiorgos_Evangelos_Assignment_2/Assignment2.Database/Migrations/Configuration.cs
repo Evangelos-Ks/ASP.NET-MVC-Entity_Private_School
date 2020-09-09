@@ -1,9 +1,7 @@
 ﻿namespace Assignment2.Database.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
     using Assignment2.Entities;
     using System.Collections.Generic;
 
